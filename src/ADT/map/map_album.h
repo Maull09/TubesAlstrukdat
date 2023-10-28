@@ -11,7 +11,7 @@
 
 typedef struct {
     int id;
-    char albumName[255];
+    char albumName[100];
     int singerID;  // ID penyanyi yang memiliki album ini
 } Album;
 

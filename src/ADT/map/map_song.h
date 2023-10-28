@@ -10,7 +10,7 @@
 
 typedef struct {
     int id;
-    char songName[255];
+    char songName[100];
     int albumID;   // ID album tempat lagu ini berasal
 } Song;
 
