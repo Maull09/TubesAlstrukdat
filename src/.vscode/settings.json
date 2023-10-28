@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "*.v": "verilog",
+        "stdlib.h": "c",
+        "mesininput.h": "c",
+        "mesinkarakter copy.h": "c",
+        "mesinkarakter.h": "c",
+        "mesinkata.h": "c",
+        "boolean.h": "c",
+        "mesinkalimat.h": "c",
+        "queue.h": "c",
+        "set.h": "c",
+        "stack.h": "c",
+        "function.h": "c",
+        "arraydin.h": "c",
+        "stdio.h": "c",
+        "arraysinger.h": "c"
+    }
+}
