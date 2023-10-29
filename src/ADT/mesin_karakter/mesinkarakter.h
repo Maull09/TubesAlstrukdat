@@ -5,13 +5,8 @@
 #define __MESIN_KAR_H_
 
 #include "../boolean.h"
-
-#define MARK ';'
-#define MARK2 '#'
-#define NEWLINE '\n'
-/* State Mesin */
-extern char currentChar;
-extern boolean EOP;
+#include "../listadt.h"
+extern FILE *config;
 
 void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.

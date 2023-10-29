@@ -2,21 +2,9 @@
 #define __MESINKATA_H__
 
 #include "../boolean.h"
-#include "../mesin_karakater/mesinkarakter.h"
+#include "../mesin_karakter/mesinkarakter.h"
+#include "../listadt.h"
 
-#define NMax 50
-#define BLANK ' '
-#define NEWLINE '\n'
-
-typedef struct
-{
-   char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
-   int Length;
-} Word;
-
-/* State Mesin Kata */
-extern boolean EndWord;
-extern Word currentWord;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK

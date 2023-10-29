@@ -10,7 +10,7 @@ int main() {
     STARTFILE(filename);
     while (!IsEOP()) {
         printf("%c", GetCC());
-        ADV2();
+        ADV();
     }
 
     printf("\n\nPembacaan karakter dari file selesai!\n");
@@ -20,7 +20,7 @@ int main() {
     START();
     while (!IsEOP()) {
         printf("%c", GetCC());
-        ADV();
+        ADV2();
     }
 
     printf("\n\nPembacaan karakter dari stdin selesai!\n");

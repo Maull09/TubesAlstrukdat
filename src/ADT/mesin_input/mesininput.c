@@ -8,6 +8,28 @@ boolean EOP;
 boolean EndWord;
 Word currentWord;
 
+// void IgnoreBlanks()
+// /* Mengabaikan satu atau beberapa BLANK
+//    I.S. : currentChar sembarang
+//    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+// {
+//     while (currentChar == BLANK)
+//     {
+//         ADV2();
+//     }
+// }
+
+// void IgnoreNewLine()
+// /* Mengabaikan satu atau beberapa BLANK
+//    I.S. : currentChar sembarang
+//    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+// {
+//     while (currentChar == NEWLINE)
+//     {
+//         ADV2();
+//     }
+// }
+
 void STARTINPUT()
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
@@ -24,7 +46,7 @@ void STARTINPUT()
     } else
     {
         EndWord = false;
-        ADVWORD();
+        ADVINPUT();
     }
 }
 
@@ -36,7 +58,7 @@ void ADVINPUT()
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 {
     IgnoreBlanks();
-
+    IgnoreNewLine();
     if (currentChar == MARK)
     {
         EndWord = true;
@@ -44,6 +66,7 @@ void ADVINPUT()
     {
         CopyWordInput();
         IgnoreBlanks();
+        IgnoreNewLine();
     }
 }
 
@@ -56,13 +79,12 @@ void CopyWordInput()
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 {
     int i = 0;
-
     while ((currentChar != MARK) && (currentChar != BLANK) && (i < NMax))
     {
         currentWord.TabWord[i] = currentChar;
         i += 1;
-        ADV();
+        ADV2();
     }
-
     currentWord.Length = i;
 }
+

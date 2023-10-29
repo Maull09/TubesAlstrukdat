@@ -14,6 +14,7 @@
         "function.h": "c",
         "arraydin.h": "c",
         "stdio.h": "c",
-        "arraysinger.h": "c"
+        "arraysinger.h": "c",
+        "linkedlist.h": "c"
     }
 }

@@ -6,7 +6,7 @@
 
 int main() {
     StackSong S;
-    SongInfo songInput, songPopped;
+    Lagu songInput, songPopped;
 
     CreateEmptyStackSong(&S);
 
@@ -16,27 +16,27 @@ int main() {
     // Simulasi menambahkan 2 lagu ke dalam stack
     printf("Pushing songs into the stack...\n");
 
-    SalinString(songInput.singer, "Arctic Monkeys");
+    SalinString(songInput.artist, "Arctic Monkeys");
     SalinString(songInput.album, "Favourite Worst Nightmare");
-    SalinString(songInput.song, "505");
+    SalinString(songInput.titlesong, "505");
     PushStackSong(&S, songInput);
 
-    SalinString(songInput.singer, "BLACKPINK");
+    SalinString(songInput.artist, "BLACKPINK");
     SalinString(songInput.album, "BORN PINK");
-    SalinString(songInput.song, "Pink Venom");
+    SalinString(songInput.titlesong, "Pink Venom");
     PushStackSong(&S, songInput);
 
     // Menampilkan lagu di puncak stack
     if (!IsEmptyStackSong(S)) {
         songPopped = InfoTop(S);
-        printf("Song at the top: %s; %s; %s\n", songPopped.singer, songPopped.album, songPopped.song);
+        printf("Song at the top: %s; %s; %s\n", songPopped.artist, songPopped.album, songPopped.titlesong);
     }
 
     // Simulasi menghapus lagu dari stack
     printf("\nPopping songs from the stack...\n");
     while (!IsEmptyStackSong(S)) {
         PopStackSong(&S, &songPopped);
-        printf("Popped: %s; %s; %s\n", songPopped.singer, songPopped.album, songPopped.song);
+        printf("Popped: %s; %s; %s\n", songPopped.artist, songPopped.album, songPopped.titlesong);
     }
 
     // Menampilkan pesan ketika stack sudah kosong

@@ -4,6 +4,17 @@
 boolean EndKalimat;
 Kalimat CKalimat;
 
+void Ignoreblanks()
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+{
+    while (currentChar == BLANK)
+    {
+        ADV();
+    }
+}
+
 void IgnoreNewline()
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
@@ -18,7 +29,7 @@ void IgnoreNewline()
 void SalinKalimatFile() {
     ResetKalimat();  // Reset array
     int i = 0;
-    while ((currentChar != MARK) && (currentChar != NEWLINE) && (currentChar != MARK2))
+    while ((currentChar != MARK) && (currentChar != NEWLINE) && (currentChar != EOF) && !feof(config) && (currentChar != MARK2))
     {
         CKalimat.TabKalimat[i] = currentChar;
         // printf("%c", currentChar);
@@ -43,7 +54,7 @@ void SalinKalimatFile2() {
 void STARTKALIMATFILE(char filename[]) {
     STARTFILE(filename);
     IgnoreNewline();
-    if (currentChar == MARK2 || currentChar == EOF) {
+    if (currentChar == MARK2) {
         EndKalimat = true;
     } else {
         EndKalimat = false;
@@ -53,7 +64,7 @@ void STARTKALIMATFILE(char filename[]) {
 
 void ADVKALIMATFILE(){
     IgnoreNewline();
-    IgnoreBlanks();
+    Ignoreblanks();
     if (currentChar == MARK2) {
         EndKalimat = true;
     } else {
@@ -64,7 +75,7 @@ void ADVKALIMATFILE(){
 
 void ADVKALIMATFILE2() {
     IgnoreNewline();
-    if (currentChar == BLANK || currentChar == MARK2) {
+    if (currentChar == BLANK) {
         EndKalimat = true;
     } else {
         EndKalimat = false;

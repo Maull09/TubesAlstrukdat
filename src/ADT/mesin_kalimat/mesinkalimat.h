@@ -6,17 +6,9 @@
 #define __MESINKALIMAT_H__
 
 #include "../boolean.h"
-#include "../mesin_karakater/mesinkarakter.h"
-#include "../mesin_kata/mesinkata.h"
-
-#define KMax 450
-#define NEWLINE '\n'
-#define BLANK ' '
-
-typedef struct {
-  char TabKalimat[KMax+1];
-  int Length;
-} Kalimat;
+#include "../mesin_karakter/mesinkarakter.h"
+// #include "../mesin_kata/mesinkata.h"
+#include "../listadt.h"
 
 /* State Mesin Kalimat */
 extern boolean EndKalimat;
@@ -34,5 +26,6 @@ void ADVKALIMATFILE2();
 void copyKalimat (Kalimat k1, Kalimat *k2);
 void ResetKalimat();
 void IgnoreNewline();
+void Ignoreblanks();
 
 #endif

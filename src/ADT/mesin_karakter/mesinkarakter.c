@@ -6,6 +6,7 @@
 char currentChar;
 boolean EOP;
 
+FILE *config;
 static FILE *pita;
 static int retval;
 
@@ -22,9 +23,10 @@ void START()
     ADV2();
 }
 
+
 void STARTFILE (char filename[]) {
-    pita = fopen(filename, "r");
-    if (pita != NULL) {
+    config = fopen(filename, "r");
+    if (config != NULL) {
         ADV();
     } else {
         printf("\nFile tidak ditemukan!\n");
@@ -40,12 +42,12 @@ void ADV()
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 {
-    retval = fscanf(pita, "%c", &currentChar);
+    retval = fscanf(config, "%c", &currentChar);
     // EOP = (currentChar == MARK);
-    EOP = feof(pita);
+    EOP = feof(config) || (currentChar == MARK2);
     if (EOP)
     {
-        fclose(pita);
+        fclose(config);
     }
 }
 
@@ -57,8 +59,8 @@ void ADV2()
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 {
     retval = fscanf(pita, "%c", &currentChar);
-    EOP = (currentChar == MARK);
-    // EOP = feof(pita);
+    // EOP = (currentChar == MARK);
+    EOP = feof(pita);
     if (EOP)
     {
         fclose(pita);

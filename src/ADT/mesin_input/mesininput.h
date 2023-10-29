@@ -2,8 +2,9 @@
 #define __MESININPUT_H__
 
 #include "../boolean.h"
-#include "../mesin_karakater/mesinkarakter.h"
+#include "../mesin_karakter/mesinkarakter.h"
 #include "../mesin_kata/mesinkata.h"
+#include "../listadt.h"
 
 void STARTINPUT();
 /* I.S. : currentChar sembarang
@@ -26,4 +27,5 @@ void CopyWordInput();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
+void ResetInput();
 #endif

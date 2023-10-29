@@ -6,23 +6,7 @@
 
 #include "../boolean.h"
 #include "../../function.h"
-
-#define IDX_UNDEF -1
-#define CAPACITY 100
-
-typedef struct {
-    char artist[100];
-    char album[100];
-    char titlesong[100];
-} Lagu;
-
-/* Definisi elemen dan address */
-typedef Lagu ElTypeQueue;
-typedef struct {
-    ElTypeQueue buffer[CAPACITY]; 
-    int idxHead;
-    int idxTail;
-} QueueLagu;
+#include "../listadt.h"
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
