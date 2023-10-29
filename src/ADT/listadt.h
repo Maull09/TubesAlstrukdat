@@ -29,6 +29,7 @@ typedef struct {
 typedef struct {
     char name[255]; // Nama dari playlist
     int id;         // ID dari playlist
+    List songs;     // Daftar lagu dalam playlist
 } Playlist;
 
 typedef struct {
@@ -118,11 +119,9 @@ typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
 	infotype info;
 	address next;
-	address prev;
 } ElmtList;
 typedef struct {
 	address First;
-	address Last;
 } List;
 
 // ADT 8 untuk mesin karakter [mesinkarakter.h]

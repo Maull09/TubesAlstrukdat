@@ -8,6 +8,7 @@
 
 #include "../listadt.h"
 
+
 /* ********** PROTOTYPE ********** */
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyArrayPlaylists(ArrayPlaylists *arr);
