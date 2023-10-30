@@ -9,7 +9,7 @@ void CreateEmptyArrayPlaylists(ArrayPlaylists *arr) {
 }
 
 void CreatePlaylist(Playlist *p, char name[], int id) {
-    strcpy(p->name, name);
+    SalinString(p->name, name);
     p->id = id;
     p->songs.First = NULL;  // Initializing empty linked list
 }
@@ -17,8 +17,8 @@ void CreatePlaylist(Playlist *p, char name[], int id) {
 /* *** Destruktor *** */
 void DeallocateArrayPlaylists(ArrayPlaylists *arr) {
     for (int i = 0; i < arr->Neff; i++) {
-        // Assuming there's a function to deallocate linked list
-        DeallocateList(&(arr->playlists[i].songs));
+        // function to deallocate linked list
+        Dealokasi((&arr->playlists[i].songs.First));
     }
     free(arr->playlists);
     arr->playlists = NULL;
@@ -51,7 +51,7 @@ void AddPlaylist(ArrayPlaylists *arr, Playlist p) {
 
 int FindPlaylist(ArrayPlaylists arr, char name[]) {
     for (int i = 0; i < arr.Neff; i++) {
-        if (strcmp(arr.playlists[i].name, name) == 0) {
+        if (StringSama(arr.playlists[i].name, name)) {
             return i; 
         }
     }

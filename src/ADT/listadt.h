@@ -23,22 +23,6 @@ typedef struct {
 } ListSinger;
 
 
-// ADT 2 Untuk array Playlist [arrayplaylist.h]
-#define INIT_SIZE 10 // Ukuran awal array dinamis
-
-typedef struct {
-    char name[255]; // Nama dari playlist
-    int id;         // ID dari playlist
-    List songs;     // Daftar lagu dalam playlist
-} Playlist;
-
-typedef struct {
-    Playlist *playlists;  // Pointer ke array dinamis dari playlist
-    int Neff;             // Jumlah playlist yang ada saat ini
-    int capacity;        // Kapasitas array dinamis saat ini
-} ArrayPlaylists;
-
-
 // ADT 3 untuk set [set.h]
 #define MaxSetSongs 100
 typedef struct {
@@ -156,5 +140,18 @@ typedef struct {
   int Length;
 } Kalimat;
 
+// ADT 2 Untuk array Playlist [arrayplaylist.h]
+#define INIT_SIZE 10 // Ukuran awal array dinamis
 
+typedef struct {
+    char name[255]; // Nama dari playlist
+    int id;         // ID dari playlist
+    List songs;     // Daftar lagu dalam playlist
+} Playlist;
+
+typedef struct {
+    Playlist *playlists;  // Pointer ke array dinamis dari playlist
+    int Neff;             // Jumlah playlist yang ada saat ini
+    int capacity;        // Kapasitas array dinamis saat ini
+} ArrayPlaylists;
 #endif
