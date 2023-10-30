@@ -49,7 +49,7 @@ void STARTINPUT()
         ADVINPUT();
     }
 }
-
+// TEST 123;\n
 void ADVINPUT()
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
@@ -66,7 +66,7 @@ void ADVINPUT()
     {
         CopyWordInput();
         IgnoreBlanks();
-        IgnoreNewLine();
+
     }
 }
 
@@ -88,3 +88,9 @@ void CopyWordInput()
     currentWord.Length = i;
 }
 
+void ResetInput() {
+    for (int i = 0; i < sizeof(currentWord.TabWord); i++) {
+        currentWord.TabWord[i] = '\0';
+        currentWord.Length = 0;
+    }
+}

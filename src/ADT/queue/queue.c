@@ -89,6 +89,5 @@ void SalinLagu(Lagu *dest, Lagu src) {
     SalinString(dest->artist, src.artist);
     SalinString(dest->album, src.album);
     SalinString(dest->titlesong, src.titlesong);
-    SalinString(dest->SongId, src.SongId);
 }
 

@@ -6,8 +6,13 @@
 #include "../../function.h"
 #include "../listadt.h"
 
-void CreateEmptyMapAlbum(MapAlbum *M);
-void InsertAlbum(MapAlbum *M, Album a);
-int FindAlbum(MapAlbum M, char albumName[]);
+
+void CreateEmptyMapAlbum(MapAlbumSinger *M);
+void CreateEmptyListMapAlbum(ListMapAlbum *LM);
+void InsertListMapAlbum(ListMapAlbum *MA, MapAlbumSinger M);
+void InsertAlbum(MapAlbumSinger *M, Album a);
+boolean FindAlbum(MapAlbumSinger M, char albumName[]);
+void DisplayMapAlbum(MapAlbumSinger M);
+void DisplayListMapAlbum(ListMapAlbum LM);
 
 #endif

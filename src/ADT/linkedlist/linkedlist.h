@@ -8,15 +8,13 @@
 
 #include "../listadt.h"
 
+
 /* Definisi list : */
 /* List kosong : First(L) = Nil */
 /* Setiap elemen dengan address P dapat diacu Info(P), Next(P) */
 /* Elemen terakhir list : jika addressnya Last, maka Next(Last)=Nil */
-#define Artist(P) (P)->info.artist
-#define Album(P) (P)->info.album
-#define TitleSong(P) (P)->info.titlesong
-#define IdSong(P) (P)->info.SongId
-#define Last(L) ((L).Last)
+#define SongName(P) (P)->info.songName
+#define PlaylistName(P) (P)->PlaylistName
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 #define First(L) ((L).First)
@@ -30,6 +28,8 @@ boolean IsEmpty (List L);
 void CreateEmpty (List *L);
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
+void CreateEmptyListofPlaylist(ListofPlaylist *LoP);
+
 
 /****************** Manajemen Memori ******************/
 address Alokasi (infotype X);
@@ -116,4 +116,6 @@ void PrintInfo (List L);
 int NbElmt (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
+
+void InserttoListofPlaylist(ListofPlaylist *LoP, List L);
 #endif

@@ -8,11 +8,11 @@
 #include "../linkedlist/linkedlist.h"
 #include "../listadt.h"
 
+#define INIT_SIZE 10 // Ukuran awal array dinamis
 
 /* ********** PROTOTYPE ********** */
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyArrayPlaylists(ArrayPlaylists *arr);
-void CreatePlaylist(Playlist *p, char name[], int id);
 
 /* *** Destruktor *** */
 void DeallocateArrayPlaylists(ArrayPlaylists *arr);
@@ -22,6 +22,7 @@ void ExpandArrayPlaylists(ArrayPlaylists *arr);  // Menggandakan kapasitas array
 
 /* *** Operasi-operasi lain *** */
 void AddPlaylist(ArrayPlaylists *arr, Playlist p);
-int FindPlaylist(ArrayPlaylists arr, char name[]);
+boolean FindPlaylist(ArrayPlaylists arr, char name[]);
+void DisplayPlaylist(ArrayPlaylists arrPlaylist);
 
 #endif

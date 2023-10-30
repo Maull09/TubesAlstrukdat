@@ -2,24 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/****************** TEST LIST KOSONG ******************/
-boolean IsEmpty(List L) {
-    return First(L) == Nil;
-}
-
 /****************** PEMBUATAN LIST KOSONG ******************/
 void CreateEmpty(List *L) {
-    First(*L) = Nil;
+    First(*L) = NULL;
+}
+
+void CreateEmptyListofPlaylist(ListofPlaylist *LoP) {
+    LoP->Neff = 0;
+    for (int i = 0; i < 100; i++) {
+        CreateEmpty(&LoP->listplaylist[i]);
+    }
 }
 
 /****************** Manajemen Memori ******************/
 address Alokasi(infotype X) {
-    address P = (address) malloc(sizeof(ElmtList));
-    if (P != Nil) {
+    address P = (address)malloc(sizeof(ElmtList));
+    if (P != NULL) {
         Info(P) = X;
-        Next(P) = Nil;
+        Next(P) = NULL;
+        return P;
+    } else {
+        return NULL;
     }
-    return P;
 }
 
 void Dealokasi(address *P) {
@@ -29,23 +33,26 @@ void Dealokasi(address *P) {
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 address Search(List L, infotype X) {
     address P = First(L);
-    while (P != Nil && (StringSama(Artist(P), X.artist) || StringSama(Album(P), X.album)|| StringSama(TitleSong(P), X.titlesong)|| StringSama(IdSong(P), X.SongId))) {
+    while (P != NULL) {
+        if (StringSama(Info(P).songName, X.songName) == 0) {
+            return P;
+        }
         P = Next(P);
     }
-    return P;
+    return NULL;
 }
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 void InsVFirst(List *L, infotype X) {
     address P = Alokasi(X);
-    if (P != Nil) {
+    if (P != NULL) {
         InsertFirst(L, P);
     }
 }
 
 void InsVLast(List *L, infotype X) {
     address P = Alokasi(X);
-    if (P != Nil) {
+    if (P != NULL) {
         InsertLast(L, P);
     }
 }
@@ -80,75 +87,84 @@ void InsertLast(List *L, address P) {
         InsertFirst(L, P);
     } else {
         address last = First(*L);
-        while (Next(last) != Nil) {
+        while (Next(last) != NULL) {
             last = Next(last);
         }
-        Next(last) = P;
+        InsertAfter(L, P, last);
     }
 }
 
 void DelFirst(List *L, address *P) {
     *P = First(*L);
     First(*L) = Next(First(*L));
-    Next(*P) = Nil;
+    Next(*P) = NULL;
 }
 
 void DelP(List *L, infotype X) {
-    address P = First(*L), prev = Nil;
-    while (P != Nil && (StringSama(Artist(P), X.artist)|| StringSama(Album(P), X.album)|| StringSama(TitleSong(P), X.titlesong)|| StringSama(IdSong(P), X.SongId) != 0)) {
-        prev = P;
+    address P = First(*L), Prec = NULL;
+    while (P != NULL && StringSama(Info(P).songName, X.songName)) {
+        Prec = P;
         P = Next(P);
     }
-    if (P != Nil) {
-        if (prev == Nil) {
+    if (P != NULL) {
+        if (Prec == NULL) { 
             DelFirst(L, &P);
         } else {
-            DelAfter(L, &P, prev);
+            DelAfter(L, &P, Prec);
         }
         Dealokasi(&P);
     }
 }
 
 void DelLast(List *L, address *P) {
-    if (Next(First(*L)) == Nil) {
-        *P = First(*L);
-        CreateEmpty(L);
+    address Prec = NULL;
+    *P = First(*L);
+    while (Next(*P) != NULL) {
+        Prec = *P;
+        *P = Next(*P);
+    }
+    if (Prec == NULL) {
+        DelFirst(L, P);
     } else {
-        address last = First(*L);
-        while (Next(Next(last)) != Nil) {
-            last = Next(last);
-        }
-        *P = Next(last);
-        Next(last) = Nil;
+        DelAfter(L, P, Prec);
     }
 }
 
 void DelAfter(List *L, address *Pdel, address Prec) {
     *Pdel = Next(Prec);
     Next(Prec) = Next(*Pdel);
-    Next(*Pdel) = Nil;
+    Next(*Pdel) = NULL;
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo(List L) {
     printf("[");
     address P = First(L);
-    while (P != Nil) {
-        printf("%s-%s-%s-%s", Artist(P), Album(P), TitleSong(P), IdSong(P));
+    while (P != NULL) {
+        printf("%s", Info(P).songName);
+        if (Next(P) != NULL) printf(", ");
         P = Next(P);
-        if (P != Nil) {
-            printf(", ");
-        }
     }
-    printf("]");
+    printf("]\n");
 }
 
 int NbElmt(List L) {
     int count = 0;
     address P = First(L);
-    while (P != Nil) {
+    while (P != NULL) {
         count++;
         P = Next(P);
     }
     return count;
+}
+
+void InserttoListofPlaylist(ListofPlaylist *LoP, List L) {
+    if (LoP->Neff < 100) {
+        LoP->listplaylist[LoP->Neff] = L;
+        LoP->Neff++;
+    }
+}
+
+boolean IsEmpty(List L) {
+    return First(L) == NULL;
 }

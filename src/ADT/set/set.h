@@ -5,5 +5,9 @@
 
 // PROTOTYPE
 void CreateEmptySet(SetSong *S);
+void CreateEmptyListSet(ListofSetSong *S);
 void AddSongToSet(SetSong *S, Song song);
 boolean IsSongInSet(SetSong S, char *songName);
+void AddSetSongToListSetSong(ListofSetSong *list, SetSong setsong);
+void DisplaySetSong(SetSong S);
+void DisplayListOfSetSong(ListofSetSong list);

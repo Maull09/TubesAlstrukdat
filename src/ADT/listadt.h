@@ -13,7 +13,6 @@
 
 // ADT 1 Untuk array Singer [arraySinger.h]
 typedef struct {
-    int id;
     char singerName[255];
 } Singer;
 
@@ -26,15 +25,19 @@ typedef struct {
 // ADT 3 untuk set [set.h]
 #define MaxSetSongs 100
 typedef struct {
-    int id;
     char songName[100];
-    int albumID;   // ID album tempat lagu ini berasal
 } Song;
 
 typedef struct {
+    char albumName[100];   // ID album tempat lagu ini berasal
     Song songs[MaxSetSongs];
     int Neff; // Jumlah lagu sebenarnya dalam set
 } SetSong;
+
+typedef struct {
+    SetSong Songs[100];
+    int Neff;
+} ListofSetSong;
 
 
 // ADT 4 Untuk Album dan Map Album [map_album.h]
@@ -43,17 +46,20 @@ typedef struct {
 #define MaxAlbums 100
 
 typedef struct {
-    int id;
     char albumName[100];
-    int singerID;  // ID penyanyi yang memiliki album ini
-    char singerName[100];
 } Album;
 
 typedef struct {
+    char SingerName[100];
     Album albums[MaxAlbums];
     int Neff;   // Jumlah album sebenarnya
-} MapAlbum;
+} MapAlbumSinger;
 
+typedef struct {
+    MapAlbumSinger MapAlbums[100];
+    int Neff;
+} ListMapAlbum;
+ 
 
 // // ADT 4 Untuk Song dan Map Song [map_song.h]
 #define NilMapSong 0
@@ -61,10 +67,15 @@ typedef struct {
 #define MaxSongs 100
 
 typedef struct {
+    char albumName[100];
     Song songs[MaxSongs];
     int Neff;   // Jumlah lagu sebenarnya
-} MapSong;
+} MapSongAlbum;
 
+typedef struct {
+    MapSongAlbum MapSongs[100];
+    int Neff;
+} ListMapSong;
 
 // ADT 5 Untuk Queue dan Lagu [queue.h]
 #define IDX_UNDEF -1
@@ -74,7 +85,6 @@ typedef struct {
     char artist[100];
     char album[100];
     char titlesong[100];
-    char SongId[100];
 } Lagu;
 
 /* Definisi elemen dan address */
@@ -98,19 +108,40 @@ typedef struct {
 // ADT 7 untuk linked list [linkedlist.h]
 #define Nil NULL
 
-typedef Lagu infotype;
+typedef Song infotype;
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
 	infotype info;
 	address next;
 } ElmtList;
+
 typedef struct {
 	address First;
+    char PlaylistName[100];
 } List;
+
+typedef struct {
+    List listplaylist[100];
+    int Neff;
+} ListofPlaylist;
+
+
+// ADT 2 Untuk array Playlist [arrayplaylist.h]
+#define INIT_SIZE 10 // Ukuran awal array dinamis
+
+typedef struct {
+    char name[255]; // Nama dari playlist
+} Playlist;
+
+typedef struct {
+    Playlist *playlists;  // Pointer ke array dinamis dari playlist
+    int Neff;             // Jumlah playlist yang ada saat ini
+    int capacity;        // Kapasitas array dinamis saat ini
+} ArrayPlaylists;
 
 // ADT 8 untuk mesin karakter [mesinkarakter.h]
 #define MARK ';'
-#define MARK2 '#'
+#define MARK2 '\0'
 #define NEWLINE '\n'
 /* State Mesin */
 extern char currentChar;
@@ -140,18 +171,5 @@ typedef struct {
   int Length;
 } Kalimat;
 
-// ADT 2 Untuk array Playlist [arrayplaylist.h]
-#define INIT_SIZE 10 // Ukuran awal array dinamis
 
-typedef struct {
-    char name[255]; // Nama dari playlist
-    int id;         // ID dari playlist
-    List songs;     // Daftar lagu dalam playlist
-} Playlist;
-
-typedef struct {
-    Playlist *playlists;  // Pointer ke array dinamis dari playlist
-    int Neff;             // Jumlah playlist yang ada saat ini
-    int capacity;        // Kapasitas array dinamis saat ini
-} ArrayPlaylists;
 #endif

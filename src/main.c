@@ -24,10 +24,10 @@ int main(){
     SetSong KumpulanLagu;
     CreateEmptySet(&KumpulanLagu);
     // Map Penyanyi Album
-    MapAlbum SingerAlbum;
+    MapAlbumSinger SingerAlbum;
     CreateEmptyMapAlbum(&SingerAlbum);
     //Map Album Lagu
-    MapSong SongAlbum;
+    MapSongAlbum SongAlbum;
     CreateEmptyMapSong(&SongAlbum);
     // Linked List Playlist
     // List Playlist;
@@ -227,7 +227,11 @@ int main(){
             mulai = false;
         } else {
             invcommand();
+            while (currentChar != MARK){
+                ADVINPUT();
+            }
         }
+
     }
 
     return 0;

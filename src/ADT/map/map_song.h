@@ -5,8 +5,13 @@
 #include "../../function.h"
 #include "../listadt.h"
 
-void CreateEmptyMapSong(MapSong *M);
-void InsertSong(MapSong *M, Song s);
-int FindSong(MapSong M, char songName[]);
+
+void CreateEmptyMapSong(MapSongAlbum *M);
+void CreateEmptyListMapSong(ListMapSong *LM);
+void InsertSong(MapSongAlbum *M, Song s);
+void InsertListMapSong(ListMapSong *LM, MapSongAlbum M);
+boolean FindSong(MapSongAlbum M, char songName[]);
+void DisplayMapSong(MapSongAlbum M);
+void DisplayListMapSong(ListMapSong LM);
 
 #endif
