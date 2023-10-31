@@ -14,17 +14,3 @@ void STATUS(Lagu *playing, QueueLagu *antrian){
     }
 }
 
-int main(){
-    QueueLagu q;
-    Lagu song;
-    SalinString(song.artist,"singer");
-    SalinString(song.album,"album");
-    SalinString(song.titlesong,"title");
-    CreateQueue(&q);
-    enqueue(&q,song);
-    STATUS(&song,&q);
-
-    
-
-    return 0;
-}
