@@ -56,7 +56,7 @@ int main(){
                 printf("Load Game\n");
                 sesi = true;
             } else {
-                printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");
             }
         }else if (IsStringEqual(currentWord, "LIST")){ //List
             ADVINPUT();
@@ -132,6 +132,7 @@ int main(){
                 }
             }else {
                 invcommand();
+                
             }
         }else if (IsStringEqual(currentWord, "SONG")){
             ADVINPUT();
@@ -227,12 +228,8 @@ int main(){
             mulai = false;
         } else {
             invcommand();
-            while (currentChar != MARK){
-                ADVINPUT();
-            }
         }
-
+        EndInput();
     }
-
     return 0;
 }

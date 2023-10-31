@@ -31,4 +31,6 @@ void delay(int number_of_seconds);
 void invcommand();
 
 void FUNCSTART();
+
+void EndInput();
 #endif

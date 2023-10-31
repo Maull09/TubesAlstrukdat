@@ -39,7 +39,14 @@ void help() {
 }
 
 void invcommand(){
-    printf("Gada commandnya bjir\n");
+    printf("Gada commandnya\n");
+    EndInput();
+}
+
+void EndInput(){
+    while (currentChar != MARK){
+        ADVINPUT();
+    }
 }
 
 void delay(int number_of_seconds)

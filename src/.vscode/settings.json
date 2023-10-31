@@ -15,7 +15,8 @@
         "arraydin.h": "c",
         "stdio.h": "c",
         "arraysinger.h": "c",
-        "linkedlist.h": "c"
+        "linkedlist.h": "c",
+        "arrayplaylist.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
