@@ -7,5 +7,5 @@
 void CreateEmptyListSinger(ListSinger *L);
 void InsertSinger(ListSinger *L, Singer s);
 int FindSinger(ListSinger L, char singerName[]);
-
+void displaySinger(ListSinger LS);
 #endif

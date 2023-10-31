@@ -1,4 +1,5 @@
 #include "arraySinger.h"
+#include <stdio.h>
 
 void CreateEmptyListSinger(ListSinger *L) {
     L->Neff = 0;
@@ -18,4 +19,10 @@ int FindSinger(ListSinger L, char singerName[]) {
         }
     }
     return IdxUndef;  // tidak ditemukan
+}
+
+void displaySinger(ListSinger LS){
+    for(int i = 0; i<LS.Neff;i++){
+        printf("Nama Artis : %s", LS.singers[i].singerName);
+    }
 }
