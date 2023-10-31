@@ -229,7 +229,8 @@ int main(){
         } else {
             invcommand();
         }
-        EndInput();
+        ResetInput();
+        // EndInput();
     }
     return 0;
 }

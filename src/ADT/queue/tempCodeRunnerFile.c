@@ -1,1 +1,0 @@
-gcc ../../function.c ../arraystatis/arraySinger.c ../map/map_album.c ../map/map_song.c ../mesin_karakter/mesinkarakter.c ../mesin_kata/mesinkata.c ../mesin_input/mesininput.c ../mesin_kalimat/mesinkalimat.c ../queue/queue.c ../arraydin/arrayplaylist.c ../linkedlist/linkedlist.c ../set/set.c ../stack/stack.c -o driver_queue

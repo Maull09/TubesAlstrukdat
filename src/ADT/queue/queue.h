@@ -4,7 +4,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "../boolean.h"
 #include "../../function.h"
 #include "../listadt.h"
 
@@ -31,4 +30,8 @@ void dequeue(QueueLagu *q, ElTypeQueue *val);
 void displayQueue(QueueLagu q);
 
 void SalinLagu(Lagu *dest, Lagu src);
+
+void removeSong(QueueLagu *q, int id);
+
+void clearQueue(QueueLagu *q);
 #endif

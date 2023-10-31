@@ -18,11 +18,12 @@ int FindSinger(ListSinger L, char singerName[]) {
             return i;
         }
     }
-    return IdxUndef;  // tidak ditemukan
+    return IdxUndef; 
 }
 
 void displaySinger(ListSinger LS){
+    printf("Daftar Artis Tersedia : \n");
     for(int i = 0; i<LS.Neff;i++){
-        printf("Nama Artis : %s", LS.singers[i].singerName);
+        printf("Nama Artis : %s\n", LS.singers[i].singerName);
     }
 }

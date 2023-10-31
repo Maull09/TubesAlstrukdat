@@ -2,6 +2,11 @@
 #include <string.h>
 #include "queue.h"
 
+// #include "../mesin_karakter/mesinkarakter.h"
+// #include "../mesin_kata/mesinkata.h"
+// #include "../mesin_input/mesininput.h"
+// #include "../mesin_kalimat/mesinkalimat.h"
+
 /* *** Kreator *** */
 void CreateQueue(QueueLagu *q) {
     IDX_HEAD(*q) = IDX_UNDEF;
@@ -91,3 +96,27 @@ void SalinLagu(Lagu *dest, Lagu src) {
     SalinString(dest->titlesong, src.titlesong);
 }
 
+void removeSong(QueueLagu *q, int id){
+    int n = lengthQueue(*q);
+    if (isEmptyQueue(*q)) {
+        printf("Queue kosong. Tidak ada lagu yang dapat dihapus.\n");
+    } else {
+        // Cek apakah ID lagu valid
+        if (id < 1 || id > n){
+            printf("Lagu dengan urutan ke %d tidak ada.\n", id);
+        } else {
+            ElTypeQueue removed_song;
+            removed_song = q->buffer[id];
+            for (int i = id; i < n; i++){
+                q->buffer[i] = q->buffer[i+1];
+            }
+            printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", removed_song.titlesong, removed_song.artist);
+        }
+    }
+    IDX_TAIL(*q) -= 1;
+}
+
+void clearQueue(QueueLagu *q){
+    CreateQueue(q);
+    printf("Queue berhasil dikosongkan\n");
+}

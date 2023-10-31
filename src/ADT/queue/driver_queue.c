@@ -1,78 +1,74 @@
 #include <stdio.h>
 #include "queue.h"
 
-#include "../mesin_karakter/mesinkarakter.h"
-#include "../mesin_kata/mesinkata.h"
-#include "../mesin_input/mesininput.h"
-#include "../queue/queue.h"
 #include "../set/set.h"
 #include "../arraystatis/arraySinger.h"
 #include "../map/map_album.h"
 #include "../map/map_song.h"
 
-// gcc queue.c driver_queue.c ../../function.c -o driver_queue
-
 int main() {
     QueueLagu q;
-    ElTypeQueue lagu1, lagu2, lagu3;
+    ElTypeQueue lagu1, lagu2, lagu3, lagu4, lagu5;
     ElTypeQueue laguHapus;
-    ListSinger LS;
-    Singer singerInput;
-    int foundIdx;
-    MapSongAlbum SM;
-    Song S1 = {"Song One"};
-    Song S2 = {"Song Two"};
-    ListMapSong LM;
-    MapAlbumSinger AlbumSinger;
-    Album A1 = {"Album One"};
-    Album A2 = {"Album Two"};
-    ListMapAlbum LMA;
 
-    CreateEmptyListSinger(&LS);
+    // ListSinger LS;
+    // Singer singerInput;
 
-    SalinString(singerInput.singerName, "Arctic Monkeys");
-    InsertSinger(&LS, singerInput);
+    // CreateEmptyListSinger(&LS);
 
-    SalinString(singerInput.singerName, "BLACKPINK");
-    InsertSinger(&LS, singerInput);
+    // SalinString(singerInput.singerName, "Arctic Monkeys");
+    // InsertSinger(&LS, singerInput);
 
-    printf("Display listsinger: \n");
-    displaySinger(LS);
+    // SalinString(singerInput.singerName, "BLACKPINK");
+    // InsertSinger(&LS, singerInput);
+
+    // displaySinger(LS);
+    // printf("\n");
 
 
-    CreateEmptyMapAlbum(&AlbumSinger);
-    CreateEmptyListMapAlbum(&LMA);
-    SalinString(AlbumSinger.SingerName, "Singer A");
-    InsertAlbum(&AlbumSinger, A1);
-    InsertAlbum(&AlbumSinger, A2);
-    InsertListMapAlbum(&LMA, AlbumSinger);
+    // MapAlbumSinger AlbumSinger;
+    // Album A1 = {"Album One"};
+    // Album A2 = {"Album Two"};
+    // ListMapAlbum ListAlbum;
 
+    // CreateEmptyMapAlbum(&AlbumSinger);
+    // CreateEmptyListMapAlbum(&ListAlbum);
+    // SalinString(AlbumSinger.SingerName, "Singer A");
+    // InsertAlbum(&AlbumSinger, A1);
+    // InsertAlbum(&AlbumSinger, A2);
+    // InsertListMapAlbum(&ListAlbum, AlbumSinger);
 
-    printf("Displaying MapAlbumSinger:\n");
-    DisplayMapAlbum(AlbumSinger);
-    printf("\n");
+    // printf("Displaying MapAlbumSinger:\n");
+    // DisplayMapAlbum(AlbumSinger);
+    // printf("\n");
 
-    printf("Displaying ListMapAlbum:\n");
-    DisplayListMapAlbum(LMA);
+    // printf("Displaying ListMapAlbum:\n");
+    // DisplayListMapAlbum(ListAlbum);
+    // printf("\n");
+
+    // MapSongAlbum SongAlbum;
+    // Song S1 = {"Song One"};
+    // Song S2 = {"Song Two"};
+    // ListMapSong LMS; 
+
+    // CreateEmptyMapSong(&SongAlbum);
+    // CreateEmptyListMapSong(&LMS);
+
+    // SalinString(SongAlbum.albumName, "Album A");
+
+    // InsertSong(&SongAlbum, S1);
+    // InsertSong(&SongAlbum, S2);
+    // InsertListMapSong(&LMS, SongAlbum);
     
+    // // Test display functions
+    // printf("Displaying MapSongAlbum:\n");
+    // DisplayMapSong(SongAlbum);
+    // printf("\n");
 
-    CreateEmptyMapSong(&SM);
-    CreateEmptyListMapSong(&LM);
+    // printf("Displaying ListMapSong:\n");
+    // DisplayListMapSong(LMS);
 
-    SalinString(SM.albumName, "Album A");
-
-    InsertSong(&SM, S1);
-    InsertSong(&SM, S2);
-    InsertListMapSong(&LM, SM);
-    
-    // Test display functions
-    printf("Displaying MapSongAlbum:\n");
-    DisplayMapSong(SM);
-    printf("\n");
-
-    printf("Displaying ListMapSong:\n");
-    DisplayListMapSong(LM);
-
+    CreateQueue(&q);
     // Data dummy
     SalinString(lagu1.artist, "Coldplay");
     SalinString(lagu1.album, "A Head Full of Dreams");
@@ -86,13 +82,23 @@ int main() {
     SalinString(lagu3.album, "1989");
     SalinString(lagu3.titlesong, "Blank Space");
 
-    CreateQueue(&q);
+    SalinString(lagu4.artist, "Taylor Swift");
+    SalinString(lagu4.album, "Speak Now");
+    SalinString(lagu4.titlesong, "Enchanted");
+
+    SalinString(lagu5.artist, "Taylor Swift");
+    SalinString(lagu5.album, "Lover");
+    SalinString(lagu5.titlesong, "Daylight");
+
     // Menambahkan lagu ke queue
     enqueue(&q, lagu1);
     enqueue(&q, lagu2);
     enqueue(&q, lagu3);
+    enqueue(&q, lagu4);
+    enqueue(&q, lagu5);
+
     
-    printf("Setelah menambahkan 3 lagu:\n");
+    printf("Setelah menambahkan 5 lagu:\n");
     displayQueue(q);
 
     // Menghapus lagu dari queue
@@ -100,6 +106,17 @@ int main() {
     printf("\nSetelah menghapus lagu %s - %s: %s dari queue:\n", laguHapus.artist, laguHapus.album, laguHapus.titlesong);
     displayQueue(q);
 
+    printf("\n");
+    removeSong(&q, 2);
+
+    displayQueue(q);
+    
+    printf("\nKosongkan Queue\n");
+    clearQueue(&q);
+
+
+    displayQueue(q);
+    
+
     return 0;
 }
-// gcc ../../function.c ../arraystatis/arraySinger.c ../map/map_album.c ../map/map_song.c ../mesin_karakter/mesinkarakter.c ../mesin_kata/mesinkata.c ../mesin_input/mesininput.c ../mesin_kalimat/mesinkalimat.c ../queue/queue.c ../arraydin/arrayplaylist.c ../linkedlist/linkedlist.c ../set/set.c ../stack/stack.c -o driver_queue
