@@ -22,3 +22,44 @@ boolean StringSama(char s1[], char s2[]) {
     }
     return s1[i] == s2[i]; // memeriksa apakah keduanya berakhir pada saat yang sama (keduanya adalah '\0')
 }
+
+boolean isNumber(char *str){
+    if(str[0] == '\0') {
+        return false;
+    }
+
+    for(int i = 0; str[i] != '\0'; i++){
+        if(!is_digit(str[i])){
+            return false;
+        }
+    }
+    return true;
+}
+
+boolean is_digit(char c) {
+    return c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8'|| c == '9';
+}
+
+boolean name_valid(char *str) {
+    if (str[0] == '\0') {
+        return false;
+    }
+
+    int length = 0;
+    while (str[length] != '\0') {
+        length++;
+    }
+
+    if (length < 4) {
+        return false;
+    }
+
+    if (str[length - 4] == '.' && 
+        str[length - 3] == 't' &&
+        str[length - 2] == 'x' &&
+        str[length - 1] == 't') {
+        return true;
+    }
+
+    return false;
+}

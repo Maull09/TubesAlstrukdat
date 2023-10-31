@@ -57,6 +57,7 @@ void ADVINPUT()
           Jika currentChar = MARK, EndWord = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 {
+    ResetInput();
     IgnoreBlanks();
     if (currentChar == MARK)
     {

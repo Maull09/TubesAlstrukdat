@@ -12,9 +12,9 @@ int main() {
     printf("Destination String setelah disalin: %s\n\n", destination);
 
     // Test untuk StringSama
-    char string1[] = "OpenAI";
-    char string2[] = "OpenAI";
-    char string3[] = "Open";
+    char string1[] = "Maul";
+    char string2[] = "Maul";
+    char string3[] = "Maulana";
 
     if (StringSama(string1, string2)) {
         printf("String1 (%s) dan String2 (%s) adalah sama.\n", string1, string2);
@@ -26,6 +26,21 @@ int main() {
         printf("String1 (%s) dan String3 (%s) adalah sama.\n", string1, string3);
     } else {
         printf("String1 (%s) dan String3 (%s) adalah berbeda.\n", string1, string3);
+    }
+
+    char str1[] = "12345";
+    char str2[] = "12a45";
+
+    if(isNumber(str1)) {
+        printf("%s is a number.\n", str1);
+    } else {
+        printf("%s is not a number.\n", str1);
+    }
+
+    if(isNumber(str2)) {
+        printf("%s is a number.\n", str2);
+    } else {
+        printf("%s is not a number.\n", str2);
     }
 
     return 0;

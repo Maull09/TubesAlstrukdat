@@ -56,6 +56,8 @@ int main(){
                 } else {
                     printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");
                 }
+            }else {
+                invcommand();
             }
         } else if (IsStringEqual(currentWord, "LOAD")){ //Load
             ADVINPUT();
@@ -66,7 +68,10 @@ int main(){
                 } else {
                     printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");
                 }
+            }else {
+                invcommand();
             }
+
         }else if (IsStringEqual(currentWord, "LIST")){ //List
             ADVINPUT();
             if (IsStringEqual(currentWord, "DEFAULT")){ // List Default
@@ -145,30 +150,45 @@ int main(){
                 } else {
                     invcommand();
                 }
-            } else if (IsStringEqual(currentWord, "SWAP")){ // TAMBAHIN HANDLER BLANK
+            } else if (IsStringEqual(currentWord, "SWAP")){ 
                 ADVINPUT();
-                int x = atoi(currentWord.TabWord);
-                ADVINPUT();
-                int y = atoi(currentWord.TabWord);
-                ADVINPUT();
-                if (EndWord){
-                    if (sesi){
-                        printf("Queue swap %d %d\n", x,y);
+                if(isNumber(currentWord.TabWord)){
+                    int x = atoi(currentWord.TabWord);
+                    ADVINPUT();
+                    if(isNumber(currentWord.TabWord)){
+                        int y = atoi(currentWord.TabWord);
+                        ADVINPUT();
+                        if (EndWord){
+                            if (sesi){
+                                printf("Queue swap %d %d\n", x,y);
+                            } else {
+                                printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                            }
+                        } else {
+                            invcommand();
+                        }
                     } else {
-                        printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                        invcommand();
                     }
                 } else {
                     invcommand();
                 }
-            } else if (IsStringEqual(currentWord, "REMOVE")){
+            } else if (IsStringEqual(currentWord, "REMOVE")){ 
                 ADVINPUT();
-                int id = atoi(currentWord.TabWord);
-                ADVINPUT();
-                if (EndWord){
-                    if (sesi){
-                        printf("Queue remove %d\n", id);
+                
+                // Pengecekan apakah currentWord adalah angka
+                if(isNumber(currentWord.TabWord)){
+                    int id = atoi(currentWord.TabWord);
+                    ADVINPUT();
+                    
+                    if (EndWord){
+                        if (sesi){
+                            printf("Queue remove %d\n", id);
+                        } else {
+                            printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                        }
                     } else {
-                        printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                        invcommand();
                     }
                 } else {
                     invcommand();
@@ -255,34 +275,61 @@ int main(){
                 } else{
                     invcommand();
                 }
-            } else if (IsStringEqual(currentWord, "SWAP")){
+            } else if (IsStringEqual(currentWord, "SWAP")){ 
                 ADVINPUT();
-                int id = atoi(currentWord.TabWord);
-                ADVINPUT();
-                int x = atoi(currentWord.TabWord);
-                ADVINPUT();
-                int y = atoi(currentWord.TabWord);
-                ADVINPUT();
-                if (EndWord){
-                    if (sesi){
-                        printf("Playlist %d swap %d %d\n", id, x, y);
+                
+                if(isNumber(currentWord.TabWord)){
+                    int id = atoi(currentWord.TabWord);
+                    ADVINPUT();
+
+                    if(isNumber(currentWord.TabWord)){
+                        int x = atoi(currentWord.TabWord);
+                        ADVINPUT();
+                        
+                        if(isNumber(currentWord.TabWord)){
+                            int y = atoi(currentWord.TabWord);
+                            ADVINPUT();
+                            
+                            if (EndWord){
+                                if (sesi){
+                                    printf("Playlist %d swap %d %d\n", id, x, y);
+                                } else {
+                                    printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                                }
+                            } else {
+                                invcommand();
+                            }
+                        } else {
+                            invcommand();
+                        }
                     } else {
-                        printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                        invcommand();
                     }
                 } else {
                     invcommand();
                 }
-            } else if (IsStringEqual(currentWord, "REMOVE")){
+            } else if (IsStringEqual(currentWord, "REMOVE")){ 
                 ADVINPUT();
-                int id = atoi(currentWord.TabWord);
-                ADVINPUT();
-                int n = atoi(currentWord.TabWord);
-                ADVINPUT();
-                if (EndWord){
-                    if (sesi){
-                        printf("Playlist %d remove %d\n", id, n);
+                
+                if(isNumber(currentWord.TabWord)){
+                    int id = atoi(currentWord.TabWord);
+                    ADVINPUT();
+
+                    if(isNumber(currentWord.TabWord)){
+                        int n = atoi(currentWord.TabWord);
+                        ADVINPUT();
+                        
+                        if (EndWord){
+                            if (sesi){
+                                printf("Playlist %d remove %d\n", id, n);
+                            } else {
+                                printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                            }
+                        } else {
+                            invcommand();
+                        }
                     } else {
-                        printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                        invcommand();
                     }
                 } else {
                     invcommand();
@@ -312,15 +359,21 @@ int main(){
             } else {
                 invcommand();
             }
-        } else if (IsStringEqual(currentWord, "SAVE")){
+        } else if (IsStringEqual(currentWord, "SAVE")){ 
             ADVINPUT();
-            Word filename = currentWord;
-            ADVINPUT();
-            if (EndWord){
-                if (sesi){
-                    printf("Simpan ke %s\n", filename.TabWord);
+            
+            if(name_valid(currentWord.TabWord)){
+                Word filename = currentWord;
+                ADVINPUT();
+                
+                if (EndWord){
+                    if (sesi){
+                        printf("Simpan ke %s\n", filename.TabWord);
+                    } else {
+                        printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                    }
                 } else {
-                    printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                    invcommand();
                 }
             } else {
                 invcommand();

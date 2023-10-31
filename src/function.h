@@ -7,3 +7,9 @@ void SalinString(char dest[], char src[]);
 
 //Untuk Membandingkan String 1 dan String 2
 boolean StringSama(char s1[], char s2[]);
+
+boolean isNumber(char *str);
+
+boolean is_digit(char c);
+
+boolean name_valid(char *str);
