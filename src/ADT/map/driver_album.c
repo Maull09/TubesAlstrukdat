@@ -4,7 +4,7 @@
 // gcc map_album.c driver_album.c ../../function.c -o driver_album
 
 int main() {
-    MapAlbumSinger M;
+    MapAlbum M;
     Album A1 = {"Album One"};
     Album A2 = {"Album Two"};
     ListMapAlbum LM;

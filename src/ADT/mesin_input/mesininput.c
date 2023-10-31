@@ -58,14 +58,14 @@ void ADVINPUT()
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 {
     IgnoreBlanks();
-    IgnoreNewLine();
     if (currentChar == MARK)
     {
         EndWord = true;
     } else
     {
+        EndWord = false;
         CopyWordInput();
-        IgnoreBlanks();
+        // IgnoreBlanks();
 
     }
 }

@@ -3,11 +3,8 @@
 
 // gcc map_song.c driver_song.c ../../function.c -o driver_song
 
-#include "map_song.h"
-#include <stdio.h>
-
 int main() {
-    MapSongAlbum M;
+    MapSong M;
     Song S1 = {"Song One"};
     Song S2 = {"Song Two"};
     ListMapSong LM;

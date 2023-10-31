@@ -6,12 +6,13 @@
 #include "../listadt.h"
 
 
-void CreateEmptyMapSong(MapSongAlbum *M);
+void CreateEmptyMapSong(MapSong *M);
 void CreateEmptyListMapSong(ListMapSong *LM);
-void InsertSong(MapSongAlbum *M, Song s);
-void InsertListMapSong(ListMapSong *LM, MapSongAlbum M);
-boolean FindSong(MapSongAlbum M, char songName[]);
-void DisplayMapSong(MapSongAlbum M);
+void InsertSong(MapSong *M, Song s);
+void InsertListMapSong(ListMapSong *LM, MapSong M);
+boolean FindSong(MapSong, char songName[]);
+void DisplayMapSong(MapSong M);
 void DisplayListMapSong(ListMapSong LM);
 
 #endif
+

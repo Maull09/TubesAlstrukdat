@@ -99,7 +99,7 @@ boolean IsStringEqual(Word word1, char *word2)
             if (word2[i] != word1.TabWord[i])
             {
 
-                equal = false;
+                return false;
             }
         }
     } else {

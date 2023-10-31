@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "queue.h"
-
 #include "../set/set.h"
 #include "../arraystatis/arraySinger.h"
 #include "../map/map_album.h"
@@ -11,62 +10,66 @@ int main() {
     ElTypeQueue lagu1, lagu2, lagu3, lagu4, lagu5;
     ElTypeQueue laguHapus;
 
-    // ListSinger LS;
-    // Singer singerInput;
+    ListSinger LS;
+    Singer singerInput;
 
-    // CreateEmptyListSinger(&LS);
+    CreateEmptyListSinger(&LS);
 
-    // SalinString(singerInput.singerName, "Arctic Monkeys");
-    // InsertSinger(&LS, singerInput);
+    SalinString(singerInput.singerName, "Arctic Monkeys");
+    InsertSinger(&LS, singerInput);
 
-    // SalinString(singerInput.singerName, "BLACKPINK");
-    // InsertSinger(&LS, singerInput);
+    SalinString(singerInput.singerName, "BLACKPINK");
+    InsertSinger(&LS, singerInput);
 
-    // displaySinger(LS);
-    // printf("\n");
+    displaySinger(LS);
+    printf("\n");
 
 
-    // MapAlbumSinger AlbumSinger;
-    // Album A1 = {"Album One"};
-    // Album A2 = {"Album Two"};
-    // ListMapAlbum ListAlbum;
+    MapAlbum AlbumSinger;
+    Album A1 = {"Album One"};
+    Album A2 = {"Album Two"};
+    ListMapAlbum ListAlbum;
 
-    // CreateEmptyMapAlbum(&AlbumSinger);
-    // CreateEmptyListMapAlbum(&ListAlbum);
-    // SalinString(AlbumSinger.SingerName, "Singer A");
-    // InsertAlbum(&AlbumSinger, A1);
-    // InsertAlbum(&AlbumSinger, A2);
-    // InsertListMapAlbum(&ListAlbum, AlbumSinger);
+    CreateEmptyMapAlbum(&AlbumSinger);
+    CreateEmptyListMapAlbum(&ListAlbum);
 
-    // printf("Displaying MapAlbumSinger:\n");
-    // DisplayMapAlbum(AlbumSinger);
-    // printf("\n");
+    SalinString(AlbumSinger.SingerName, "Singer A");
 
-    // printf("Displaying ListMapAlbum:\n");
-    // DisplayListMapAlbum(ListAlbum);
-    // printf("\n");
+    InsertAlbum(&AlbumSinger, A1);
+    InsertAlbum(&AlbumSinger, A2);
 
-    // MapSongAlbum SongAlbum;
-    // Song S1 = {"Song One"};
-    // Song S2 = {"Song Two"};
-    // ListMapSong LMS; 
+    InsertListMapAlbum(&ListAlbum, AlbumSinger);
 
-    // CreateEmptyMapSong(&SongAlbum);
-    // CreateEmptyListMapSong(&LMS);
+    printf("Displaying MapAlbumSinger:\n");
+    DisplayMapAlbum(AlbumSinger);
+    printf("\n");
 
-    // SalinString(SongAlbum.albumName, "Album A");
+    printf("Displaying ListMapAlbum:\n");
+    DisplayListMapAlbum(ListAlbum);
 
-    // InsertSong(&SongAlbum, S1);
-    // InsertSong(&SongAlbum, S2);
-    // InsertListMapSong(&LMS, SongAlbum);
+    printf("\n");
+
+    MapSong SongAlbum;
+    Song S1 = {"Song One"};
+    Song S2 = {"Song Two"};
+    ListMapSong arrMapSong; 
+
+    CreateEmptyMapSong(&SongAlbum);
+    CreateEmptyListMapSong(&arrMapSong);
+
+    SalinString(SongAlbum.albumName, "Album A");
+
+    InsertSong(&SongAlbum, S1);
+    InsertSong(&SongAlbum, S2);
+    InsertListMapSong(&arrMapSong, SongAlbum);
     
-    // // Test display functions
-    // printf("Displaying MapSongAlbum:\n");
-    // DisplayMapSong(SongAlbum);
-    // printf("\n");
+    // Test display functions
+    printf("Displaying MapSong:\n");
+    DisplayMapSong(SongAlbum);
+    printf("\n");
 
-    // printf("Displaying ListMapSong:\n");
-    // DisplayListMapSong(LMS);
+    printf("Displaying ListMapSong:\n");
+    DisplayListMapSong(arrMapSong);
 
     CreateQueue(&q);
     // Data dummy

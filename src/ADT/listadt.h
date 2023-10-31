@@ -53,10 +53,10 @@ typedef struct {
     char SingerName[100];
     Album albums[MaxAlbums];
     int Neff;   // Jumlah album sebenarnya
-} MapAlbumSinger;
+} MapAlbum;
 
 typedef struct {
-    MapAlbumSinger MapAlbums[100];
+    MapAlbum MapAlbums[100];
     int Neff;
 } ListMapAlbum;
  
@@ -70,10 +70,10 @@ typedef struct {
     char albumName[100];
     Song songs[MaxSongs];
     int Neff;   // Jumlah lagu sebenarnya
-} MapSongAlbum;
+} MapSong;
 
 typedef struct {
-    MapSongAlbum MapSongs[100];
+    MapSong MapSongs[100];
     int Neff;
 } ListMapSong;
 

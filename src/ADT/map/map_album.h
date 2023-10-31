@@ -7,12 +7,12 @@
 #include "../listadt.h"
 
 
-void CreateEmptyMapAlbum(MapAlbumSinger *M);
+void CreateEmptyMapAlbum(MapAlbum *M);
 void CreateEmptyListMapAlbum(ListMapAlbum *LM);
-void InsertListMapAlbum(ListMapAlbum *MA, MapAlbumSinger M);
-void InsertAlbum(MapAlbumSinger *M, Album a);
-boolean FindAlbum(MapAlbumSinger M, char albumName[]);
-void DisplayMapAlbum(MapAlbumSinger M);
+void InsertListMapAlbum(ListMapAlbum *MA, MapAlbum M);
+void InsertAlbum(MapAlbum *M, Album a);
+boolean FindAlbum(MapAlbum M, char albumName[]);
+void DisplayMapAlbum(MapAlbum M);
 void DisplayListMapAlbum(ListMapAlbum LM);
 
 #endif
