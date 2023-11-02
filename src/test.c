@@ -51,15 +51,19 @@ int main(){
 
     char choice;
     char SelectedArtist;
+    char SelectedAlbum;
     printf("Ingin melihat album yang ada?(Y/N) : ");
     scanf("%c", &choice);
 
     if (choice == 'Y' || choice == 'y'){
         printf("Pilih penyanyi untuk melihat album mereka : ");
         scanf("%s", &SelectedArtist);
-        if(FindAlbum(ListAlbum, SelectedArtist)){
+        if(FindAlbum(AlbumSinger, SelectedArtist)){
             DisplayMapAlbum(AlbumSinger); 
-            // if
+            if (choice == 'Y' || choice == 'y'){
+                printf("Pilih album untuk melihat lagu yang ada di album : ");
+                scanf("%s", &SelectedAlbum);
+            }
 
         }
         
