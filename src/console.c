@@ -61,62 +61,117 @@ void delay(int number_of_seconds)
     while (clock() < start_time + milli_seconds);
 }
 
-// void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbumSinger *SingerAlbum, MapSongAlbum *SongAlbum) {
+void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu) {
+    STARTKALIMATFILE("./data/config.txt");
+    int jumlahPenyanyi = atoi(CKalimat.TabKalimat);  // Convert ke integer
+    DaftarPenyanyi->Neff = jumlahPenyanyi;
+
+
+    for (int i = 0; i < DaftarPenyanyi->Neff; i++) {
+        ADVKALIMATFILE2();  // Baca Jumlah Album
+        int jumlahAlbum = atoi(CKalimat.TabKalimat);  // Convert ke integer
+        SingerAlbum->Neff = jumlahAlbum;
+        ADVKALIMATFILE();  // Baca nama penyanyi
+        SalinString(DaftarPenyanyi->singers[i].singerName, CKalimat.TabKalimat);
+        SalinString(SingerAlbum->SingerName, CKalimat.TabKalimat);
+
+
+        for (int j = 0; j < jumlahAlbum; j++){
+            ADVKALIMATFILE2();  // Baca jumlah lagu dalam album
+            int jumlahLagu = atoi(CKalimat.TabKalimat);  // Convert ke integer
+            SongAlbum->Neff = 1;
+            KumpulanLagu->Neff = jumlahLagu;
+
+            ADVKALIMATFILE(); // Baca Nama album
+            SalinString(SingerAlbum->albums[j].albumName, CKalimat.TabKalimat);
+            SalinString(SongAlbum->albumName, CKalimat.TabKalimat);
+
+        
+            for (int k = 0; k < jumlahLagu; k++) {
+                ADVKALIMATFILE();  // Baca judul lagu
+                SalinString(KumpulanLagu->songs[k].songName, CKalimat.TabKalimat);
+            }
+            
+            AddSetSongToMapSong(SongAlbum, *KumpulanLagu);
+            InsertListMapSong(KumpulanLaguAlbum, *SongAlbum);
+        }
+        InsertListMapAlbum(KumpulanAlbumSinger, *SingerAlbum);
+    }
+
+    printf("File konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
+    displaySinger(*DaftarPenyanyi);
+    DisplayListMapAlbum(KumpulanAlbumSinger);
+    DisplayListMapSong(KumpulanLaguAlbum);
+
+}
+
+
+void Load(char * filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu) {
+    char* pathdata = "./data/";
+    char* combinepath = concat(pathdata, filename);
+    STARTKALIMATFILE("./data/config.txt");
+    int jumlahPenyanyi = atoi(CKalimat.TabKalimat);  // Convert ke integer
+    DaftarPenyanyi->Neff = jumlahPenyanyi;
+
+
+    for (int i = 0; i < DaftarPenyanyi->Neff; i++) {
+        ADVKALIMATFILE2();  // Baca Jumlah Album
+        int jumlahAlbum = atoi(CKalimat.TabKalimat);  // Convert ke integer
+        SingerAlbum->Neff = jumlahAlbum;
+        ADVKALIMATFILE();  // Baca nama penyanyi
+        SalinString(DaftarPenyanyi->singers[i].singerName, CKalimat.TabKalimat);
+        SalinString(SingerAlbum->SingerName, CKalimat.TabKalimat);
+
+
+        for (int j = 0; j < jumlahAlbum; j++){
+            ADVKALIMATFILE2();  // Baca jumlah lagu dalam album
+            int jumlahLagu = atoi(CKalimat.TabKalimat);  // Convert ke integer
+            SongAlbum->Neff = 1;
+            KumpulanLagu->Neff = jumlahLagu;
+
+            ADVKALIMATFILE(); // Baca Nama album
+            SalinString(SingerAlbum->albums[j].albumName, CKalimat.TabKalimat);
+            SalinString(SongAlbum->albumName, CKalimat.TabKalimat);
+
+        
+            for (int k = 0; k < jumlahLagu; k++) {
+                ADVKALIMATFILE();  // Baca judul lagu
+                SalinString(KumpulanLagu->songs[k].songName, CKalimat.TabKalimat);
+            }
+            
+            AddSetSongToMapSong(SongAlbum, *KumpulanLagu);
+            InsertListMapSong(KumpulanLaguAlbum, *SongAlbum);
+        }
+        InsertListMapAlbum(KumpulanAlbumSinger, *SingerAlbum);
+    }
+
+
+
+}
+
+
+// void FUNCSTART() {
 //     STARTKALIMATFILE("./data/config.txt");
 //     int jumlahPenyanyi = atoi(CKalimat.TabKalimat);  // Convert ke integer
-//     DaftarPenyanyi->Neff = jumlahPenyanyi;
+//     printf("Jumlah Penyanyi = %d\n", jumlahPenyanyi);
     
-//     for (int i = 0; i < DaftarPenyanyi->Neff; i++) {
+//     for (int i = 1; i <= jumlahPenyanyi; i++) {
 //         ADVKALIMATFILE2();  // Baca Jumlah Album
 //         int jumlahAlbum = atoi(CKalimat.TabKalimat);  // Convert ke integer
-//         SingerAlbum->Neff = jumlahAlbum;
 //         ADVKALIMATFILE();  // Baca nama penyanyi
-//         SalinString(DaftarPenyanyi->singers[i].singerName, CKalimat.TabKalimat);
-//         DaftarPenyanyi->singers[i].id = i+1;
-
-//         for (int j = 0; j < jumlahAlbum; j++){
+//         printf("Jumlah Album %s : %d\n", CKalimat.TabKalimat, jumlahAlbum);
+        
+//         for (int j = 1; j <= jumlahAlbum; j++){
 //             ADVKALIMATFILE2();  // Baca jumlah lagu dalam album
 //             int jumlahLagu = atoi(CKalimat.TabKalimat);  // Convert ke integer
-//             SongAlbum->Neff = jumlahLagu;
 //             ADVKALIMATFILE(); // Baca Nama album
-//             SalinString(SingerAlbum->albums[j].albumName, CKalimat.TabKalimat);
-//             SingerAlbum->albums[j].id = j+1;
-//             SingerAlbum->albums[j].singerID = i+1;
+//             printf("Jumlah lagu album %s : %d\n", CKalimat.TabKalimat, jumlahLagu);
         
-//             for (int k = 0; k < jumlahLagu; k++) {
+//             for (int k = 1; k <= jumlahLagu; k++) {
 //                 ADVKALIMATFILE();  // Baca judul lagu
-//                 SalinString(SongAlbum->songs[k].songName, CKalimat.TabKalimat);
-//                 SongAlbum->songs[k].id = k+1;
-//                 SongAlbum->songs[k].albumID = j+1;
-
+//                 printf("Lagu %d penyanyi %d : %s\n", k, i, CKalimat.TabKalimat);
 //             }
 //         }
 //     }
-//     printf("File konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
+//     printf("Selesai FUNCSTART\n");
 // }
-
-void FUNCSTART() {
-    STARTKALIMATFILE("./data/config.txt");
-    int jumlahPenyanyi = atoi(CKalimat.TabKalimat);  // Convert ke integer
-    printf("Jumlah Penyanyi = %d\n", jumlahPenyanyi);
-    
-    for (int i = 1; i <= jumlahPenyanyi; i++) {
-        ADVKALIMATFILE2();  // Baca Jumlah Album
-        int jumlahAlbum = atoi(CKalimat.TabKalimat);  // Convert ke integer
-        ADVKALIMATFILE();  // Baca nama penyanyi
-        printf("Jumlah Album %s : %d\n", CKalimat.TabKalimat, jumlahAlbum);
-        
-        for (int j = 1; j <= jumlahAlbum; j++){
-            ADVKALIMATFILE2();  // Baca jumlah lagu dalam album
-            int jumlahLagu = atoi(CKalimat.TabKalimat);  // Convert ke integer
-            ADVKALIMATFILE(); // Baca Nama album
-            printf("Jumlah lagu album %s : %d\n", CKalimat.TabKalimat, jumlahLagu);
-        
-            for (int k = 1; k <= jumlahLagu; k++) {
-                ADVKALIMATFILE();  // Baca judul lagu
-                printf("Lagu %d penyanyi %d : %s\n", k, i, CKalimat.TabKalimat);
-            }
-        }
-    }
-    printf("Selesai FUNCSTART\n");
-}

@@ -1,4 +1,7 @@
 #include "function.h"
+#include <stdio.h>
+#include <stdlib.h>
+
 // Fungsi Yang Dapat Dipakai
 
 // Untuk menyalin string dari src ke dest
@@ -63,3 +66,43 @@ boolean name_valid(char *str) {
 
     return false;
 }
+
+int stringLength(char* string)
+{
+    int length = 0;
+    while (*string != '\0')
+    {
+        length++;
+        string++;
+    }
+    return length;
+}
+
+
+char* concat(char *s1, char *s2) {
+    char *result;
+    char *temp;
+
+    // Alokasikan memori
+    result = (char *)malloc(stringLength(s1) + stringLength(s2) + 1); // +1 untuk karakter null-terminator
+    if (result == NULL) {
+        return NULL; // Alokasi gagal
+    }
+
+    temp = result;
+
+    // Salin s1 ke result
+    while (*s1) {
+        *temp++ = *s1++;
+    }
+
+    // Salin s2 ke result
+    while ((*temp++ = *s2++));
+
+    return result;
+}
+
+
+
+
+

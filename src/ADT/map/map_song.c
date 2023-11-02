@@ -9,12 +9,12 @@ void CreateEmptyListMapSong(ListMapSong *LM) {
     LM->Neff = 0;
 }
 
-void InsertSong(MapSong *M, Song s) {
-    if (M->Neff < MaxSongs) {
-        M->songs[M->Neff] = s;
-        M->Neff++;
-    }
-}
+// void InsertSong(MapSong *M, Song s) {
+//     if (M->Neff < MaxSongs) {
+//         M->songs.songs[]->songName = s;
+//         M->Neff++;
+//     }
+// }
 
 void InsertListMapSong(ListMapSong *LM, MapSong M) {
     if (LM->Neff < 100) {
@@ -25,7 +25,7 @@ void InsertListMapSong(ListMapSong *LM, MapSong M) {
 
 boolean FindSong(MapSong M, char songName[]) {
     for (int i = 0; i < M.Neff; i++) {
-        if (StringSama(M.songs[i].songName, songName)) {
+        if (StringSama(M.songs.songs[i].songName, songName)) {
             return true;
         }
     }
@@ -34,8 +34,8 @@ boolean FindSong(MapSong M, char songName[]) {
 
 void DisplayMapSong(MapSong M) {
     printf("Daftar Lagu di %s: \n", M.albumName);
-    for (int i = 0; i < M.Neff; i++) {
-        printf("\t%d. %s\n",i+1, M.songs[i].songName);
+    for (int i = 0; i < M.songs.Neff; i++) {
+        printf("\t%d. %s\n",i+1, M.songs.songs[i].songName);
     }
 }
 

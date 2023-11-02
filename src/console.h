@@ -33,4 +33,6 @@ void invcommand();
 void FUNCSTART();
 
 void EndInput();
+
+void Load(char * filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, );
 #endif

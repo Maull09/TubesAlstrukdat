@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "function.h"
 
 int main() {
@@ -41,6 +42,14 @@ int main() {
         printf("%s is a number.\n", str2);
     } else {
         printf("%s is not a number.\n", str2);
+    }
+
+    char* s1 = "Hello, ";
+    char* s2 = "World!";
+    char* combined = concat(s1, s2);
+    if (combined != NULL) {
+        printf("%s\n", combined);
+        free(combined); // Jangan lupa membebaskan memori setelah selesai menggunakan
     }
 
     return 0;

@@ -29,15 +29,9 @@ typedef struct {
 } Song;
 
 typedef struct {
-    char albumName[100];   // ID album tempat lagu ini berasal
     Song songs[MaxSetSongs];
     int Neff; // Jumlah lagu sebenarnya dalam set
 } SetSong;
-
-typedef struct {
-    SetSong Songs[100];
-    int Neff;
-} ListofSetSong;
 
 
 // ADT 4 Untuk Album dan Map Album [map_album.h]
@@ -66,9 +60,10 @@ typedef struct {
 #define UndefinedMapSong -999
 #define MaxSongs 100
 
+
 typedef struct {
     char albumName[100];
-    Song songs[MaxSongs];
+    SetSong songs;
     int Neff;   // Jumlah lagu sebenarnya
 } MapSong;
 

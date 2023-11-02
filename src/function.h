@@ -13,3 +13,7 @@ boolean isNumber(char *str);
 boolean is_digit(char c);
 
 boolean name_valid(char *str);
+
+char* concat(char *s1, char *s2);
+
+int stringLength(char* string);

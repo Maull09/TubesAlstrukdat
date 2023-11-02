@@ -11,7 +11,7 @@ void CreateEmptyListMapAlbum(ListMapAlbum *LM) {
 
 void InsertListMapAlbum(ListMapAlbum *LM, MapAlbum M) {
     if (LM->Neff < 100) {
-        LM->MapAlbums[LM->MapAlbums->Neff] = M;
+        LM->MapAlbums[LM->Neff] = M;
         LM->Neff++;
     }
 }

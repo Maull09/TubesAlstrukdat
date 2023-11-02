@@ -33,11 +33,12 @@ int main(){
     List Playlist;
     CreateEmpty(&Playlist);
     // List Map Album Lagu
-    ListMapAlbum KumpulanAlbum;
-    CreateEmptyListMapAlbum(&KumpulanAlbum);
+    ListMapAlbum KumpulanAlbumSinger;
+    CreateEmptyListMapAlbum(&KumpulanAlbumSinger);
     // List Map Song
     ListMapSong KumpulanLaguAlbum;
     CreateEmptyListMapSong(&KumpulanLaguAlbum);
+    
 
     // display welcome
     welcome();
@@ -54,9 +55,8 @@ int main(){
             if (EndWord){
                 if (!sesi){
                     printf("WayangWave Dimulai\n");
-                    // FUNCSTART(&DaftarPenyanyi, &SingerAlbum, &SongAlbum);
                     char tempcurrentchar = currentChar;
-                    FUNCSTART();
+                    FUNCSTART(&DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu);
                     sesi = true;
                     currentChar = tempcurrentchar;
                 } else {
@@ -70,10 +70,10 @@ int main(){
             if(name_valid(currentWord.TabWord)){
                 Word filename = currentWord;
                 ADVINPUT();
-                
                 if (EndWord){
                     if (!sesi){
                         sesi = true;
+                        Load
                         printf("Load Game\n");
                     } else {
                         printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");
