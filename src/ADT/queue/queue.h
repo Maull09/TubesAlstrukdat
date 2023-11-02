@@ -34,4 +34,7 @@ void SalinLagu(Lagu *dest, Lagu src);
 void removeSong(QueueLagu *q, int id);
 
 void clearQueue(QueueLagu *q);
+
+void QueueSwap (QueueLagu *q, int x, int y);
+
 #endif

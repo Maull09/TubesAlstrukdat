@@ -22,8 +22,8 @@ int FindSinger(ListSinger L, char singerName[]) {
 }
 
 void displaySinger(ListSinger LS){
-    printf("Daftar Artis Tersedia : \n");
+    printf("Daftar Penyanyi : \n");
     for(int i = 0; i<LS.Neff;i++){
-        printf("Nama Artis : %s\n", LS.singers[i].singerName);
+        printf("\t%d. %s\n",i+1, LS.singers[i].singerName);
     }
 }

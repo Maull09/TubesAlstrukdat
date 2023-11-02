@@ -25,7 +25,7 @@ int main() {
     printf("\n");
 
     printf("Displaying ListMapSong:\n");
-    DisplayListMapSong(LM);
+    DisplayListMapSong(&LM);
 
     return 0;
 }

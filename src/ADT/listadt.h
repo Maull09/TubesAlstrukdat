@@ -73,7 +73,7 @@ typedef struct {
 } MapSong;
 
 typedef struct {
-    MapSong MapSongs[100];
+    MapSong MapSongs[90];
     int Neff;
 } ListMapSong;
 

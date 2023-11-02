@@ -33,16 +33,16 @@ boolean FindSong(MapSong M, char songName[]) {
 }
 
 void DisplayMapSong(MapSong M) {
-    printf("Album Name: %s\n", M.albumName);
+    printf("Daftar Lagu di %s: \n", M.albumName);
     for (int i = 0; i < M.Neff; i++) {
-        printf("- %s\n", M.songs[i].songName);
+        printf("\t%d. %s\n",i+1, M.songs[i].songName);
     }
 }
 
-void DisplayListMapSong(ListMapSong LM) {
-    for (int i = 0; i < LM.Neff; i++) {
+void DisplayListMapSong(ListMapSong *LM) {
+    for (int i = 0; i < LM->Neff; i++) {
         printf("MapSongAlbum #%d:\n", i + 1);
-        DisplayMapSong(LM.MapSongs[i]);
+        DisplayMapSong(LM->MapSongs[i]);
         printf("\n");
     }
 }

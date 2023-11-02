@@ -120,3 +120,27 @@ void clearQueue(QueueLagu *q){
     CreateQueue(q);
     printf("Queue berhasil dikosongkan\n");
 }
+
+void QueueSwap (QueueLagu *q, int x, int y){
+    if (isEmptyQueue(*q)){
+        printf("Queue kosong \n");
+        return;
+    }
+
+    int length = lengthQueue(*q);
+
+    if (x<1 || x>length || y<1 || y>length){
+        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue! \n");
+        return;
+    }
+
+    ElTypeQueue lagu_x, lagu_y, temp;
+    lagu_x = q->buffer[x];
+    lagu_y = q->buffer[y];
+    temp = q->buffer[y];
+    q->buffer[y] = q->buffer[x];
+    q->buffer[x] = temp;
+
+    printf("Lagu \"%s\" berhasil ditukar dengan \"%s\"!\n", lagu_x.titlesong, lagu_y.titlesong);
+
+}
