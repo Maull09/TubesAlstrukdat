@@ -5,59 +5,78 @@
 #include "ADT/arraystatis/arraySinger.h"
 #include "ADT/map/map_album.h"
 #include "ADT/map/map_song.h"
+#include "ADT/arraydin/arrayplaylist.h"
+#include "ADT/linkedlist/linkedlist.h"
+
 // #include "ADT/mesin_input/mesininput.h"
 
 int main(){
-    ListSinger LS;
-    Singer singerInput;
-    CreateEmptyListSinger(&LS);
+    // ListSinger LS;
+    // Singer singerInput;
+    // CreateEmptyListSinger(&LS);
 
-    // Input singers
-    SalinString(singerInput.singerName, "Arctic Monkeys");
-    InsertSinger(&LS, singerInput);
-    SalinString(singerInput.singerName, "BLACKPINK");
-    InsertSinger(&LS, singerInput);
-    displaySinger(LS);
-    printf("\n");
+    // // Input singers
+    // SalinString(singerInput.singerName, "Arctic Monkeys");
+    // InsertSinger(&LS, singerInput);
+    // SalinString(singerInput.singerName, "BLACKPINK");
+    // InsertSinger(&LS, singerInput);
+    // displaySinger(LS);
+    // printf("\n");
 
-    //input y/n
-    //input nama artis kalau y
+    // //input y/n
+    // //input nama artis kalau y
 
-    MapAlbum AlbumSinger;
-    Album A1 = {"Album One"};
-    Album A2 = {"Album Two"};
-    ListMapAlbum ListAlbum;
-    CreateEmptyMapAlbum(&AlbumSinger);
-    CreateEmptyListMapAlbum(&ListAlbum);
-    SalinString(AlbumSinger.SingerName, "Singer A");
-    InsertAlbum(&AlbumSinger, A1);
-    InsertAlbum(&AlbumSinger, A2);
-    InsertListMapAlbum(&ListAlbum, AlbumSinger);
+    // MapAlbum AlbumSinger;
+    // Album A1 = {"Album One"};
+    // Album A2 = {"Album Two"};
+    // ListMapAlbum ListAlbum;
+    // CreateEmptyMapAlbum(&AlbumSinger);
+    // CreateEmptyListMapAlbum(&ListAlbum);
+    // SalinString(AlbumSinger.SingerName, "Singer A");
+    // InsertAlbum(&AlbumSinger, A1);
+    // InsertAlbum(&AlbumSinger, A2);
+    // InsertListMapAlbum(&ListAlbum, AlbumSinger);
     
-    // printf("Displaying MapAlbumSinger:\n");
-    DisplayMapAlbum(AlbumSinger);
-    // printf("\nDisplaying ListMapAlbum:\n");
-    // DisplayListMapAlbum(&ListAlbum);
-    printf("\n");
+    // // printf("Displaying MapAlbumSinger:\n");
+    // DisplayMapAlbum(AlbumSinger);
+    // // printf("\nDisplaying ListMapAlbum:\n");
+    // // DisplayListMapAlbum(&ListAlbum);
+    // printf("\n");
     
-    //input y/n
-    //input nama album kalau y
+    // //input y/n
+    // //input nama album kalau y
 
-    MapSong SongAlbum;
-    Song S1 = {"Song One"};
-    Song S2 = {"Song Two"};
-    ListMapSong arrMapSong; 
-    CreateEmptyMapSong(&SongAlbum);
-    CreateEmptyListMapSong(&arrMapSong);
-    SalinString(SongAlbum.albumName, "Album A");
-    InsertSong(&SongAlbum, S1);
-    InsertSong(&SongAlbum, S2);
-    InsertListMapSong(&arrMapSong, SongAlbum);
+    // MapSong SongAlbum;
+    // Song S1 = {"Song One"};
+    // Song S2 = {"Song Two"};
+    // ListMapSong arrMapSong; 
+    // CreateEmptyMapSong(&SongAlbum);
+    // CreateEmptyListMapSong(&arrMapSong);
+    // SalinString(SongAlbum.albumName, "Album A");
+    // InsertSong(&SongAlbum, S1);
+    // InsertSong(&SongAlbum, S2);
+    // InsertListMapSong(&arrMapSong, SongAlbum);
 
-    // printf("Displaying MapSong:\n");
-    DisplayMapSong(SongAlbum);
-    // printf("\nDisplaying ListMapSong:\n");
-    // DisplayListMapSong(&arrMapSong);
+    // // printf("Displaying MapSong:\n");
+    // DisplayMapSong(SongAlbum);
+    // // printf("\nDisplaying ListMapSong:\n");
+    // // DisplayListMapSong(&arrMapSong);
+
+    ArrayPlaylists arrPlaylist;
+    Playlist p1, p2;
+
+    SalinString(p1.name, "Pop Hits");
+    SalinString(p2.name, "Chill Vibes");
+
+    CreateEmptyArrayPlaylists(&arrPlaylist);
+
+    AddPlaylist(&arrPlaylist, p1);
+    AddPlaylist(&arrPlaylist, p2);
+
+    // Test Display function
+    printf("Displaying Playlists:\n");
+    DisplayPlaylist(arrPlaylist);
+    printf("\n");
 
     return 0;
 }

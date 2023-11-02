@@ -40,7 +40,8 @@ boolean FindPlaylist(ArrayPlaylists arr, char name[]) {
 }
 
 void DisplayPlaylist(ArrayPlaylists arrPlaylist) {
+    printf("Daftar playlist yang kamu miliki:\n");
     for (int i = 0; i < arrPlaylist.Neff; i++) {
-        printf("%s\n", arrPlaylist.playlists[i].name);
+        printf("\t%d. %s\n",i+1, arrPlaylist.playlists[i].name);
     }
 }

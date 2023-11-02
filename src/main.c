@@ -32,6 +32,12 @@ int main(){
     // Linked List Playlist
     List Playlist;
     CreateEmpty(&Playlist);
+    // List Map Album Lagu
+    ListMapAlbum KumpulanAlbum;
+    CreateEmptyListMapAlbum(&KumpulanAlbum);
+    // List Map Song
+    ListMapSong KumpulanLaguAlbum;
+    CreateEmptyListMapSong(&KumpulanLaguAlbum);
 
     // display welcome
     welcome();
@@ -60,18 +66,24 @@ int main(){
                 invcommand();
             }
         } else if (IsStringEqual(currentWord, "LOAD")){ //Load
-            ADVINPUT();
-            if (EndWord){
-                if (!sesi){
-                    printf("Load Game\n");
-                    sesi = true;
+            ADVINPUT();            
+            if(name_valid(currentWord.TabWord)){
+                Word filename = currentWord;
+                ADVINPUT();
+                
+                if (EndWord){
+                    if (!sesi){
+                        sesi = true;
+                        printf("Load Game\n");
+                    } else {
+                        printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");
+                    }
                 } else {
-                    printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");
+                    invcommand();
                 }
-            }else {
+            } else {
                 invcommand();
             }
-
         }else if (IsStringEqual(currentWord, "LIST")){ //List
             ADVINPUT();
             if (IsStringEqual(currentWord, "DEFAULT")){ // List Default
