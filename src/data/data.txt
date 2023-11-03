@@ -32,7 +32,7 @@ Arctic Monkeys;AM;Do I Wanna Know?
 BLACKPINK;BORN PINK;Shut Down
 Arctic Monkeys;AM;Arabella
 2
-Arctic Monkeys;Favourite Worst Nightmare;5051
+Arctic Monkeys;Favourite Worst Nightmare;505
 BLACKPINK;BORN PINK;Pink Venom
 3
 3 BLACKPINK My Top Three

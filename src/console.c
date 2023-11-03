@@ -162,13 +162,16 @@ void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapS
     ADVKALIMATFILE();
     printf("%s\n", CKalimat.TabKalimat);
     int jumlahriwayat = atoi(CKalimat.TabKalimat);
-
+    sLagu->TOP = jumlahriwayat;
     for(int m = 0; m < jumlahriwayat; m++){
         ADVKALIMATFILE3();
+        printf("%s\n", CKalimat.TabKalimat);
         SalinString(sLagu->Songs[m].artist, CKalimat.TabKalimat);
         ADVKALIMATFILE3();
+        printf("%s\n", CKalimat.TabKalimat);
         SalinString(sLagu->Songs[m].album, CKalimat.TabKalimat);
         ADVKALIMATFILE3();
+        printf("%s\n", CKalimat.TabKalimat);
         SalinString(sLagu->Songs[m].titlesong, CKalimat.TabKalimat);
     }
 

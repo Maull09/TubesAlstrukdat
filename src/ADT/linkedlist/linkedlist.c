@@ -34,7 +34,7 @@ void Dealokasi(address *P) {
 address Search(List L, infotype X) {
     address P = First(L);
     while (P != NULL) {
-        if (StringSama(Info(P).songName, X.songName) == 0) {
+        if (StringSama(Info(P).titlesong, X.titlesong) == 0) {
             return P;
         }
         P = Next(P);
@@ -77,11 +77,6 @@ void InsertFirst(List *L, address P) {
     First(*L) = P;
 }
 
-void InsertAfter(List *L, address P, address Prec) {
-    Next(P) = Next(Prec);
-    Next(Prec) = P;
-}
-
 void InsertLast(List *L, address P) {
     if (IsEmpty(*L)) {
         InsertFirst(L, P);
@@ -102,7 +97,7 @@ void DelFirst(List *L, address *P) {
 
 void DelP(List *L, infotype X) {
     address P = First(*L), Prec = NULL;
-    while (P != NULL && StringSama(Info(P).songName, X.songName)) {
+    while (P != NULL && StringSama(Info(P).titlesong, X.titlesong)) {
         Prec = P;
         P = Next(P);
     }
@@ -130,18 +125,12 @@ void DelLast(List *L, address *P) {
     }
 }
 
-void DelAfter(List *L, address *Pdel, address Prec) {
-    *Pdel = Next(Prec);
-    Next(Prec) = Next(*Pdel);
-    Next(*Pdel) = NULL;
-}
-
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo(List L) {
     printf("[");
     address P = First(L);
     while (P != NULL) {
-        printf("%s", Info(P).songName);
+        printf("%s", Info(P).titlesong);
         if (Next(P) != NULL) printf(", ");
         P = Next(P);
     }

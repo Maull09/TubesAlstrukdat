@@ -11,7 +11,7 @@
 void playlistCreate(){
 }
 
-void playlistAdd(char input[]){
+void playlistAdd(){
 }
 
 void playlistSwap(){

@@ -13,8 +13,10 @@
 /* List kosong : First(L) = Nil */
 /* Setiap elemen dengan address P dapat diacu Info(P), Next(P) */
 /* Elemen terakhir list : jika addressnya Last, maka Next(Last)=Nil */
-#define SongName(P) (P)->info.songName
-#define PlaylistName(P) (P)->PlaylistName
+#define titlesong(P) (P)->info.titlesong
+#define artist(P) (P)->info.album
+#define artist(P) (P)->info.artist
+#define PlaylistName(P) (P)->info.PlaylistName
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 #define First(L) ((L).First)

@@ -27,3 +27,5 @@ void displaySinger(ListSinger LS){
         printf("\t%d. %s\n",i+1, LS.singers[i].singerName);
     }
 }
+
+// find artis

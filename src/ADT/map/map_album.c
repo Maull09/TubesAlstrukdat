@@ -40,6 +40,7 @@ void DisplayMapAlbum(MapAlbum M) {
 }
 
 void DisplayListMapAlbum(ListMapAlbum *LM, char singername[]) {
+    int i;
     for (int i = 0; i < LM->Neff; i++) {
         if(StringSama(LM->MapAlbums[i].SingerName, singername)){
             DisplayMapAlbum(LM->MapAlbums[i]);

@@ -33,11 +33,11 @@ void displayStack(StackSong *S) {
     } else {
         int i, nomor = 1;
         printf("[");
-            for (i = 0; i <= S->TOP; i++) {
+            for (i = 0; i <= S->TOP-1; i++) {
                 printf("%d. %s - %s: %s", nomor, S->Songs[i].artist, S->Songs[i].album, S->Songs[i].titlesong);
-                if (i != S->TOP) printf(",\n ");
+                if (i != S->TOP-1) printf(",\n ");
                 nomor++;
+            }
         printf("]\n");
-    }
     }
 }

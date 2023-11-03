@@ -46,9 +46,6 @@ int main(){
     displaySinger(LS);
     printf("\n");
 
-    //input y/n
-    //input nama artis kalau y
-
     char choice;
     char SelectedArtist;
     char SelectedAlbum;
@@ -58,13 +55,20 @@ int main(){
     if (choice == 'Y' || choice == 'y'){
         printf("Pilih penyanyi untuk melihat album mereka : ");
         scanf("%s", &SelectedArtist);
-        if(FindAlbum(AlbumSinger, SelectedArtist)){
-            DisplayMapAlbum(AlbumSinger); 
+        if(FindArtist(AlbumSinger, SelectedArtist)){
+            DisplayListMapAlbum(&ListAlbum, SelectedArtist); 
+            scanf("%c", &choice);
             if (choice == 'Y' || choice == 'y'){
                 printf("Pilih album untuk melihat lagu yang ada di album : ");
                 scanf("%s", &SelectedAlbum);
-            }
+                if (FindAlbum(AlbumSinger, SelectedAlbum)){
+                    DisplayListMapSong(&arrMapSong, SelectedAlbum);
+                }
+                    
+            } 
 
+        }else {
+            printf("Tidak ada nama penyanyi");
         }
         
     } 

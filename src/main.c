@@ -73,8 +73,10 @@ int main(){
                 if (EndWord){
                     if (!sesi){
                         sesi = true;
+                        char tempcurrentchar = currentChar;
                         Load(&filename.TabWord, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist, &Playlist);
                         printf("Load Game\n");
+                        currentChar = tempcurrentchar;
                     } else {
                         printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");
                     }
