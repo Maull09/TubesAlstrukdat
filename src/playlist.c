@@ -26,8 +26,31 @@ void playlistCreate(){
     }
 }
 
-void playlistAdd(ArrayPlaylists arrPlaylist){
-    printf("Daftar Penyanyi :\n");
-    DisplayPlaylist(arrPlaylist);
+void playlistAdd(ArrayPlaylists arrPlaylist, ListSinger LS, MapAlbum M, int pilihan){
+    displaySinger(LS);
+    char name[225];
+    printf("Masukkan Nama Penyanyi yang dipilih : ");
+    fscanf("%s", &name); // input masih diperbincangkan
+    displaySinger(LS);
+    if(pilihan == 1){
+        if (!FindSinger(LS, name)){
+            printf("Penyanyi %s tidak ada dalam daftar. Silakan coba lagi.", name);
+        }
+        else{
+
+            DisplayMapAlbum(M);
+            printf("Masukkan Judul Album yang dipilih : ");
+            fscanf("%s", &name); // input masih diperbincanglan
+            if(!FindAlbum){
+
+            }
+        }
+    }
+    else if(pilihan == 2){
+
+    }
+}
+
+void playlistSwap(){
     
 }
