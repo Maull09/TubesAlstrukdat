@@ -39,11 +39,24 @@ void DisplayMapAlbum(MapAlbum M) {
     }
 }
 
-void DisplayListMapAlbum(ListMapAlbum *LM) {
+void DisplayListMapAlbum(ListMapAlbum *LM, char singername[]) {
+    int i;
     for (int i = 0; i < LM->Neff; i++) {
+<<<<<<< HEAD
+        if (singername[i] == M.SingerName[i]){
+            printf("MapAlbumSinger #%d:\n", i + 1);
+            DisplayMapAlbum(LM->MapAlbums[i]);
+            printf("\n");
+        }
+=======
+        if(StringSama(LM->MapAlbums[i].SingerName, singername))
         printf("MapAlbumSinger #%d:\n", i + 1);
         DisplayMapAlbum(LM->MapAlbums[i]);
         printf("\n");
+>>>>>>> e3fc8495a086175db67d55b5e7eaa0d071717e2d
     }
+    LM->MapAlbums[i]->SingerName;
+
+    
 }
 
