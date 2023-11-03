@@ -106,10 +106,10 @@ void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongA
 }
 
 
-void Load(char * filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu) {
+void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, QueueLagu *qLagu, StackSong *sLagu, ArrayPlaylists *arrPlaylist, List *linkedPlaylist){
     char* pathdata = "./data/";
     char* combinepath = concat(pathdata, filename);
-    STARTKALIMATFILE("./data/config.txt");
+    STARTKALIMATFILE(combinepath);
     int jumlahPenyanyi = atoi(CKalimat.TabKalimat);  // Convert ke integer
     DaftarPenyanyi->Neff = jumlahPenyanyi;
 
@@ -145,8 +145,56 @@ void Load(char * filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, Map
         InsertListMapAlbum(KumpulanAlbumSinger, *SingerAlbum);
     }
 
+    ADVKALIMATFILE();
+    int jumlahqueue = atoi(CKalimat.TabKalimat);
 
+    for(int l = 0; l < jumlahqueue; l++){
+        ElTypeQueue tempq;
+        ADVKALIMATFILE3();
+        SalinString(tempq.artist ,CKalimat.TabKalimat);
+        ADVKALIMATFILE3();
+        SalinString(tempq.album ,CKalimat.TabKalimat);
+        ADVKALIMATFILE3();
+        SalinString(tempq.titlesong ,CKalimat.TabKalimat);
+        enqueue(qLagu, tempq);
+    }
 
+    ADVKALIMATFILE();
+    printf("%s\n", CKalimat.TabKalimat);
+    int jumlahriwayat = atoi(CKalimat.TabKalimat);
+
+    for(int m = 0; m < jumlahriwayat; m++){
+        ADVKALIMATFILE3();
+        SalinString(sLagu->Songs[m].artist, CKalimat.TabKalimat);
+        ADVKALIMATFILE3();
+        SalinString(sLagu->Songs[m].album, CKalimat.TabKalimat);
+        ADVKALIMATFILE3();
+        SalinString(sLagu->Songs[m].titlesong, CKalimat.TabKalimat);
+    }
+
+    ADVKALIMATFILE();
+    int jumlahplaylist = atoi(CKalimat.TabKalimat);
+
+    for(int n = 0; n < jumlahplaylist; n++){
+        ADVKALIMATFILE2();
+        int jumlahlagu = atoi(CKalimat.TabKalimat);
+        ADVKALIMATFILE(); // Baca nama playlist 1
+        printf("Nama Playlist %d : %s\n", n+1, CKalimat.TabKalimat);
+        for(int o = 0; o < jumlahlagu; o++){
+            ADVKALIMATFILE3(); // baca nama artis
+            printf("Nama Artis Lagu %d playlist %d : %s\n", o+1, n+1, CKalimat.TabKalimat);
+            ADVKALIMATFILE3(); // baca nama album
+            printf("Nama Album Lagu %d playlist %d : %s\n", o+1, n+1, CKalimat.TabKalimat);
+            ADVKALIMATFILE3(); // baca nama lagu
+            printf("Nama Lagu %d playlist %d : %s\n", o+1, n+1, CKalimat.TabKalimat);
+
+        }
+    }
+
+    printf("queue\n");
+    displayQueue(*qLagu);
+    printf("stack\n");
+    displayStack(sLagu);
 }
 
 

@@ -3,16 +3,14 @@
 #include "function.h"
 
 int main() {
-    // Test untuk SalinString
     char source[] = "Halo Dunia!";
-    char destination[50]; // mengalokasikan memori yang cukup besar untuk tujuan
+    char destination[50]; 
 
     SalinString(destination, source);
 
     printf("Source String: %s\n", source);
     printf("Destination String setelah disalin: %s\n\n", destination);
 
-    // Test untuk StringSama
     char string1[] = "Maul";
     char string2[] = "Maul";
     char string3[] = "Maulana";
@@ -44,12 +42,12 @@ int main() {
         printf("%s is not a number.\n", str2);
     }
 
-    char* s1 = "Hello, ";
-    char* s2 = "World!";
+    char* s1 = "./data/";
+    char* s2 = "file.txt";
     char* combined = concat(s1, s2);
     if (combined != NULL) {
         printf("%s\n", combined);
-        free(combined); // Jangan lupa membebaskan memori setelah selesai menggunakan
+        free(combined);
     }
 
     return 0;

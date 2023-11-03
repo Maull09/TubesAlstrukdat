@@ -46,3 +46,4 @@ void DisplayListMapAlbum(ListMapAlbum *LM) {
         printf("\n");
     }
 }
+

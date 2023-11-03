@@ -32,7 +32,7 @@ void AddPlaylist(ArrayPlaylists *arr, Playlist p) {
 
 boolean FindPlaylist(ArrayPlaylists arr, char name[]) {
     for (int i = 0; i < arr.Neff; i++) {
-        if (strcmp(arr.playlists[i].name, name) == 0) {
+        if (StringSama(arr.playlists[i].name, name)) {
             return true;
         }
     }

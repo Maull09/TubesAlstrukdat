@@ -73,7 +73,7 @@ int main(){
                 if (EndWord){
                     if (!sesi){
                         sesi = true;
-                        Load
+                        Load(&filename.TabWord, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist, &Playlist);
                         printf("Load Game\n");
                     } else {
                         printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");

@@ -16,12 +16,13 @@ extern Kalimat CKalimat;
 
 void SalinKalimatFile();
 void SalinKalimatFile2();
-void SalinKalimatFile ();
+void SalinKalimatFile3();
 
 void STARTKALIMATFILE(char filename[]);
 
 void ADVKALIMATFILE();
 void ADVKALIMATFILE2();
+void ADVKALIMATFILE3();
 
 void copyKalimat (Kalimat k1, Kalimat *k2);
 void ResetKalimat();

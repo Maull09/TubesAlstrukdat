@@ -26,6 +26,17 @@ void IgnoreNewline()
     }
 }
 
+void IgnoreMark()
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+{
+    while (currentChar == MARK)
+    {
+        ADV();
+    }
+}
+
 void SalinKalimatFile() {
     ResetKalimat();  // Reset array
     int i = 0;
@@ -40,9 +51,22 @@ void SalinKalimatFile() {
 }
 
 void SalinKalimatFile2() {
-    ResetKalimat();  // Reset array
+    ResetKalimat();  
     int i = 0;
     while ((currentChar != BLANK) && (currentChar != MARK))
+    {
+        CKalimat.TabKalimat[i] = currentChar;
+        i += 1;
+        ADV();
+    }
+    CKalimat.Length = i;
+}
+
+void SalinKalimatFile3() {
+    ResetKalimat();  // Reset array
+    IgnoreMark();
+    int i = 0;
+    while ((currentChar != MARK) && (currentChar != NEWLINE))
     {
         CKalimat.TabKalimat[i] = currentChar;
         i += 1;
@@ -80,6 +104,17 @@ void ADVKALIMATFILE2() {
     } else {
         EndKalimat = false;
         SalinKalimatFile2();
+    }
+}
+
+void ADVKALIMATFILE3() {
+    IgnoreNewline();
+    IgnoreMark();
+    if (currentChar == MARK) {
+        EndKalimat = true;
+    } else {
+        EndKalimat = false;
+        SalinKalimatFile3();
     }
 }
 

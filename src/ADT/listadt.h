@@ -74,7 +74,7 @@ typedef struct {
 
 // ADT 5 Untuk Queue dan Lagu [queue.h]
 #define IDX_UNDEF -1
-#define CAPACITY 100
+#define CAPACITY 50
 
 typedef struct {
     char artist[100];
