@@ -4,7 +4,7 @@
 
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyArrayPlaylists(ArrayPlaylists *arr) {
-    arr->playlists = (Playlist*) malloc(INIT_SIZE * sizeof(Playlist));
+    arr->playlists = (Playlist *) malloc(INIT_SIZE * sizeof(Playlist));
     arr->Neff = 0;
     arr->capacity = INIT_SIZE;
 }
@@ -12,16 +12,18 @@ void CreateEmptyArrayPlaylists(ArrayPlaylists *arr) {
 /* *** Destruktor *** */
 void DeallocateArrayPlaylists(ArrayPlaylists *arr) {
     free(arr->playlists);
+    arr->Neff = 0;
+    arr->capacity = 0;
 }
 
 /* *** Manajemen Kapasitas Array *** */
 void ExpandArrayPlaylists(ArrayPlaylists *arr) {
     int newCapacity = arr->capacity * 2;
-    arr->playlists = (Playlist*) realloc(arr->playlists, newCapacity * sizeof(Playlist));
+    arr->playlists = (Playlist *) realloc(arr->playlists, newCapacity * sizeof(Playlist));
     arr->capacity = newCapacity;
 }
 
-/* *** Operasi-operasi lain *** */
+/* *** Operasi-operasi Playlist *** */
 void AddPlaylist(ArrayPlaylists *arr, Playlist p) {
     if (arr->Neff == arr->capacity) {
         ExpandArrayPlaylists(arr);
@@ -30,18 +32,22 @@ void AddPlaylist(ArrayPlaylists *arr, Playlist p) {
     arr->Neff++;
 }
 
-boolean FindPlaylist(ArrayPlaylists arr, char name[]) {
-    for (int i = 0; i < arr.Neff; i++) {
-        if (StringSama(arr.playlists[i].name, name)) {
-            return true;
-        }
-    }
-    return false;
+boolean FindPlaylist(ArrayPlaylists arr, int idx) {
+    return (idx >= 0 && idx < arr.Neff);
 }
 
-void DisplayPlaylist(ArrayPlaylists arrPlaylist) {
-    printf("Daftar playlist yang kamu miliki:\n");
-    for (int i = 0; i < arrPlaylist.Neff; i++) {
-        printf("\t%d. %s\n",i+1, arrPlaylist.playlists[i].name);
+void DeletePlaylist(ArrayPlaylists *arr, int idx) {
+    if (FindPlaylist(*arr, idx)) {
+        for (int i = idx; i < arr->Neff - 1; i++) {
+            arr->playlists[i] = arr->playlists[i + 1];
+        }
+        arr->Neff--;
+    }
+}
+
+void DisplayPlaylist(ArrayPlaylists arr) {
+    for (int i = 0; i < arr.Neff; i++) {
+        printf("Playlist Name: %s\n", arr.playlists[i].name);
+        DisplaySongs(arr.playlists[i].laguplaylist);
     }
 }

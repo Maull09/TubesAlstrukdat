@@ -100,8 +100,8 @@ void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongA
 
     printf("File konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
     displaySinger(*DaftarPenyanyi);
-    DisplayListMapAlbum(KumpulanAlbumSinger);
-    DisplayListMapSong(KumpulanLaguAlbum);
+    // DisplayListMapAlbum(KumpulanAlbumSinger);
+    // DisplayListMapSong(KumpulanLaguAlbum);
 
 }
 
@@ -182,6 +182,9 @@ void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapS
         ADVKALIMATFILE2();
         int jumlahlagu = atoi(CKalimat.TabKalimat);
         ADVKALIMATFILE(); // Baca nama playlist 1
+        arrPlaylist->Neff = jumlahlagu;
+        SalinString(arrPlaylist->playlists[n].name, CKalimat.TabKalimat);
+        SalinString()
         printf("Nama Playlist %d : %s\n", n+1, CKalimat.TabKalimat);
         for(int o = 0; o < jumlahlagu; o++){
             ADVKALIMATFILE3(); // baca nama artis
@@ -198,6 +201,8 @@ void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapS
     displayQueue(*qLagu);
     printf("stack\n");
     displayStack(sLagu);
+    printf("Playlist\n");
+    DisplayPlaylist(*arrPlaylist);
 }
 
 

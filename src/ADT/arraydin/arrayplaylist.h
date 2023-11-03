@@ -10,6 +10,7 @@
 
 #define INIT_SIZE 10 // Ukuran awal array dinamis
 
+
 /* ********** PROTOTYPE ********** */
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyArrayPlaylists(ArrayPlaylists *arr);
@@ -20,9 +21,10 @@ void DeallocateArrayPlaylists(ArrayPlaylists *arr);
 /* *** Manajemen Kapasitas Array *** */
 void ExpandArrayPlaylists(ArrayPlaylists *arr);  // Menggandakan kapasitas array playlists
 
-/* *** Operasi-operasi lain *** */
+/* *** Operasi-operasi Playlist *** */
 void AddPlaylist(ArrayPlaylists *arr, Playlist p);
-boolean FindPlaylist(ArrayPlaylists arr, char name[]);
-void DisplayPlaylist(ArrayPlaylists arrPlaylist);
+boolean FindPlaylist(ArrayPlaylists arr, int idx);
+void DeletePlaylist(ArrayPlaylists *arr, int idx);
+void DisplayPlaylist(ArrayPlaylists arr);
 
 #endif

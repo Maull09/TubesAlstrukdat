@@ -42,12 +42,11 @@ void ADV()
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 {
-    retval = fscanf(config, "%c", &currentChar);
-    // EOP = (currentChar == MARK);
-    EOP = feof(config) || (currentChar == MARK2);
-    if (EOP)
-    {
+    if ((currentChar = fgetc(config)) == EOF) {
+        EOP = true;
         fclose(config);
+    } else {
+        EOP = false;
     }
 }
 
@@ -59,12 +58,7 @@ void ADV2()
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 {
     retval = fscanf(pita, "%c", &currentChar);
-    // EOP = (currentChar == MARK);
-    EOP = feof(pita);
-    if (EOP)
-    {
-        fclose(pita);
-    }
+
 }
 
 char GetCC()
@@ -76,5 +70,5 @@ char GetCC()
 boolean IsEOP()
 /* Mengirimkan true jika currentChar = MARK */
 {
-    return (currentChar == MARK);
+    return (currentChar == EOF);
 }

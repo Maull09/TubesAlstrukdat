@@ -103,7 +103,7 @@ typedef struct {
 // ADT 7 untuk linked list [linkedlist.h]
 #define Nil NULL
 
-typedef Song infotype;
+typedef Lagu infotype;
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
 	infotype info;
@@ -112,20 +112,14 @@ typedef struct tElmtlist {
 
 typedef struct {
 	address First;
-    char PlaylistName[100];
 } List;
-
-typedef struct {
-    List listplaylist[100];
-    int Neff;
-} ListofPlaylist;
-
 
 // ADT 2 Untuk array Playlist [arrayplaylist.h]
 #define INIT_SIZE 10 // Ukuran awal array dinamis
 
 typedef struct {
     char name[255]; // Nama dari playlist
+    List laguplaylist;
 } Playlist;
 
 typedef struct {

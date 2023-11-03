@@ -4,7 +4,7 @@
 // gcc mesinkarakter.c driver_mesinkarakter.c -o driver_mesinkarakter
 
 int main() {
-    char filename[] = "../../data/test_mesinkarakter.txt"; // Anda perlu membuat file bernama testchar.txt dengan beberapa kalimat di dalamnya, diakhiri dengan tanda MARK (';')
+    char filename[] = "../../data/test_mesinkarakter.txt";
     printf("Memulai pembacaan dari file %s...\n\n", filename);
 
     STARTFILE(filename);
