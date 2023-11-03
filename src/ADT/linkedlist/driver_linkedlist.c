@@ -1,30 +1,33 @@
 #include "linkedlist.h"
 #include <stdio.h>
-
-// gcc linkedlist.c driver_linkedlist.c ../../function.c -o driver_linkedlist
+#include <stdlib.h>
 
 int main() {
     List L;
-    infotype song1, song2, song3;
-    SalinString(song1.songName, "Imagine");
-    SalinString(song2.songName, "Bohemian Rhapsody");
-    SalinString(song3.songName, "Billie Jean");
+    infotype lagu1 = {"Beatles", "Abbey Road", "Come Together"};
+    infotype lagu2 = {"Queen", "News of the World", "We Will Rock You"};
+    infotype lagu3 = {"Adele", "25", "Hello"};
 
+    // Membuat list kosong
     CreateEmpty(&L);
-    InsVFirst(&L, song1);
-    InsVLast(&L, song2);
-    InsVLast(&L, song3);
 
-    printf("List of songs:\n");
+    // Menambahkan lagu ke list
+    InsVFirst(&L, lagu1);
+    InsVLast(&L, lagu2);
+    InsVLast(&L, lagu3);
+
+    // Menampilkan semua lagu
+    printf("Daftar lagu:\n");
     PrintInfo(L);
 
-    infotype songDel;
-    DelVFirst(&L, &songDel);
-    printf("Deleted: %s\n", songDel.songName);
+    // Menghapus lagu dari list
+    DelVFirst(&L, &lagu1);
+    printf("\nSetelah menghapus lagu pertama:\n");
     PrintInfo(L);
 
-    DelVLast(&L, &songDel);
-    printf("Deleted: %s\n", songDel.songName);
+    // Menghapus lagu dari list
+    DelVLast(&L, &lagu3);
+    printf("\nSetelah menghapus lagu terakhir:\n");
     PrintInfo(L);
 
     return 0;

@@ -12,7 +12,8 @@ void InsertSong(MapSong *M, Song s);
 void InsertListMapSong(ListMapSong *LM, MapSong M);
 boolean FindSong(MapSong, char songName[]);
 void DisplayMapSong(MapSong M);
-void DisplayListMapSong(ListMapSong *LM, char albumname[]);
+void DisplayListMapSong_Name(ListMapSong *LM, char albumname[]);
+void DisplayListMapSong(ListMapSong *LM);
 
 #endif
 

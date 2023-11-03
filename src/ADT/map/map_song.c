@@ -39,7 +39,15 @@ void DisplayMapSong(MapSong M) {
     }
 }
 
-void DisplayListMapSong(ListMapSong *LM, char albumname[]) {
+void DisplayListMapSong(ListMapSong *LM) {
+    for (int i = 0; i < LM->Neff; i++) {
+        printf("MapSongAlbum #%d:\n", i + 1);
+        DisplayMapSong(LM->MapSongs[i]);
+        printf("\n");
+    }
+}
+
+void DisplayListMapSong_Name(ListMapSong *LM, char albumname[]) {
     for (int i = 0; i < LM->Neff; i++) {
         if (StringSama(LM -> MapSongs[i].albumName, albumname)){
             DisplayMapSong(LM->MapSongs[i]);

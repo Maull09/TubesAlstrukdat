@@ -45,9 +45,13 @@ void DeletePlaylist(ArrayPlaylists *arr, int idx) {
     }
 }
 
-void DisplayPlaylist(ArrayPlaylists arr) {
-    for (int i = 0; i < arr.Neff; i++) {
-        printf("Playlist Name: %s\n", arr.playlists[i].name);
-        DisplaySongs(arr.playlists[i].laguplaylist);
+void DisplayPlaylist(ArrayPlaylists *arr) {
+    printf("Daftar playlist yang kamu miliki:\n");
+    if(arr->Neff == 0){
+        printf("Kamu tidak memiliki playlist.\n");
+    } else {
+        for (int i = 0; i < arr->Neff; i++) {
+            printf("\t%d. %s\n", i+1, arr->playlists[i].name);
+        }
     }
 }

@@ -118,7 +118,7 @@ typedef struct {
 #define INIT_SIZE 10 // Ukuran awal array dinamis
 
 typedef struct {
-    char name[255]; // Nama dari playlist
+    char name[100]; // Nama dari playlist
     List laguplaylist;
 } Playlist;
 

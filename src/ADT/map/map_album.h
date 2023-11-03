@@ -13,6 +13,7 @@ void InsertListMapAlbum(ListMapAlbum *MA, MapAlbum M);
 void InsertAlbum(MapAlbum *M, Album a);
 boolean FindAlbum(MapAlbum M, char albumName[]);
 void DisplayMapAlbum(MapAlbum M);
-void DisplayListMapAlbum(ListMapAlbum *LM, char singername[]);
+void DisplayListMapAlbum(ListMapAlbum *LM);
+void DisplayListMapAlbum_Name(ListMapAlbum *LM, char singername[]);
 
 #endif

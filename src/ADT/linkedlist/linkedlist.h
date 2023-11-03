@@ -15,7 +15,6 @@
 #define titlesong(P) (P)->info.titlesong
 #define album(P) (P)->info.album
 #define artist(P) (P)->info.artist
-#define PlaylistName(P) (P)->info.PlaylistName
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 #define First(L) ((L).First)

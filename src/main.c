@@ -29,9 +29,6 @@ int main(){
     //Map Album Lagu
     MapSong SongAlbum;
     CreateEmptyMapSong(&SongAlbum);
-    // Linked List Playlist
-    List Playlist;
-    CreateEmpty(&Playlist);
     // List Map Album Lagu
     ListMapAlbum KumpulanAlbumSinger;
     CreateEmptyListMapAlbum(&KumpulanAlbumSinger);
@@ -68,14 +65,15 @@ int main(){
         } else if (IsStringEqual(currentWord, "LOAD")){ //Load
             ADVINPUT();            
             if(name_valid(currentWord.TabWord)){
-                Word filename = currentWord;
+                char *namefile = (char *)malloc(256 * sizeof(char));
+                SalinString(namefile, currentWord.TabWord);
                 ADVINPUT();
                 if (EndWord){
                     if (!sesi){
                         sesi = true;
                         char tempcurrentchar = currentChar;
-                        Load(&filename.TabWord, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist, &Playlist);
-                        printf("Load Game\n");
+                        Load(namefile, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist);
+                        free(namefile);
                         currentChar = tempcurrentchar;
                     } else {
                         printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");
@@ -103,7 +101,7 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
-                        printf("Liat Playlist\n");
+                        DisplayPlaylist(&DaftarPlaylist);
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -174,7 +172,7 @@ int main(){
                         ADVINPUT();
                         if (EndWord){
                             if (sesi){
-                                printf("Queue swap %d %d\n", x,y);
+                                QueueSwap(&ToPlay, x, y);
                             } else {
                                 printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                             }
@@ -197,7 +195,7 @@ int main(){
                     
                     if (EndWord){
                         if (sesi){
-                            printf("Queue remove %d\n", id);
+                            removeSong(&ToPlay, id);
                         } else {
                             printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                         }
@@ -211,7 +209,7 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
-                        printf("Queue start\n");
+                        clearQueue(&ToPlay);
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
