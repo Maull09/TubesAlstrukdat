@@ -12,19 +12,19 @@ void InsertSinger(ListSinger *L, Singer s) {
     }
 }
 
-int FindSinger(ListSinger L, char singerName[]) {
+boolean FindSinger(ListSinger L, char singerName[]) {
     for (int i = 0; i < L.Neff; i++) {
         if (StringSama(L.singers[i].singerName, singerName)) {
-            return i;
+            return true;
         }
     }
-    return IdxUndef; 
+    return false; 
 }
 
-void displaySinger(ListSinger LS){
+void displaySinger(ListSinger *LS){
     printf("Daftar Penyanyi : \n");
-    for(int i = 0; i<LS.Neff;i++){
-        printf("\t%d. %s\n",i+1, LS.singers[i].singerName);
+    for(int i = 0; i<LS->Neff;i++){
+        printf("\t%d. %s\n",i+1, LS->singers[i].singerName);
     }
 }
 

@@ -55,20 +55,26 @@ int main(){
     if (choice == 'Y' || choice == 'y'){
         printf("Pilih penyanyi untuk melihat album mereka : ");
         scanf("%s", &SelectedArtist);
-        if(FindArtist(AlbumSinger, SelectedArtist)){
+
+        if(FindArtist(LS, SelectedArtist)){
             DisplayListMapAlbum(&ListAlbum, SelectedArtist); 
             scanf("%c", &choice);
+
             if (choice == 'Y' || choice == 'y'){
                 printf("Pilih album untuk melihat lagu yang ada di album : ");
                 scanf("%s", &SelectedAlbum);
+
                 if (FindAlbum(AlbumSinger, SelectedAlbum)){
                     DisplayListMapSong(&arrMapSong, SelectedAlbum);
+
+                } else {
+                    printf("Tidak ada nama album\n");
                 }
                     
             } 
 
         }else {
-            printf("Tidak ada nama penyanyi");
+            printf("Tidak ada nama penyanyi\n");
         }
         
     } 
@@ -109,3 +115,45 @@ int main(){
 }
 
 // gcc test.c function.c ADT/arraystatis/arraySinger.c ADT/map/map_album.c ADT/map/map_song.c ADT/mesin_input/mesininput.c -o test 
+
+void ListDefault(ListSinger listpenyanyi, ListMapAlbum arrmapalbum, ListMapSong arrmapsong){
+    displaySinger(listpenyanyi);
+    printf("\n");
+
+    char choice;
+    char SelectedArtist;
+    char SelectedAlbum;
+    printf("Ingin melihat album yang ada?(Y/N) : ");
+    scanf("%c", &choice);
+
+    if (choice == 'Y' || choice == 'y'){
+        printf("Pilih penyanyi untuk melihat album mereka : ");
+        scanf("%s", &SelectedArtist);
+
+        if(FindArtist(listpenyanyi, SelectedArtist)){
+            DisplayListMapAlbum(&arrmapalbum, SelectedArtist); 
+            scanf("%c", &choice);
+
+            if (choice == 'Y' || choice == 'y'){
+                printf("Pilih album untuk melihat lagu yang ada di album : ");
+                scanf("%s", &SelectedAlbum);
+
+                if (FindAlbum(arrmapsong, SelectedAlbum)){
+                    DisplayListMapSong(&arrmapsong, SelectedAlbum);
+
+                } else {
+                    printf("Tidak ada nama album\n");
+                }
+        
+            } 
+
+        }else {
+            printf("Tidak ada nama penyanyi\n");
+        }
+        
+    } 
+}
+
+void listPlaylist(ArrayPlaylists playlistlagu){
+    DisplayPlaylist(&playlistlagu);
+}

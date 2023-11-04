@@ -35,7 +35,10 @@ int main(){
     // List Map Song
     ListMapSong KumpulanLaguAlbum;
     CreateEmptyListMapSong(&KumpulanLaguAlbum);
-    
+    // Lagu
+    Lagu Playnow;    
+    CreateLagu(&Playnow);
+
 
     // display welcome
     welcome();
@@ -90,7 +93,7 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
-                        printf("Liat Penyanyi\n");
+                        ListDefault(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum);
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -118,6 +121,7 @@ int main(){
                 if (EndWord){
                     if (sesi){
                         printf("Play Lagu\n");
+                        PlaySong(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &Playnow, &ToPlay, &HistoryLagu);
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -144,7 +148,7 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
-                        printf("Queue Song\n");
+                        QueueSong(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &ToPlay);
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -226,7 +230,12 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
-                        printf("Song next\n");
+                        if(!isEmptyQueue(ToPlay)){
+                            dequeue(&ToPlay, &Playnow);
+                            printf("Memutar lagu selanjutnya %s oleh %s\n", Playnow.titlesong, Playnow.artist);
+                        } else {
+                            printf("Queue kosong, memutar kembali lagu  %s oleh %s\n", Playnow.titlesong, Playnow.artist);
+                        }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -237,7 +246,12 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
-                        printf("Song prev\n");
+                        if (!IsEmptyStackSong){
+                            PopStackSong(&HistoryLagu, &Playnow);
+                            printf("Memutar lagu sebelumnya %s oleh %s\n", Playnow.titlesong, Playnow.artist);
+                        } else {
+                            printf("Riwayat lagu kosong, memutar kembali lagu %s oleh %s\n", Playnow.titlesong, Playnow.artist);
+                        }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -364,7 +378,7 @@ int main(){
             ADVINPUT();
             if (EndWord){
                 if (sesi){
-                    printf("Liat Status\n");
+                    STATUS(&Playnow, &ToPlay);
                 } else {
                     printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                 }
@@ -409,6 +423,7 @@ int main(){
             invcommand();
         }
         EndInput();
+        printf("=============================================================================================\n");
     }
     return 0;
 }

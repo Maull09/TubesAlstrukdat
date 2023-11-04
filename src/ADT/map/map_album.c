@@ -41,6 +41,7 @@ void FindAlbum_SingerName(ListMapAlbum LM, char singerName[]) {
     }
 }
 
+
 void DisplayMapAlbum(MapAlbum M) {
     printf("Daftar Album oleh %s : \n", M.SingerName);
     for (int i = 0; i < M.Neff; i++) {

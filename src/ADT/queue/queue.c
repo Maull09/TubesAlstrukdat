@@ -60,27 +60,27 @@ void dequeue(QueueLagu *q, ElTypeQueue *val) {
     }
 }
 
-void displayQueue(QueueLagu q) {
-    if (isEmptyQueue(q)) {
+void displayQueue(QueueLagu *q) {
+    if (isEmptyQueue(*q)) {
         printf("[]\n");
     } else {
         int i, nomor = 1;
         printf("[");
 
-        if (IDX_TAIL(q) >= IDX_HEAD(q)) {
-            for (i = IDX_HEAD(q); i <= IDX_TAIL(q); i++) {
-                printf("%d. %s - %s: %s", nomor, q.buffer[i].artist, q.buffer[i].album, q.buffer[i].titlesong);
-                if (i != IDX_TAIL(q)) printf(",\n ");
+        if (IDX_TAIL(*q) >= IDX_HEAD(*q)) {
+            for (i = IDX_HEAD(*q); i <= IDX_TAIL(*q); i++) {
+                printf("%d. %s - %s: %s", nomor, q->buffer[i].artist, q->buffer[i].album, q->buffer[i].titlesong);
+                if (i != IDX_TAIL(*q)) printf(",\n ");
                 nomor++;
             }
         } else {
-            for (i = IDX_HEAD(q); i < CAPACITY; i++) {
-                printf("%d. %s - %s: %s,\n ", nomor, q.buffer[i].artist, q.buffer[i].album, q.buffer[i].titlesong);
+            for (i = IDX_HEAD(*q); i < CAPACITY; i++) {
+                printf("%d. %s - %s: %s,\n ", nomor, q->buffer[i].artist, q->buffer[i].album, q->buffer[i].titlesong);
                 nomor++;
             }
-            for (i = 0; i <= IDX_TAIL(q); i++) {
-                printf("%d. %s - %s: %s", nomor, q.buffer[i].artist, q.buffer[i].album, q.buffer[i].titlesong);
-                if (i != IDX_TAIL(q)) printf(",\n ");
+            for (i = 0; i <= IDX_TAIL(*q); i++) {
+                printf("%d. %s - %s: %s", nomor, q->buffer[i].artist, q->buffer[i].album, q->buffer[i].titlesong);
+                if (i != IDX_TAIL(*q)) printf(",\n ");
                 nomor++;
             }
         }

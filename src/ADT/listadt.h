@@ -9,11 +9,11 @@
 
 #define IdxMin 1
 #define IdxUndef -999
-#define MaxSingers 100
+#define MaxSingers 50
 
 // ADT 1 Untuk array Singer [arraySinger.h]
 typedef struct {
-    char singerName[255];
+    char singerName[100];
 } Singer;
 
 typedef struct {
@@ -23,7 +23,7 @@ typedef struct {
 
 
 // ADT 3 untuk set [set.h]
-#define MaxSetSongs 100
+#define MaxSetSongs 50
 typedef struct {
     char songName[100];
 } Song;
@@ -37,7 +37,7 @@ typedef struct {
 // ADT 4 Untuk Album dan Map Album [map_album.h]
 #define NilMapAlbum 0
 #define Undefined -999
-#define MaxAlbums 100
+#define MaxAlbums 50
 
 typedef struct {
     char albumName[100];
@@ -58,7 +58,7 @@ typedef struct {
 // // ADT 4 Untuk Song dan Map Song [map_song.h]
 #define NilMapSong 0
 #define UndefinedMapSong -999
-#define MaxSongs 100
+#define MaxSongs 50
 
 
 typedef struct {
@@ -67,7 +67,7 @@ typedef struct {
 } MapSong;
 
 typedef struct {
-    MapSong MapSongs[90];
+    MapSong MapSongs[50];
     int Neff;
 } ListMapSong;
 

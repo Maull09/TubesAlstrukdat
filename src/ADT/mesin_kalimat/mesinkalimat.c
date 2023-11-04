@@ -86,6 +86,17 @@ void STARTKALIMATFILE(char filename[]) {
     }
 }
 
+void STARTKALIMATFILE2(char filename[]) {
+    STARTFILE2(filename);
+    IgnoreNewline();
+    if (currentChar == MARK2) {
+        EndKalimat = true;
+    } else {
+        EndKalimat = false;
+        SalinKalimatFile();
+    }
+}
+
 void ADVKALIMATFILE(){
     IgnoreNewline();
     Ignoreblanks();

@@ -19,6 +19,7 @@ void SalinKalimatFile2();
 void SalinKalimatFile3();
 
 void STARTKALIMATFILE(char filename[]);
+void STARTKALIMATFILE2(char filename[]);
 
 void ADVKALIMATFILE();
 void ADVKALIMATFILE2();

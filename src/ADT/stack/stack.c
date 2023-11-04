@@ -5,6 +5,10 @@ void CreateEmptyStackSong(StackSong *S) {
     S->TOP = IDX_UNDEF;
 }
 
+void clearStack(StackSong *S){
+    CreateEmptyStackSong(S);
+}
+
 boolean IsEmptyStackSong(StackSong S) {
     return (S.TOP == IDX_UNDEF);
 }

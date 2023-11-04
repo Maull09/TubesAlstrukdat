@@ -14,5 +14,6 @@ boolean IsFullStackSong(StackSong S);
 void PushStackSong(StackSong *S, Lagu X);
 void PopStackSong(StackSong *S, Lagu* X);
 void displayStack(StackSong *S);
+void clearStack(StackSong *S);
 
 #endif

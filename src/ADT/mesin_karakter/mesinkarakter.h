@@ -33,4 +33,5 @@ boolean IsEOP();
 /* Mengirimkan true jika currentChar = MARK */
 
 void STARTFILE(char filename[]);
+void STARTFILE2 (char filename[]);
 #endif

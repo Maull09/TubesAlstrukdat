@@ -29,7 +29,6 @@ boolean IsSongInSet(SetSong S, char *songName) {
 void AddSetSongToMapSong(MapSong *list, SetSong setsong) {
     if (list->songs.Neff < 100) {
         list->songs = setsong;
-        list->songs.Neff++;
     }
 }
 

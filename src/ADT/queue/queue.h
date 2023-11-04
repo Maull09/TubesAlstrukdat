@@ -27,7 +27,7 @@ void enqueue(QueueLagu *q, ElTypeQueue val);
 void dequeue(QueueLagu *q, ElTypeQueue *val);
 
 /* *** Display Queue *** */
-void displayQueue(QueueLagu q);
+void displayQueue(QueueLagu *q);
 
 void SalinLagu(Lagu *dest, Lagu src);
 

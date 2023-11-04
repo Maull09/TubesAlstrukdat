@@ -35,6 +35,17 @@ void STARTFILE (char filename[]) {
     }
 }
 
+void STARTFILE2 (char filename[]) {
+    config = fopen(filename, "r");
+    if (config != NULL) {
+        ADV();
+    } else {
+        printf("\nSave file tidak ditemukan. WayangWave gagal dijalankan.!\n");
+        printf("---------------------------------------------\n");
+        exit(0);
+    }
+}
+
 void ADV()
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK

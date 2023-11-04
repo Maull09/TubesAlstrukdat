@@ -1,6 +1,12 @@
 #include "map_song.h"
 #include <stdio.h>
 
+void CreateLagu(Lagu *infolagu) {
+    SalinString(infolagu->album, "\0"); 
+    SalinString(infolagu->artist, "\0");  
+    SalinString(infolagu->titlesong, "\0");  
+}
+
 void CreateEmptyMapSong(MapSong *M) {
     M->albumName[0] = '\0'; 
     CreateEmptySet(&M->songs);
@@ -41,6 +47,22 @@ void FindSong_AlbumName(ListMapSong LM, char albumName[]) {
     }
 }
 
+void FindSong_IDsong(ListMapSong LM, char albumName[], int idx, Lagu *play) {
+    for (int i = 0; i < LM.Neff; i++) {
+        if (StringSama(LM.MapSongs[i].albumName, albumName)) {
+            SalinString(play->titlesong, LM.MapSongs[i].songs.songs[idx-1].songName);
+        }
+    }
+}
+
+boolean valid_idsong(ListMapSong LM, int idx, char albumName[]){
+    for (int i = 0; i < LM.Neff; i++) {
+        if (StringSama(LM.MapSongs[i].albumName, albumName)) {
+            return (idx >= 1 && idx < LM.MapSongs[i].songs.Neff);
+        }
+    }
+} 
+
 void DisplayMapSong(MapSong M) {
     printf("Daftar Lagu di %s: \n", M.albumName);
     for (int i = 0; i < M.songs.Neff; i++) {
@@ -63,3 +85,4 @@ void DisplayListMapSong_Name(ListMapSong *LM, char albumname[]) {
         }
     }
 }
+
