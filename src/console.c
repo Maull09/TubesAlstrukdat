@@ -79,7 +79,6 @@ void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongA
         for (int j = 0; j < jumlahAlbum; j++){
             ADVKALIMATFILE2();  // Baca jumlah lagu dalam album
             int jumlahLagu = atoi(CKalimat.TabKalimat);  // Convert ke integer
-            SongAlbum->Neff = 1;
             KumpulanLagu->Neff = jumlahLagu;
 
             ADVKALIMATFILE(); // Baca Nama album
@@ -126,7 +125,6 @@ void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapS
         for (int j = 0; j < jumlahAlbum; j++){
             ADVKALIMATFILE2();  // Baca jumlah lagu dalam album
             int jumlahLagu = atoi(CKalimat.TabKalimat);  // Convert ke integer
-            SongAlbum->Neff = 1;
             KumpulanLagu->Neff = jumlahLagu;
 
             ADVKALIMATFILE(); // Baca Nama album

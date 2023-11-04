@@ -2,19 +2,20 @@
 #include <stdio.h>
 
 void CreateEmptyMapSong(MapSong *M) {
-    M->Neff = 0;
+    M->albumName[0] = '\0'; 
+    CreateEmptySet(&M->songs);
 }
 
 void CreateEmptyListMapSong(ListMapSong *LM) {
     LM->Neff = 0;
 }
 
-// void InsertSong(MapSong *M, Song s) {
-//     if (M->Neff < MaxSongs) {
-//         M->songs.songs[]->songName = s;
-//         M->Neff++;
-//     }
-// }
+void InsertSong(MapSong *M, Song s) {
+    if (M->songs.Neff< MaxSetSongs) {
+        M->songs.songs[M->songs.Neff] = s;
+        M->songs.Neff++;
+    }
+}
 
 void InsertListMapSong(ListMapSong *LM, MapSong M) {
     if (LM->Neff < 100) {
@@ -23,13 +24,21 @@ void InsertListMapSong(ListMapSong *LM, MapSong M) {
     }
 }
 
-boolean FindSong(MapSong M, char songName[]) {
-    for (int i = 0; i < M.Neff; i++) {
-        if (StringSama(M.songs.songs[i].songName, songName)) {
+boolean FindSongAlbumName(ListMapSong LM, char albumName[]) {
+    for (int i = 0; i < LM.Neff; i++) {
+        if (StringSama(LM.MapSongs[i].albumName, albumName)) {
             return true;
         }
     }
     return false;
+}
+
+void FindSong_AlbumName(ListMapSong LM, char albumName[]) {
+    for (int i = 0; i < LM.Neff; i++) {
+        if (StringSama(LM.MapSongs[i].albumName, albumName)) {
+            DisplayMapSong(LM.MapSongs[i]);
+        }
+    }
 }
 
 void DisplayMapSong(MapSong M) {

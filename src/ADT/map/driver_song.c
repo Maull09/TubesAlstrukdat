@@ -20,12 +20,14 @@ int main() {
     InsertListMapSong(&LM, M);
 
     // Test display functions
-    printf("Displaying MapSongAlbum:\n");
-    DisplayMapSong(M);
-    printf("\n");
+    FindSong_AlbumName(LM, "Album A");
 
-    printf("Displaying ListMapSong:\n");
-    DisplayListMapSong(&LM);
+    // printf("Displaying MapSongAlbum:\n");
+    // DisplayMapSong(M);
+    // printf("\n");
+
+    // printf("Displaying ListMapSong:\n");
+    // DisplayListMapSong(&LM);
 
     return 0;
 }

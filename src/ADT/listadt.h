@@ -64,7 +64,6 @@ typedef struct {
 typedef struct {
     char albumName[100];
     SetSong songs;
-    int Neff;   // Jumlah lagu sebenarnya
 } MapSong;
 
 typedef struct {

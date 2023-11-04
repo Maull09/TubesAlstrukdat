@@ -23,13 +23,22 @@ void InsertAlbum(MapAlbum *M, Album a) {
     }
 }
 
-boolean FindAlbum(MapAlbum M, char albumName[]) {
-    for (int i = 0; i < M.Neff; i++) {
-        if (StringSama(M.albums[i].albumName, albumName)) {
+
+boolean FindAlbumSingerName(ListMapAlbum LM, char singerName[]) {
+    for (int i = 0; i < LM.Neff; i++) {
+        if (StringSama(LM.MapAlbums[i].SingerName, singerName)) {
             return true;
         }
     }
     return false;
+}
+
+void FindAlbum_SingerName(ListMapAlbum LM, char singerName[]) {
+    for (int i = 0; i < LM.Neff; i++) {
+        if (StringSama(LM.MapAlbums[i].SingerName, singerName)) {
+            DisplayMapAlbum(LM.MapAlbums[i]);
+        }
+    }
 }
 
 void DisplayMapAlbum(MapAlbum M) {
