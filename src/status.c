@@ -2,9 +2,19 @@
 #include "ADT/queue/queue.c"
 #include "ADT/mesin_kalimat/mesinkalimat.c"
 
-void STATUS(Lagu *playing, QueueLagu antrian){
+void STATUS(Playlist playlist,Lagu playing, QueueLagu antrian){
+    if(playlist.name){
+        printf("Current Playlist: %s", playlist.name);
+        printf("\n");
+    }
     printf("Now Playing:");
-    printf("%s - %s - %s",*playing->artist,*playing->album,*playing->titlesong);
+    if (!playing.artist){
+        printf("No songs have been played yet. Please search for a song to begin playback.");
+    }
+    else{
+        printf("%s - %s - %s",playing.artist,playing.album,playing.titlesong);
+    }
+    printf("\n");
     printf("Queue:");
     if (isEmptyQueue(antrian)){
         printf("Your queue is empty.");
