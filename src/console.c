@@ -400,3 +400,36 @@ void STATUS(Lagu *playing, QueueLagu *antrian){
         displayQueue(antrian);
     }
 }
+
+void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, ArrayPlaylists *arrplaylist, char namaplaylist[]){
+    int x = (rand() % DaftarPenyanyi->Neff) - 1;
+    infotype dummylagu;
+
+    SalinString(dummylagu.artist, DaftarPenyanyi->singers[x].singerName);    
+    
+    for (int i = 0; i < LMA->Neff; i++) {
+        if (StringSama(LMA->MapAlbums[i].SingerName, dummylagu.artist)) {
+            x = (rand() % LMA->MapAlbums[i].Neff - 1);
+            SalinString(dummylagu.album, LMA->MapAlbums[i].albums[x].albumName);           
+        }
+    }
+
+    for (int i = 0; i < LMS->Neff; i++) {
+        if (StringSama(LMS->MapSongs[i].albumName, dummylagu.album)) {
+            x = (rand() % LMS->MapSongs->songs.Neff) - 1;
+            SalinString(dummylagu.titlesong, LMS->MapSongs[i].songs.songs[x].songName);
+        }
+    }
+
+    for (int i = 0 ; i < arrplaylist->Neff; i++){
+        if(StringSama(arrplaylist->playlists[i].name, namaplaylist)){
+            printf("Sebelum dienhance : \n");
+            PrintInfo(arrplaylist->playlists[i].laguplaylist);
+            InsVLast(&arrplaylist->playlists[i].laguplaylist, dummylagu);
+            printf("Menambahkan lagu %s album %s oleh %s ke playlist %s\n", dummylagu.titlesong, dummylagu.album, dummylagu.artist, namaplaylist);
+            printf("Setelah dienhance : \n");
+            PrintInfo(arrplaylist->playlists[i].laguplaylist);
+        }
+    }
+
+}

@@ -419,7 +419,24 @@ int main(){
             } else {
                 invcommand();
             }
-        } else {
+        } else if (IsStringEqual(currentWord, "ENHANCE")){
+            ADVINPUT();
+            if (EndWord){
+                if (sesi){
+                    DisplayPlaylist(&DaftarPlaylist);
+                    if(DaftarPlaylist.Neff != 0){
+                        printf("\n");
+                        printf("Silahkan pilih playlist untuk di enhance : ");
+                        STARTINPUT2();
+                        enhance(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPlaylist, currentWord.TabWord);
+                    }
+                } else {
+                    printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                }
+            } else {
+                invcommand();
+            }
+        }else {
             invcommand();
         }
         EndInput();

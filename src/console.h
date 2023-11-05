@@ -39,7 +39,7 @@ void ListDefault(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSon
 void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, Lagu *putar, QueueLagu *qLagu, StackSong *sLagu);
 void QueueSong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, QueueLagu *qSong);
 void STATUS(Lagu *playing, QueueLagu *antrian);
-
+void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, ArrayPlaylists *arrplaylist, char namaplaylist[]);
 
 
 #endif
