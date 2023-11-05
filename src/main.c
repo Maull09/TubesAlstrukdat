@@ -428,7 +428,11 @@ int main(){
                         printf("\n");
                         printf("Silahkan pilih playlist untuk di enhance : ");
                         STARTINPUT2();
-                        enhance(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPlaylist, currentWord.TabWord);
+                        if (playlist_valid(&DaftarPlaylist, currentWord.TabWord)){
+                            enhance(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPlaylist, currentWord.TabWord);
+                        } else {
+                            printf("Tidak ada playlist %s\n", currentWord.TabWord);
+                        }
                     }
                 } else {
                     printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");

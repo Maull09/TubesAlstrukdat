@@ -402,21 +402,21 @@ void STATUS(Lagu *playing, QueueLagu *antrian){
 }
 
 void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, ArrayPlaylists *arrplaylist, char namaplaylist[]){
-    int x = (rand() % DaftarPenyanyi->Neff) - 1;
+    int x = (rand() % DaftarPenyanyi->Neff);
     infotype dummylagu;
 
     SalinString(dummylagu.artist, DaftarPenyanyi->singers[x].singerName);    
     
     for (int i = 0; i < LMA->Neff; i++) {
         if (StringSama(LMA->MapAlbums[i].SingerName, dummylagu.artist)) {
-            x = (rand() % LMA->MapAlbums[i].Neff - 1);
+            x = (rand() % LMA->MapAlbums[i].Neff);
             SalinString(dummylagu.album, LMA->MapAlbums[i].albums[x].albumName);           
         }
     }
 
     for (int i = 0; i < LMS->Neff; i++) {
         if (StringSama(LMS->MapSongs[i].albumName, dummylagu.album)) {
-            x = (rand() % LMS->MapSongs->songs.Neff) - 1;
+            x = (rand() % LMS->MapSongs->songs.Neff);
             SalinString(dummylagu.titlesong, LMS->MapSongs[i].songs.songs[x].songName);
         }
     }
@@ -432,4 +432,13 @@ void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, Ar
         }
     }
 
+}
+
+boolean playlist_valid(ArrayPlaylists *arrPlaylist, char nameplaylist[]){
+    for (int i = 0; i < arrPlaylist->Neff; i++){
+        if(StringSama(arrPlaylist->playlists[i].name, nameplaylist)){
+            return true;
+        }
+    }
+    return false;
 }

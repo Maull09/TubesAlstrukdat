@@ -40,6 +40,9 @@ void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *
 void QueueSong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, QueueLagu *qSong);
 void STATUS(Lagu *playing, QueueLagu *antrian);
 void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, ArrayPlaylists *arrplaylist, char namaplaylist[]);
+boolean playlist_valid(ArrayPlaylists *arrPlaylist, char nameplaylist[]);
+
+
 
 
 #endif
