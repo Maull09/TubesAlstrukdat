@@ -394,7 +394,7 @@ int main(){
                         int idxp = atoi(currentWord.TabWord); 
                         if(isValidPlaylist(&DaftarPlaylist, idxp)){
                             PlaylistDelete(&DaftarPlaylist, idxp);
-                            printf("Playlist ID %d dengan judul %s berhasil dihapus.", idxp, nDaftarPlaylist.playlists->name);
+                            printf("Playlist ID %d dengan judul %s berhasil dihapus.", idxp, DaftarPlaylist.playlists->name);
                         }
                         else{
                             printf("Tidak ada playlist dengan ID %d dalam daftar playlist pengguna. Silakan coba lagi.", idxp);
