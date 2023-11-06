@@ -153,3 +153,7 @@ int NbElmt (List L) {
     }
     return count;
 }
+
+boolean isValidSong(List L, int Id){
+    return(Id >= 1 && Id < NbElmt(L));
+}

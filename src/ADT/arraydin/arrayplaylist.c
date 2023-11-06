@@ -55,3 +55,7 @@ void DisplayPlaylist(ArrayPlaylists *arr) {
         }
     }
 }
+
+boolean isValidPlaylist(ArrayPlaylists *arr, int idPlaylist){
+    return (idPlaylist >= 1 && idPlaylist < (*arr).Neff);
+}

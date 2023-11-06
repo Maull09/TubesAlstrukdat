@@ -358,11 +358,20 @@ int main(){
                         
                         if (EndWord){
                             if (sesi){
-                                PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
-                                printf("\n");
-                                PlaylistRemove(&DaftarPlaylist, id, n);
-                                printf("Playlist %d remove %d\n", id, n);
-                                PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
+                                if(isValidPlaylist(&DaftarPlaylist, id)){
+                                    if(isValidSong(&DaftarPlaylist, n)){
+                                        PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
+                                        printf("\n");
+                                        PlaylistRemove(&DaftarPlaylist, id, n);
+                                        printf("Playlist %d remove %d\n", id, n);
+                                        PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
+                                    } else {
+
+                                    }
+                                } else{
+
+                                }
+                                //if valid idplaylist dan valid idlagu
                             } else {
                                 printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                             }
@@ -383,6 +392,7 @@ int main(){
                         printf("id : ");
                         STARTINPUT2();
                         int idxp = atoi(currentWord.TabWord); 
+                        //
                         PlaylistDelete(&DaftarPlaylist, idxp);
                         printf("Delete Playlist\n");
                     } else {
