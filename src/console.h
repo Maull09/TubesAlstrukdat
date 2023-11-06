@@ -41,6 +41,11 @@ void QueueSong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong 
 void STATUS(Lagu *playing, QueueLagu *antrian);
 void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, ArrayPlaylists *arrplaylist, char namaplaylist[]);
 boolean playlist_valid(ArrayPlaylists *arrPlaylist, char nameplaylist[]);
+void PlayPlaylist(ArrayPlaylists *arrPlaylist, StackSong *sLagu, QueueLagu *qLagu, int idxarr);
+void QueuePlaylist(ArrayPlaylists *arrPlaylist, QueueLagu *qLagu, int idxarr);
+void PlaylistCreate(ArrayPlaylists *arrPlaylist, char playlistname[]);
+void PlaylistDelete(ArrayPlaylists *arrPlaylist, int idxP);
+void PlaylistRemove(ArrayPlaylists *arrPlaylist, int idxP, int idxL);
 
 
 

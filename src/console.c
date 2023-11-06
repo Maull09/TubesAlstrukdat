@@ -442,3 +442,61 @@ boolean playlist_valid(ArrayPlaylists *arrPlaylist, char nameplaylist[]){
     }
     return false;
 }
+
+void PlayPlaylist(ArrayPlaylists *arrPlaylist, StackSong *sLagu, QueueLagu *qLagu, int idxarr){
+    ElTypeQueue dummyq;
+    Lagu dummyL;
+
+    if(FindPlaylist(*arrPlaylist, idxarr)){
+        while (!isEmptyQueue(*qLagu)){
+            dequeue(qLagu, &dummyq);
+            PushStackSong(sLagu, dummyq);
+        }
+
+        address P = First(arrPlaylist->playlists[idxarr-1].laguplaylist);
+        while (P != Nil){
+            SalinLagu(&dummyL, Info(P));
+            enqueue(qLagu, dummyL);
+            P = Next(P);
+        }
+    }
+}
+
+void QueuePlaylist(ArrayPlaylists *arrPlaylist, QueueLagu *qLagu, int idxarr){
+    ElTypeQueue dummyq;
+    Lagu dummyL;
+
+    if(FindPlaylist(*arrPlaylist, idxarr)){
+        address P = First(arrPlaylist->playlists[idxarr-1].laguplaylist);
+        while (P != Nil){
+            SalinLagu(&dummyL, Info(P));
+            enqueue(qLagu, dummyL);
+            P = Next(P);
+        }
+    }
+}
+
+void PlaylistCreate(ArrayPlaylists *arrPlaylist, char playlistname[]){
+    Playlist dummyP;
+    SalinString(dummyP.name, playlistname);
+    CreateEmpty(&dummyP.laguplaylist);
+    AddPlaylist(arrPlaylist, dummyP);
+    printf("berhasil dibuat %s", playlistname);
+}
+
+void PlaylistDelete(ArrayPlaylists *arrPlaylist, int idxP){
+    printf("Dihapus %s\n", arrPlaylist->playlists[idxP-1].name);
+    for (int i = idxP-1; i<arrPlaylist->Neff; i++){
+        arrPlaylist->playlists[i] = arrPlaylist->playlists[i+1];
+    }
+    arrPlaylist->Neff -= 1;
+}
+
+void PlaylistRemove(ArrayPlaylists *arrPlaylist, int idxP, int idxL){
+    int ctr = 0;
+    address p = First(arrPlaylist->playlists[idxP-1].laguplaylist);
+    while(ctr < idxL-1){
+        p = Next(p);
+    }
+    DelP(&arrPlaylist->playlists[idxP-1].laguplaylist, Info(p));
+}

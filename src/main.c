@@ -132,7 +132,11 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
-                        printf("Play Playlist\n");
+                        DisplayPlaylist(&DaftarPlaylist);
+                        printf("id : ");
+                        STARTINPUT2();
+                        int idxarr = atoi(currentWord.TabWord);
+                        PlayPlaylist(&DaftarPlaylist, &HistoryLagu, &ToPlay, idxarr);
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -159,7 +163,11 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
-                        printf("Queue Playlist\n");
+                        DisplayPlaylist(&DaftarPlaylist);
+                        printf("id : ");
+                        STARTINPUT2();
+                        int idxarr = atoi(currentWord.TabWord);
+                        QueuePlaylist(&DaftarPlaylist, &ToPlay, idxarr);
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -267,6 +275,9 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
+                        printf("Masukkan nama playlist yang ingin dibuat : ");
+                        STARTINPUT2();
+                        PlaylistCreate(&DaftarPlaylist, currentWord.TabWord);
                         printf("Playlist Create\n");
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
@@ -347,7 +358,11 @@ int main(){
                         
                         if (EndWord){
                             if (sesi){
+                                PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
+                                printf("\n");
+                                PlaylistRemove(&DaftarPlaylist, id, n);
                                 printf("Playlist %d remove %d\n", id, n);
+                                PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
                             } else {
                                 printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                             }
@@ -364,6 +379,11 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
+                        DisplayPlaylist(&DaftarPlaylist);
+                        printf("id : ");
+                        STARTINPUT2();
+                        int idxp = atoi(currentWord.TabWord); 
+                        PlaylistDelete(&DaftarPlaylist, idxp);
                         printf("Delete Playlist\n");
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
