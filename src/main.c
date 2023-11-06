@@ -366,10 +366,10 @@ int main(){
                                         printf("Playlist %d remove %d\n", id, n);
                                         PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
                                     } else {
-
+                                        printf("Tidak ada lagu dengan urutan %d di playlist “%s”!", n, DaftarPlaylist.playlists->name);
                                     }
                                 } else{
-
+                                    printf("Tidak ada playlist dengan ID %d.", id);
                                 }
                                 //if valid idplaylist dan valid idlagu
                             } else {
@@ -392,8 +392,13 @@ int main(){
                         printf("id : ");
                         STARTINPUT2();
                         int idxp = atoi(currentWord.TabWord); 
-                        //
-                        PlaylistDelete(&DaftarPlaylist, idxp);
+                        if(isValidPlaylist(&DaftarPlaylist, idxp)){
+                            PlaylistDelete(&DaftarPlaylist, idxp);
+                            printf("Playlist ID %d dengan judul %s berhasil dihapus.", idxp, nDaftarPlaylist.playlists->name);
+                        }
+                        else{
+                            printf("Tidak ada playlist dengan ID %d dalam daftar playlist pengguna. Silakan coba lagi.", idxp);
+                        }
                         printf("Delete Playlist\n");
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
