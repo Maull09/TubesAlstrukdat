@@ -359,7 +359,7 @@ int main(){
                         if (EndWord){
                             if (sesi){
                                 if(isValidPlaylist(&DaftarPlaylist, id)){
-                                    if(isValidSong(&DaftarPlaylist, n)){
+                                    if(isValidSong(DaftarPlaylist.playlists->laguplaylist, n)){
                                         PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
                                         printf("\n");
                                         PlaylistRemove(&DaftarPlaylist, id, n);
@@ -417,9 +417,67 @@ int main(){
             }
         } else if (IsStringEqual(currentWord, "SAVE")){ 
             ADVINPUT();
-            
+            //bagian save pertama
             if(name_valid(currentWord.TabWord)){
-                Word filename = currentWord;
+                Word filename=currentWord;
+                char *file =(char*) malloc (currentWord.Length+1);
+                for(int i;i<currentWord.Length;i++){
+                file[i]=currentWord.TabWord[i]; 
+                }
+                file[currentWord.Length]='\0';
+                char saves[]="data\\";
+                concat(saves,file);
+                concat(saves,".txt");
+                FILE *savefile = fopen(saves,"w");
+                fprintf(savefile,"%d\n",DaftarPenyanyi.Neff);
+                for(int u=0;u<DaftarPenyanyi.Neff;u++){
+                fprintf(savefile,"%d %s\n",KumpulanAlbumSinger.MapAlbums[u].Neff,DaftarPenyanyi.singers[u]);
+
+                    for(int e=0; e<KumpulanAlbumSinger.MapAlbums[u].Neff;e++){
+                    fprintf(savefile,"%d %s\n",KumpulanLaguAlbum.MapSongs[e].songs.Neff,KumpulanLaguAlbum.MapSongs[e].albumName);
+
+                        for (int o=0; o<KumpulanLaguAlbum.MapSongs[e].songs.Neff;o++){
+                        fprintf(savefile,"%s\n",KumpulanLaguAlbum.MapSongs[e].songs.songs[o].songName);
+                        }
+                    }
+                }
+            //bagian queue
+            fprintf(savefile,"%d\n",lengthQueue(ToPlay));
+            for(int i=0;i<lengthQueue(ToPlay);i++){
+                fprintf(savefile,"%s;%s;%s\n",ToPlay.buffer[i].artist,ToPlay.buffer[i].album,ToPlay.buffer[i].titlesong);
+            }
+            //bagian riwayat
+            int stacklength;
+            StackSong stemp;
+            Lagu temp;
+            CreateEmptyStackSong(&stemp);
+            while (!IsEmptyStackSong(HistoryLagu))
+            {
+                PopStackSong(&HistoryLagu,&temp);
+                PushStackSong(&stemp,temp);
+                stacklength++;
+            }
+            while (!IsEmptyStackSong(stemp))
+            {
+                PopStackSong(&stemp,&temp);
+                PushStackSong(&HistoryLagu,temp);
+            }
+            fprintf(savefile,"%d\n",stacklength);
+            for(int i=0;i<stacklength;i++){
+                fprintf(savefile,"%s;%s;%s\n",HistoryLagu.Songs[i].artist,HistoryLagu.Songs[i].album,HistoryLagu.Songs[i].titlesong);
+            }
+            //bagian playlist
+            fprintf(savefile,"%d\n",DaftarPlaylist.Neff);
+            
+            for(int i=0;i<DaftarPlaylist.Neff;i++){
+                fprintf(savefile,"%d %s\n",NbElmt(DaftarPlaylist.playlists->laguplaylist),DaftarPlaylist.playlists[i].name);
+                address P =DaftarPlaylist.playlists->laguplaylist.First;
+                for (int a=0;a<NbElmt(DaftarPlaylist.playlists->laguplaylist);a++){
+                    fprintf(savefile,"%s;%s;%s\n",artist(P), album(P), titlesong(P));
+                    P=Next(P);
+                }
+            }
+                fclose(savefile);
                 ADVINPUT();
                 
                 if (EndWord){
