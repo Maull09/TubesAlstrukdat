@@ -164,10 +164,13 @@ int main(){
                 if (EndWord){
                     if (sesi){
                         DisplayPlaylist(&DaftarPlaylist);
-                        printf("id : ");
+                        printf("Masukkan ID Playlist : ");
                         STARTINPUT2();
                         int idxarr = atoi(currentWord.TabWord);
-                        QueuePlaylist(&DaftarPlaylist, &ToPlay, idxarr);
+                        if (isValidPlaylist(&DaftarPlaylist, idxarr) && (DaftarPlaylist.Neff != 0)){
+                            QueuePlaylist(&DaftarPlaylist, &ToPlay, idxarr);
+                        }
+                        //Validation playlist kosong
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -241,9 +244,9 @@ int main(){
                         if(!isEmptyQueue(ToPlay)){
                             dequeue(&ToPlay, &Playnow);
                             //push next song ?
-                            printf("Memutar lagu selanjutnya %s oleh %s\n", Playnow.titlesong, Playnow.artist);
+                            printf("Memutar lagu selanjutnya \"%s\" oleh \"%s\"\n", Playnow.titlesong, Playnow.artist);
                         } else {
-                            printf("Queue kosong, memutar kembali lagu  %s oleh %s\n", Playnow.titlesong, Playnow.artist);
+                            printf("Queue kosong, memutar kembali lagu \"%s\" oleh \"%s\"\n", Playnow.titlesong, Playnow.artist);
                         }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
@@ -257,9 +260,9 @@ int main(){
                     if (sesi){
                         if (!IsEmptyStackSong){
                             PopStackSong(&HistoryLagu, &Playnow);
-                            printf("Memutar lagu sebelumnya %s oleh %s\n", Playnow.titlesong, Playnow.artist);
+                            printf("Memutar lagu sebelumnya \"%s\" oleh \"%s\"\n", Playnow.titlesong, Playnow.artist);
                         } else {
-                            printf("Riwayat lagu kosong, memutar kembali lagu %s oleh %s\n", Playnow.titlesong, Playnow.artist);
+                            printf("Riwayat lagu kosong, memutar kembali lagu \"%s\" oleh \"%s\"\n", Playnow.titlesong, Playnow.artist);
                         }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");

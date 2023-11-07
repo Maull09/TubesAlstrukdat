@@ -64,7 +64,6 @@ boolean valid_idsong(ListMapSong LM, int idx, char albumName[]){
 } 
 
 void DisplayMapSong(MapSong M) {
-    printf("Daftar Lagu di %s: \n", M.albumName);
     for (int i = 0; i < M.songs.Neff; i++) {
         printf("\t%d. %s\n",i+1, M.songs.songs[i].songName);
     }

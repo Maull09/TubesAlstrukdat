@@ -106,8 +106,8 @@ void removeSong(QueueLagu *q, int id){
             printf("Lagu dengan urutan ke %d tidak ada.\n", id);
         } else {
             ElTypeQueue removed_song;
-            removed_song = q->buffer[id];
-            for (int i = id; i < n; i++){
+            removed_song = q->buffer[id-1];
+            for (int i = id-1; i < n; i++){
                 q->buffer[i] = q->buffer[i+1];
             }
             printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", removed_song.titlesong, removed_song.artist);
@@ -135,11 +135,11 @@ void QueueSwap (QueueLagu *q, int x, int y){
     }
 
     ElTypeQueue lagu_x, lagu_y, temp;
-    lagu_x = q->buffer[x];
-    lagu_y = q->buffer[y];
-    temp = q->buffer[y];
-    q->buffer[y] = q->buffer[x];
-    q->buffer[x] = temp;
+    lagu_x = q->buffer[x-1];
+    lagu_y = q->buffer[y-1];
+    temp = q->buffer[y-1];
+    q->buffer[y-1] = q->buffer[x];
+    q->buffer[x-1] = temp;
 
     printf("Lagu \"%s\" berhasil ditukar dengan \"%s\"!\n", lagu_x.titlesong, lagu_y.titlesong);
 
