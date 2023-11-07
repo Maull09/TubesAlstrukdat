@@ -47,6 +47,22 @@ void enqueue(QueueLagu *q, ElTypeQueue val) {
     SalinLagu(&TAIL(*q), val);
 }
 
+void enqueueFirst(QueueLagu *q, ElTypeQueue val) {
+    if (isEmptyQueue(*q)) {
+        IDX_HEAD(*q) = 0;
+        IDX_TAIL(*q) = 0;
+        SalinLagu(&HEAD(*q), val);
+    } else {
+        if (IDX_HEAD(*q) == 0) {
+            IDX_HEAD(*q) = CAPACITY - 1;
+        } else {
+            IDX_HEAD(*q) -= 1;
+        }
+        SalinLagu(&HEAD(*q), val);
+    }
+}
+
+
 void dequeue(QueueLagu *q, ElTypeQueue *val) {
     SalinLagu(val, HEAD(*q));
 
@@ -65,27 +81,21 @@ void displayQueue(QueueLagu *q) {
         printf("[]\n");
     } else {
         int i, nomor = 1;
-        printf("[");
-
         if (IDX_TAIL(*q) >= IDX_HEAD(*q)) {
             for (i = IDX_HEAD(*q); i <= IDX_TAIL(*q); i++) {
-                printf("%d. %s - %s: %s", nomor, q->buffer[i].artist, q->buffer[i].album, q->buffer[i].titlesong);
-                if (i != IDX_TAIL(*q)) printf(",\n ");
+                printf("%d. %s - %s: %s\n", nomor, q->buffer[i].artist, q->buffer[i].album, q->buffer[i].titlesong);
                 nomor++;
             }
         } else {
             for (i = IDX_HEAD(*q); i < CAPACITY; i++) {
-                printf("%d. %s - %s: %s,\n ", nomor, q->buffer[i].artist, q->buffer[i].album, q->buffer[i].titlesong);
+                printf("%d. %s - %s: %s\n", nomor, q->buffer[i].artist, q->buffer[i].album, q->buffer[i].titlesong);
                 nomor++;
             }
             for (i = 0; i <= IDX_TAIL(*q); i++) {
-                printf("%d. %s - %s: %s", nomor, q->buffer[i].artist, q->buffer[i].album, q->buffer[i].titlesong);
-                if (i != IDX_TAIL(*q)) printf(",\n ");
+                printf("%d. %s - %s: %s\n", nomor, q->buffer[i].artist, q->buffer[i].album, q->buffer[i].titlesong);
                 nomor++;
             }
         }
-
-        printf("]\n");
     }
 }
 
@@ -130,16 +140,15 @@ void QueueSwap (QueueLagu *q, int x, int y){
     int length = lengthQueue(*q);
 
     if (x<1 || x>length || y<1 || y>length){
-        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue! \n");
+        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue! \n", x);
         return;
     }
 
     ElTypeQueue lagu_x, lagu_y, temp;
     lagu_x = q->buffer[x-1];
     lagu_y = q->buffer[y-1];
-    temp = q->buffer[y-1];
-    q->buffer[y-1] = q->buffer[x];
-    q->buffer[x-1] = temp;
+    q->buffer[y-1] = lagu_x;
+    q->buffer[x-1] = lagu_y;
 
     printf("Lagu \"%s\" berhasil ditukar dengan \"%s\"!\n", lagu_x.titlesong, lagu_y.titlesong);
 

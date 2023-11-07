@@ -18,5 +18,6 @@ void FindSong_AlbumName(ListMapSong LM, char albumName[]);
 void FindSong_IDsong(ListMapSong LM, char albumName[], int idx, Lagu *play);
 void CreateLagu(Lagu *infolagu);
 boolean valid_idsong(ListMapSong LM, int idx, char albumName[]);
+int idAlbum(ListMapSong *LM, char album[]);
 #endif
 

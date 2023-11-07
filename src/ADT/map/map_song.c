@@ -58,7 +58,7 @@ void FindSong_IDsong(ListMapSong LM, char albumName[], int idx, Lagu *play) {
 boolean valid_idsong(ListMapSong LM, int idx, char albumName[]){
     for (int i = 0; i < LM.Neff; i++) {
         if (StringSama(LM.MapSongs[i].albumName, albumName)) {
-            return (idx >= 1 && idx < LM.MapSongs[i].songs.Neff);
+            return (idx >= 1 && idx <= LM.MapSongs[i].songs.Neff);
         }
     }
 } 
@@ -85,3 +85,10 @@ void DisplayListMapSong_Name(ListMapSong *LM, char albumname[]) {
     }
 }
 
+int idAlbum(ListMapSong *LM, char album[]){
+    for(int i = 0; i < LM->Neff;i++){
+        if(StringSama(LM->MapSongs[i].albumName, album)){
+            return i;
+        }
+    }
+}

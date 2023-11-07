@@ -37,4 +37,5 @@ void clearQueue(QueueLagu *q);
 
 void QueueSwap (QueueLagu *q, int x, int y);
 
+void enqueueFirst(QueueLagu *q, ElTypeQueue val);
 #endif

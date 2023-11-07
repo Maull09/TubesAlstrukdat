@@ -155,5 +155,5 @@ int NbElmt (List L) {
 }
 
 boolean isValidSong(List L, int Id){
-    return(Id >= 1 && Id < NbElmt(L));
+    return(Id >= 1 && Id <= NbElmt(L));
 }

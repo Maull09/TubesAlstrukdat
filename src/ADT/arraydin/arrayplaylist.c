@@ -46,7 +46,6 @@ void DeletePlaylist(ArrayPlaylists *arr, int idx) {
 }
 
 void DisplayPlaylist(ArrayPlaylists *arr) {
-    printf("Daftar playlist yang kamu miliki:\n");
     if(arr->Neff == 0){
         printf("Kamu tidak memiliki playlist.\n");
     } else {
@@ -57,5 +56,5 @@ void DisplayPlaylist(ArrayPlaylists *arr) {
 }
 
 boolean isValidPlaylist(ArrayPlaylists *arr, int idPlaylist){
-    return (idPlaylist >= 1 && idPlaylist < (*arr).Neff);
+    return (idPlaylist >= 1 && idPlaylist <= (*arr).Neff);
 }

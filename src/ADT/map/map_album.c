@@ -66,14 +66,3 @@ void DisplayListMapAlbum_Name(ListMapAlbum *LM, char singername[]) {
     }
 }
 
-int idAlbum(ListMapAlbum *LM, char album[]){
-    boolean found = false;
-    int idx = 0;
-    while(idx < LM->Neff && !found){
-        if(StringSama(LM->MapAlbums, album)){
-            found = true;
-        }
-        idx++;
-    }
-    return idx;
-}

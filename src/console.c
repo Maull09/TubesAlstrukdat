@@ -159,7 +159,7 @@ void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapS
 
     ADVKALIMATFILE();
     int jumlahriwayat = atoi(CKalimat.TabKalimat);
-    sLagu->TOP = jumlahriwayat;
+    sLagu->TOP = jumlahriwayat-1;
     for(int m = 0; m < jumlahriwayat; m++){
         ADVKALIMATFILE3();
         SalinString(sLagu->Songs[m].artist, CKalimat.TabKalimat);
@@ -287,7 +287,7 @@ void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *
             SalinString(putar->album, SelectedAlbum);
 
             if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
-                printf("Daftar Lagu Album %s oleh %s", SelectedArtist, SelectedArtist);
+                printf("Daftar Lagu Album %s oleh %s\n", SelectedArtist, SelectedArtist);
                 FindSong_AlbumName(*arrmapsong, SelectedAlbum);
 
                 printf("Masukkan ID Lagu yang dipilih : ");
@@ -331,7 +331,7 @@ void QueueSong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong 
         SalinString(Putar.album, SelectedAlbum);
 
         if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
-            printf("Daftar Lagu Album %s oleh %s", SelectedArtist, SelectedArtist);
+            printf("Daftar Lagu Album %s oleh %s\n", SelectedArtist, SelectedArtist);
             FindSong_AlbumName(*arrmapsong, SelectedAlbum);
 
             printf("Masukkan ID Lagu yang dipilih : ");
@@ -450,11 +450,11 @@ void PlaylistCreate(ArrayPlaylists *arrPlaylist, char playlistname[]){
     SalinString(dummyP.name, playlistname);
     CreateEmpty(&dummyP.laguplaylist);
     AddPlaylist(arrPlaylist, dummyP);
-    printf("berhasil dibuat %s", playlistname);
+    printf("Playlist %s berhasil dibuat!\n", playlistname);
+    printf("Silakan masukkan lagu - lagu artis terkini kesayangan Anda!\n");
 }
 
 void PlaylistDelete(ArrayPlaylists *arrPlaylist, int idxP){
-    printf("Dihapus %s\n", arrPlaylist->playlists[idxP-1].name);
     for (int i = idxP-1; i<arrPlaylist->Neff; i++){
         arrPlaylist->playlists[i] = arrPlaylist->playlists[i+1];
     }
@@ -543,8 +543,8 @@ void playlistAddSong(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong
                         printf("id playlist : ");
                         STARTINPUT();
                         int idplaylist = atoi(currentWord.TabWord);
-                        if(isValidPlaylist(&arr, idplaylist)){
-                            InsVLast(&arr, Putar);
+                        if(isValidPlaylist(arr, idplaylist)){
+                            InsVLast(&arr->playlists[idplaylist-1].laguplaylist, Putar);
                             printf("Lagu dengan judul “%s” pada album %s oleh penyanyi %S berhasil ditambahkan ke dalam playlist %s.", Putar.titlesong ,SelectedAlbum, SelectedArtist, arr->playlists[idplaylist-1].name );
                         }
                         else{
@@ -588,6 +588,7 @@ void playlistAddAlbum(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSon
         if(FindSinger(*listpenyanyi, SelectedArtist)){
             FindAlbum_SingerName(*arrmapalbum, SelectedArtist); 
             
+
             printf("Ingin melihat lagu yang ada?(Y/N) : ");    
             STARTINPUT();
             SalinString(choice, currentWord.TabWord);
@@ -598,14 +599,14 @@ void playlistAddAlbum(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSon
                 SalinString(SelectedAlbum, currentWord.TabWord);
                 SalinString(Putar.album, SelectedAlbum);
                 int idalbum;
-                int idalbum = idAlbum(&arrmapalbum, SelectedAlbum);
+                idalbum = idAlbum(arrmapsong, SelectedAlbum);
                 if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
                     printf("Masukkan ID Playlist yang dipilih :  ");
                     STARTINPUT();
                     int idplaylist = atoi(currentWord.TabWord);
-                    for (int i = 0; i < arrmapsong->MapSongs[idalbum].songs.Neff; i++){
-                        SalinString(Putar.titlesong, &arrmapsong->MapSongs[idalbum].songs.songs[i]);
-                        InsVLast(&arr , Putar);
+                    for (int i = 0; i < arrmapsong->MapSongs[idalbum-1].songs.Neff; i++){
+                        SalinString(Putar.titlesong, arrmapsong->MapSongs[idalbum-1].songs.songs[i].songName);
+                        InsVLast(&arr->playlists[idplaylist-1].laguplaylist, Putar);
                     }
                     printf("Album dengan judul “%s” berhasil ditambahkan ke dalam pada playlist pengguna “%s”.", SelectedAlbum,arr->playlists[idplaylist-1].name );
                 } else {

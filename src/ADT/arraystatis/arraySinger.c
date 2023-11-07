@@ -28,4 +28,11 @@ void displaySinger(ListSinger *LS){
     }
 }
 
-// find artis
+int idArtis(ListSinger *arrS, char artisname[]){
+    for (int i = 0; i < arrS->Neff; i++){
+        if(StringSama(arrS->singers[i].singerName, artisname)){
+            return i;
+        }
+    }
+    return IDX_UNDEF;
+}
