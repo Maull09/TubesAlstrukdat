@@ -16,5 +16,5 @@ void DisplayMapAlbum(MapAlbum M);
 void DisplayListMapAlbum(ListMapAlbum *LM);
 void DisplayListMapAlbum_Name(ListMapAlbum *LM, char singername[]);
 void FindAlbum_SingerName(ListMapAlbum LM, char singerName[]);
-
+int idAlbum(ListMapAlbum *LM, char album[]);
 #endif

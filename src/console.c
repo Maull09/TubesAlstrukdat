@@ -500,3 +500,152 @@ void PlaylistRemove(ArrayPlaylists *arrPlaylist, int idxP, int idxL){
     }
     DelP(&arrPlaylist->playlists[idxP-1].laguplaylist, Info(p));
 }
+
+void playlistSwap(ArrayPlaylists *arrP, int idx, int idy, int idPlaylist){
+    int max, ctr = 0;
+    Lagu dummy, tempx, tempy;
+    address x, y;
+    if(idx > idy ){
+        max = idx;
+    }
+    else{
+        max = idy;
+    }
+    address p = First(arrP->playlists[idPlaylist-1].laguplaylist);
+    
+    while(ctr <= max){
+        if(ctr == idx){
+            x = p;
+            tempx = Info(x);
+        }
+        else if(ctr == idy){
+            y = p;
+            tempy = Info(y);
+        }
+        ctr++;
+        p = Next(p);
+    }
+    Info(x) = tempy;
+    Info(y) = tempx;
+
+}
+
+void playlistAddSong(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, ListSinger *listpenyanyi){
+    Lagu Putar;
+    displaySinger(listpenyanyi);
+    printf("\n");
+
+    char choice[1];
+    char SelectedArtist[100];
+    char SelectedAlbum[100];
+    printf("Ingin melihat album yang ada?(Y/N) : ");
+    
+    STARTINPUT();
+    SalinString(choice, currentWord.TabWord);
+    
+    if (StringSama(choice, "Y") || StringSama(choice, "y")){
+        printf("Masukkan Nama Penyanyi yang dipilih : ");
+        STARTINPUT2();
+        SalinString(SelectedArtist, currentWord.TabWord);
+        SalinString(Putar.artist, SelectedArtist);
+
+        if(FindSinger(*listpenyanyi, SelectedArtist)){
+            FindAlbum_SingerName(*arrmapalbum, SelectedArtist); 
+            
+            printf("Ingin melihat lagu yang ada?(Y/N) : ");    
+            STARTINPUT();
+            SalinString(choice, currentWord.TabWord);
+
+            if (StringSama(choice, "Y") || StringSama(choice, "y")){
+                printf("Masukkan Judul Album yang dipilih : ");
+                STARTINPUT2();
+                SalinString(SelectedAlbum, currentWord.TabWord);
+                SalinString(Putar.album, SelectedAlbum);
+
+                if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
+                    FindSong_AlbumName(*arrmapsong, SelectedAlbum);
+
+                    printf("input id : ");
+                    STARTINPUT();
+                    int idlagu = atoi(currentWord.TabWord);
+                    if (valid_idsong(*arrmapsong, idlagu, SelectedAlbum)){
+                        FindSong_IDsong(*arrmapsong, SelectedAlbum, idlagu, &Putar);        
+
+                        printf("id playlist : ");
+                        STARTINPUT();
+                        int idplaylist = atoi(currentWord.TabWord);
+                        if(isValidPlaylist(&arr, idplaylist)){
+                            InsVLast(&arr, Putar);
+                            printf("Lagu dengan judul “%s” pada album %s oleh penyanyi %S berhasil ditambahkan ke dalam playlist %s.", Putar.titlesong ,SelectedAlbum, SelectedArtist, arr->playlists[idplaylist-1].name );
+                        }
+                        else{
+                            printf("Playlist dengan id:%d tidak ada dalam daftar. Silakan coba lagi.", idplaylist);
+                        }
+                        printf("Berhasil menambahkan lagu %s oleh %s ke queue.\n",Putar.titlesong,SelectedArtist);
+                    } else {
+                        printf("Tidak ada lagu dengan id %d, silahkan coba lagi\n", idlagu);
+                    }
+                    
+                } else {
+                    printf("Album %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedAlbum);
+                }
+            } 
+        }else {
+            printf("Penyanyi %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedArtist);
+        }
+        
+    } 
+}
+
+void playlistAddAlbum(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, ListSinger *listpenyanyi){
+    Lagu Putar;
+    displaySinger(listpenyanyi);
+    printf("\n");
+
+    char choice[1];
+    char SelectedArtist[100];
+    char SelectedAlbum[100];
+    printf("Ingin melihat album yang ada?(Y/N) : ");
+    
+    STARTINPUT();
+    SalinString(choice, currentWord.TabWord);
+    
+    if (StringSama(choice, "Y") || StringSama(choice, "y")){
+        printf("Masukkan Nama Penyanyi yang dipilih : ");
+        STARTINPUT2();
+        SalinString(SelectedArtist, currentWord.TabWord);
+        SalinString(Putar.artist, SelectedArtist);
+
+        if(FindSinger(*listpenyanyi, SelectedArtist)){
+            FindAlbum_SingerName(*arrmapalbum, SelectedArtist); 
+            
+            printf("Ingin melihat lagu yang ada?(Y/N) : ");    
+            STARTINPUT();
+            SalinString(choice, currentWord.TabWord);
+
+            if (StringSama(choice, "Y") || StringSama(choice, "y")){
+                printf("Masukkan Judul Album yang dipilih : ");
+                STARTINPUT2();
+                SalinString(SelectedAlbum, currentWord.TabWord);
+                SalinString(Putar.album, SelectedAlbum);
+                int idalbum;
+                int idalbum = idAlbum(&arrmapalbum, SelectedAlbum);
+                if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
+                    printf("Masukkan ID Playlist yang dipilih :  ");
+                    STARTINPUT();
+                    int idplaylist = atoi(currentWord.TabWord);
+                    for (int i = 0; i < arrmapsong->MapSongs[idalbum].songs.Neff; i++){
+                        SalinString(Putar.titlesong, &arrmapsong->MapSongs[idalbum].songs.songs[i]);
+                        InsVLast(&arr , Putar);
+                    }
+                    printf("Album dengan judul “%s” berhasil ditambahkan ke dalam pada playlist pengguna “%s”.", SelectedAlbum,arr->playlists[idplaylist-1].name );
+                } else {
+                    printf("Album %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedAlbum);
+                }
+            } 
+        }else {
+            printf("Penyanyi %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedArtist);
+        }
+        
+    } 
+}

@@ -51,6 +51,31 @@ void playlistAdd(ArrayPlaylists arrPlaylist, ListSinger LS, MapAlbum M, int pili
     }
 }
 
-void playlistSwap(){
+void playlistSwap(ArrayPlaylists *arrP, int idx, int idy, int idPlaylist){
+    int max, ctr = 0;
+    Lagu dummy, tempx, tempy;
+    address x, y;
+    if(idx > idy ){
+        max = idx;
+    }
+    else{
+        max = idy;
+    }
+    address p = First(arrP->playlists[idPlaylist-1].laguplaylist);
     
+    while(ctr < max){
+        if(ctr == idx){
+            x = p;
+            tempx = Info(x);
+        }
+        else if(ctr == idy){
+            y = p;
+            tempy = Info(y);
+        }
+        ctr++;
+        p = Next(p);
+    }
+    Info(x) = tempy;
+    Info(y) = tempx;
+
 }

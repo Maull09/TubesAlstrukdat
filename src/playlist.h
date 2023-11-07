@@ -8,22 +8,10 @@
 #ifndef PLAYLIST_H
 #define PLAYLIST_H
 
-void playlistCreate(){
-}
-
-void playlistAdd(){
-}
-
-void playlistSwap(){
-
-}
-
-void playlistRemove(){
-
-}
-
-void playlistDelete(){
-
-}
+void playlistCreate();
+void playlistAdd(ArrayPlaylists arrPlaylist, ListSinger LS, MapAlbum M, int pilihan);
+void playlistSwap(ArrayPlaylists *arrP, int idx, int idy, int idPlaylist);
+void playlistRemove();
+void playlistDelete();
 
 #endif

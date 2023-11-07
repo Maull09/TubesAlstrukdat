@@ -331,6 +331,19 @@ int main(){
                             if (EndWord){
                                 if (sesi){
                                     printf("Playlist %d swap %d %d\n", id, x, y);
+                                    if(isValidPlaylist(&DaftarPlaylist, id)){
+                                        if(isValidSong(DaftarPlaylist.playlists[id-1].laguplaylist, x)){
+                                            if(isValidSong(DaftarPlaylist.playlists[id-1].laguplaylist, y)){
+                                                playlistSwap(&DaftarPlaylist, x, y, id);
+                                            } else {
+                                                printf("Tidak ada lagu dengan urutan %d di playlist “%s”!", y , DaftarPlaylist.playlists[id-1].name);
+                                            }
+                                        } else {
+                                            printf("Tidak ada lagu dengan urutan %d di playlist “%s”!", x , DaftarPlaylist.playlists[id-1].name);
+                                        }
+                                    } else{
+                                        printf("Tidak ada playlist dengan ID %d.", id);
+                                    }
                                 } else {
                                     printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                                 }
@@ -360,7 +373,7 @@ int main(){
                         if (EndWord){
                             if (sesi){
                                 if(isValidPlaylist(&DaftarPlaylist, id)){
-                                    if(isValidSong(DaftarPlaylist.playlists->laguplaylist, n)){
+                                    if(isValidSong(DaftarPlaylist.playlists[id-1].laguplaylist, n)){
                                         PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
                                         printf("\n");
                                         PlaylistRemove(&DaftarPlaylist, id, n);

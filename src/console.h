@@ -46,6 +46,7 @@ void QueuePlaylist(ArrayPlaylists *arrPlaylist, QueueLagu *qLagu, int idxarr);
 void PlaylistCreate(ArrayPlaylists *arrPlaylist, char playlistname[]);
 void PlaylistDelete(ArrayPlaylists *arrPlaylist, int idxP);
 void PlaylistRemove(ArrayPlaylists *arrPlaylist, int idxP, int idxL);
+void playlistSwap(ArrayPlaylists *arrP, int idx, int idy, int idPlaylist);
 
 
 
