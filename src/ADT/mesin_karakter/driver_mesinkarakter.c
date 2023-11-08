@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include "mesinkarakter.h"
 
 // gcc mesinkarakter.c driver_mesinkarakter.c -o driver_mesinkarakter

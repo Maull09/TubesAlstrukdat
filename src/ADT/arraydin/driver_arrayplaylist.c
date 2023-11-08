@@ -17,7 +17,7 @@ int main() {
 
     // Test Display function
     printf("Displaying Playlists:\n");
-    DisplayPlaylist(arrPlaylist);
+    DisplayPlaylist(&arrPlaylist);
     printf("\n");
 
     char searchName[255];
