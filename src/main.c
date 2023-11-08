@@ -309,7 +309,7 @@ int main(){
                     ADVINPUT();
                     if (EndWord){
                         if (sesi){
-                            printf("Playlist Add Song\n");
+                            playlistAddSong(&DaftarPlaylist, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPenyanyi);
                         } else {
                             printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                         }
@@ -320,7 +320,7 @@ int main(){
                     ADVINPUT();
                     if (EndWord){
                         if (sesi){
-                            printf("Playlist Add Album\n");
+                            playlistAddAlbum(&DaftarPlaylist, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPenyanyi);
                         } else {
                             printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                         }
@@ -347,19 +347,18 @@ int main(){
                             
                             if (EndWord){
                                 if (sesi){
-                                    printf("Playlist %d swap %d %d\n", id, x, y);
                                     if(isValidPlaylist(&DaftarPlaylist, id)){
                                         if(isValidSong(DaftarPlaylist.playlists[id-1].laguplaylist, x)){
                                             if(isValidSong(DaftarPlaylist.playlists[id-1].laguplaylist, y)){
                                                 playlistSwap(&DaftarPlaylist, x, y, id);
                                             } else {
-                                                printf("Tidak ada lagu dengan urutan %d di playlist “%s”!", y , DaftarPlaylist.playlists[id-1].name);
+                                                printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n", y , DaftarPlaylist.playlists[id-1].name);
                                             }
                                         } else {
-                                            printf("Tidak ada lagu dengan urutan %d di playlist “%s”!", x , DaftarPlaylist.playlists[id-1].name);
+                                            printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n", x , DaftarPlaylist.playlists[id-1].name);
                                         }
                                     } else{
-                                        printf("Tidak ada playlist dengan ID %d.", id);
+                                        printf("Tidak ada playlist dengan playlist ID %d.\n", id);
                                     }
                                 } else {
                                     printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
@@ -391,16 +390,12 @@ int main(){
                             if (sesi){
                                 if(isValidPlaylist(&DaftarPlaylist, id)){
                                     if(isValidSong(DaftarPlaylist.playlists[id-1].laguplaylist, n)){
-                                        PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
-                                        printf("\n");
                                         PlaylistRemove(&DaftarPlaylist, id, n);
-                                        printf("Playlist %d remove %d\n", id, n);
-                                        PrintInfo(DaftarPlaylist.playlists[id-1].laguplaylist);
                                     } else {
-                                        printf("Tidak ada lagu dengan urutan %d di playlist “%s”!", n, DaftarPlaylist.playlists[id-1].name);
+                                        printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n   ", n, DaftarPlaylist.playlists[id-1].name);
                                     }
                                 } else{
-                                    printf("Tidak ada playlist dengan ID %d.", id);
+                                    printf("Tidak ada playlist dengan ID %d.\n", id);
                                 }
                             } else {
                                 printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
