@@ -24,7 +24,7 @@ void menu();
 
 void welcome();
 
-void help();
+void help(boolean sesi);
 
 void delay(int number_of_seconds);
 
