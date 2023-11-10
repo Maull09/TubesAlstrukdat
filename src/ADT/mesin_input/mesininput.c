@@ -57,7 +57,7 @@ void STARTINPUT2()
           currentChar karakter pertama sesudah karakter terakhir kata */
 {
     START();
-    IgnoreBlanks();
+    // IgnoreBlanks();
     IgnoreNewLine();
 
     if (currentChar == MARK)
@@ -100,7 +100,7 @@ void ADVINPUT2()
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 {
     ResetInput();
-    IgnoreBlanks();
+    // IgnoreBlanks();
     if (currentChar == MARK)
     {
         EndWord = true;

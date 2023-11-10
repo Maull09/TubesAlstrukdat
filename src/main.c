@@ -296,7 +296,11 @@ int main(){
                     if (sesi){
                         printf("Masukkan nama playlist yang ingin dibuat : ");
                         STARTINPUT2();
-                        PlaylistCreate(&DaftarPlaylist, currentWord.TabWord);
+                        if(currentWord.TabWord[0] == BLANK && currentWord.TabWord[1] == BLANK && currentWord.TabWord[2] == BLANK && currentWord.Length == 3){
+                            printf("Minimal terdapat 3 karakter selain whitespace dalam nama playlist. Silakan coba lagi.\n");
+                        } else {
+                            PlaylistCreate(&DaftarPlaylist, currentWord.TabWord);
+                        }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
