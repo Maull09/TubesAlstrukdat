@@ -40,9 +40,7 @@ void STARTFILE2 (char filename[]) {
     if (config != NULL) {
         ADV();
     } else {
-        printf("\nSave file tidak ditemukan. WayangWave gagal dijalankan.!\n");
-        printf("---------------------------------------------\n");
-        exit(0);
+        printf("Save file tidak ditemukan. WayangWave gagal dijalankan.\n");
     }
 }
 

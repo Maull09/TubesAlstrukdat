@@ -133,161 +133,168 @@ void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongA
 }
 
 
-void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, QueueLagu *qLagu, StackSong *sLagu, ArrayPlaylists *arrPlaylist){
+void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, QueueLagu *qLagu, StackSong *sLagu, ArrayPlaylists *arrPlaylist, boolean *adafile){
     char* pathdata = "./data/";
     char* combinepath = concat(pathdata, filename);
     STARTKALIMATFILE2(combinepath);
-    int jumlahPenyanyi = atoi(CKalimat.TabKalimat);  // Convert ke integer
-    DaftarPenyanyi->Neff = jumlahPenyanyi;
+    if (CKalimat.TabKalimat[0] == MARK2 && CKalimat.Length == 0){
+        *adafile = false;
+    } else {
+        *adafile = true;
+        int jumlahPenyanyi = atoi(CKalimat.TabKalimat);  // Convert ke integer
+        DaftarPenyanyi->Neff = jumlahPenyanyi;
 
 
-    for (int i = 0; i < DaftarPenyanyi->Neff; i++) {
-        ADVKALIMATFILE2();  // Baca Jumlah Album
-        int jumlahAlbum = atoi(CKalimat.TabKalimat);  // Convert ke integer
-        SingerAlbum->Neff = jumlahAlbum;
-        ADVKALIMATFILE();  // Baca nama penyanyi
-        SalinString(DaftarPenyanyi->singers[i].singerName, CKalimat.TabKalimat);
-        SalinString(SingerAlbum->SingerName, CKalimat.TabKalimat);
+        for (int i = 0; i < DaftarPenyanyi->Neff; i++) {
+            ADVKALIMATFILE2();  // Baca Jumlah Album
+            int jumlahAlbum = atoi(CKalimat.TabKalimat);  // Convert ke integer
+            SingerAlbum->Neff = jumlahAlbum;
+            ADVKALIMATFILE();  // Baca nama penyanyi
+            SalinString(DaftarPenyanyi->singers[i].singerName, CKalimat.TabKalimat);
+            SalinString(SingerAlbum->SingerName, CKalimat.TabKalimat);
 
 
-        for (int j = 0; j < jumlahAlbum; j++){
-            ADVKALIMATFILE2();  // Baca jumlah lagu dalam album
-            int jumlahLagu = atoi(CKalimat.TabKalimat);  // Convert ke integer
-            KumpulanLagu->Neff = jumlahLagu;
+            for (int j = 0; j < jumlahAlbum; j++){
+                ADVKALIMATFILE2();  // Baca jumlah lagu dalam album
+                int jumlahLagu = atoi(CKalimat.TabKalimat);  // Convert ke integer
+                KumpulanLagu->Neff = jumlahLagu;
 
-            ADVKALIMATFILE(); // Baca Nama album
-            SalinString(SingerAlbum->albums[j].albumName, CKalimat.TabKalimat);
-            SalinString(SongAlbum->albumName, CKalimat.TabKalimat);
+                ADVKALIMATFILE(); // Baca Nama album
+                SalinString(SingerAlbum->albums[j].albumName, CKalimat.TabKalimat);
+                SalinString(SongAlbum->albumName, CKalimat.TabKalimat);
 
-        
-            for (int k = 0; k < jumlahLagu; k++) {
-                ADVKALIMATFILE();  // Baca judul lagu
-                SalinString(KumpulanLagu->songs[k].songName, CKalimat.TabKalimat);
+            
+                for (int k = 0; k < jumlahLagu; k++) {
+                    ADVKALIMATFILE();  // Baca judul lagu
+                    SalinString(KumpulanLagu->songs[k].songName, CKalimat.TabKalimat);
+                }
+                
+                AddSetSongToMapSong(SongAlbum, *KumpulanLagu);
+                InsertListMapSong(KumpulanLaguAlbum, *SongAlbum);
             }
-            
-            AddSetSongToMapSong(SongAlbum, *KumpulanLagu);
-            InsertListMapSong(KumpulanLaguAlbum, *SongAlbum);
+            InsertListMapAlbum(KumpulanAlbumSinger, *SingerAlbum);
         }
-        InsertListMapAlbum(KumpulanAlbumSinger, *SingerAlbum);
-    }
 
-    ADVKALIMATFILE();
-    int jumlahqueue = atoi(CKalimat.TabKalimat);
+        ADVKALIMATFILE();
+        int jumlahqueue = atoi(CKalimat.TabKalimat);
 
-    for(int l = 0; l < jumlahqueue; l++){
-        ElTypeQueue tempq;
-        ADVKALIMATFILE3();
-        SalinString(tempq.artist ,CKalimat.TabKalimat);
-        ADVKALIMATFILE3();
-        SalinString(tempq.album ,CKalimat.TabKalimat);
-        ADVKALIMATFILE3();
-        SalinString(tempq.titlesong ,CKalimat.TabKalimat);
-        enqueue(qLagu, tempq);
-    }
-
-    ADVKALIMATFILE();
-    int jumlahriwayat = atoi(CKalimat.TabKalimat);
-    sLagu->TOP = jumlahriwayat-1;
-    for(int m = 0; m < jumlahriwayat; m++){
-        ADVKALIMATFILE3();
-        SalinString(sLagu->Songs[m].artist, CKalimat.TabKalimat);
-        ADVKALIMATFILE3();
-        SalinString(sLagu->Songs[m].album, CKalimat.TabKalimat);
-        ADVKALIMATFILE3();
-        SalinString(sLagu->Songs[m].titlesong, CKalimat.TabKalimat);
-    }
-
-    ADVKALIMATFILE();
-    int jumlahplaylist = atoi(CKalimat.TabKalimat);
-    Playlist dummyplaylist;
-
-    for(int n = 0; n < jumlahplaylist; n++){
-        CreateEmpty(&dummyplaylist.laguplaylist);
-
-        ADVKALIMATFILE2();
-        int jumlahlagu = atoi(CKalimat.TabKalimat);
-
-        ADVKALIMATFILE(); // Baca nama playlist 
-        SalinString(dummyplaylist.name, CKalimat.TabKalimat);
-        // printf("Nama Playlist %d : %s\n", n+1, CKalimat.TabKalimat);
-        
-
-        for(int o = 0; o < jumlahlagu; o++){
-            infotype dummylagu;
-            ADVKALIMATFILE3(); // baca nama artis
-            // printf("Nama Artis Lagu %d playlist %d : %s\n", o+1, n+1, CKalimat.TabKalimat);
-            SalinString(dummylagu.artist, CKalimat.TabKalimat);
-            
-            ADVKALIMATFILE3(); // baca nama album
-            // printf("Nama Album Lagu %d playlist %d : %s\n", o+1, n+1, CKalimat.TabKalimat);
-            SalinString(dummylagu.album, CKalimat.TabKalimat);
-            
-            ADVKALIMATFILE3(); // baca nama lagu
-            // printf("Nama Lagu %d playlist %d : %s\n", o+1, n+1, CKalimat.TabKalimat);
-            SalinString(dummylagu.titlesong, CKalimat.TabKalimat);
-            
-            InsVLast(&dummyplaylist.laguplaylist, dummylagu);
+        for(int l = 0; l < jumlahqueue; l++){
+            ElTypeQueue tempq;
+            ADVKALIMATFILE3();
+            SalinString(tempq.artist ,CKalimat.TabKalimat);
+            ADVKALIMATFILE3();
+            SalinString(tempq.album ,CKalimat.TabKalimat);
+            ADVKALIMATFILE3();
+            SalinString(tempq.titlesong ,CKalimat.TabKalimat);
+            enqueue(qLagu, tempq);
         }
-        AddPlaylist(arrPlaylist, dummyplaylist);
-    }
 
-    // printf("Penyanyi :\n");
-    // displaySinger(DaftarPenyanyi);
-    // printf("Singer Album : \n");
-    // DisplayListMapAlbum(KumpulanAlbumSinger);
-    // printf("Album Lagu : \n");
-    // DisplayListMapSong(KumpulanLaguAlbum);
-    // printf("queue\n");
-    // displayQueue(*qLagu);
-    // printf("stack\n");
-    // displayStack(sLagu);
-    // printf("Playlist\n");
-    // DisplayPlaylist(arrPlaylist);
-    // for(int kl = 0; kl < arrPlaylist->Neff; kl++){
-    //     PrintInfo(arrPlaylist->playlists[kl].laguplaylist);
-    // }
-    printf("Save file berhasil dibaca. WayangWave berhasil dijalankan.\n");
+        ADVKALIMATFILE();
+        int jumlahriwayat = atoi(CKalimat.TabKalimat);
+        sLagu->TOP = jumlahriwayat-1;
+        for(int m = 0; m < jumlahriwayat; m++){
+            ADVKALIMATFILE3();
+            SalinString(sLagu->Songs[m].artist, CKalimat.TabKalimat);
+            ADVKALIMATFILE3();
+            SalinString(sLagu->Songs[m].album, CKalimat.TabKalimat);
+            ADVKALIMATFILE3();
+            SalinString(sLagu->Songs[m].titlesong, CKalimat.TabKalimat);
+        }
+
+        ADVKALIMATFILE();
+        int jumlahplaylist = atoi(CKalimat.TabKalimat);
+        Playlist dummyplaylist;
+
+        for(int n = 0; n < jumlahplaylist; n++){
+            CreateEmpty(&dummyplaylist.laguplaylist);
+
+            ADVKALIMATFILE2();
+            int jumlahlagu = atoi(CKalimat.TabKalimat);
+
+            ADVKALIMATFILE(); // Baca nama playlist 
+            SalinString(dummyplaylist.name, CKalimat.TabKalimat);
+            // printf("Nama Playlist %d : %s\n", n+1, CKalimat.TabKalimat);
+            
+
+            for(int o = 0; o < jumlahlagu; o++){
+                infotype dummylagu;
+                ADVKALIMATFILE3(); // baca nama artis
+                // printf("Nama Artis Lagu %d playlist %d : %s\n", o+1, n+1, CKalimat.TabKalimat);
+                SalinString(dummylagu.artist, CKalimat.TabKalimat);
+                
+                ADVKALIMATFILE3(); // baca nama album
+                // printf("Nama Album Lagu %d playlist %d : %s\n", o+1, n+1, CKalimat.TabKalimat);
+                SalinString(dummylagu.album, CKalimat.TabKalimat);
+                
+                ADVKALIMATFILE3(); // baca nama lagu
+                // printf("Nama Lagu %d playlist %d : %s\n", o+1, n+1, CKalimat.TabKalimat);
+                SalinString(dummylagu.titlesong, CKalimat.TabKalimat);
+                
+                InsVLast(&dummyplaylist.laguplaylist, dummylagu);
+            }
+            AddPlaylist(arrPlaylist, dummyplaylist);
+        }
+
+        // printf("Penyanyi :\n");
+        // displaySinger(DaftarPenyanyi);
+        // printf("Singer Album : \n");
+        // DisplayListMapAlbum(KumpulanAlbumSinger);
+        // printf("Album Lagu : \n");
+        // DisplayListMapSong(KumpulanLaguAlbum);
+        // printf("queue\n");
+        // displayQueue(*qLagu);
+        // printf("stack\n");
+        // displayStack(sLagu);
+        // printf("Playlist\n");
+        // DisplayPlaylist(arrPlaylist);
+        // for(int kl = 0; kl < arrPlaylist->Neff; kl++){
+        //     PrintInfo(arrPlaylist->playlists[kl].laguplaylist);
+        // }
+    }
 }
 
 
 void ListDefault(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong){
+    printf("\n");
     displaySinger(listpenyanyi);
     printf("\n");
 
     char choice[1];
     char SelectedArtist[100];
     char SelectedAlbum[100];
-    printf("Ingin melihat album yang ada?(Y/N) : ");
+    printf("Ingin melihat album yang ada?(Y/N): ");
     
     STARTINPUT();
     SalinString(choice, currentWord.TabWord);
     
     if (StringSama(choice, "Y") || StringSama(choice, "y")){
-        printf("Masukkan Nama Penyanyi yang dipilih : ");
+        printf("Pilih penyanyi untuk melihat album mereka : ");
         STARTINPUT2();
         SalinString(SelectedArtist, currentWord.TabWord);
 
         if(FindSinger(*listpenyanyi, SelectedArtist)){
+            printf("\n");
             FindAlbum_SingerName(*arrmapalbum, SelectedArtist); 
+            printf("\n");
             
             printf("Ingin melihat lagu yang ada?(Y/N) : ");    
             STARTINPUT();
             SalinString(choice, currentWord.TabWord);
 
             if (StringSama(choice, "Y") || StringSama(choice, "y")){
-                printf("Masukkan Judul Album yang dipilih : ");
+                printf("Pilih album untuk melihat lagu yang ada di album : ");
                 STARTINPUT2();
                 SalinString(SelectedAlbum, currentWord.TabWord);
 
                 if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
+                    printf("\n");
+                    printf("Daftar Lagu di %s\n", SelectedAlbum);
                     FindSong_AlbumName(*arrmapsong, SelectedAlbum);
 
                 } else {
                     printf("Album %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedAlbum);
                 }
-        
             } 
-
         }else {
             printf("Penyanyi %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedArtist);
         }
@@ -296,6 +303,7 @@ void ListDefault(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSon
 }
 
 void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, Lagu *putar, QueueLagu *qLagu, StackSong *sLagu){
+    printf("\n");
     displaySinger(listpenyanyi);
     printf("\n");
 
@@ -308,30 +316,34 @@ void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *
     SalinString(putar->artist, SelectedArtist);
 
     if(FindSinger(*listpenyanyi, SelectedArtist)){
+        printf("\n");
         FindAlbum_SingerName(*arrmapalbum, SelectedArtist); 
-            printf("Masukkan Judul Album yang dipilih : ");
-            STARTINPUT2();
-            SalinString(SelectedAlbum, currentWord.TabWord);
-            SalinString(putar->album, SelectedAlbum);
+        printf("\n");
+        printf("Masukkan Nama Album yang dipilih : ");
+        STARTINPUT2();
+        SalinString(SelectedAlbum, currentWord.TabWord);
+        SalinString(putar->album, SelectedAlbum);
 
-            if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
-                printf("Daftar Lagu Album %s oleh %s\n", SelectedArtist, SelectedArtist);
-                FindSong_AlbumName(*arrmapsong, SelectedAlbum);
+        if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
+            printf("\n");
+            printf("Daftar Lagu Album %s oleh %s :  \n", SelectedAlbum, SelectedArtist);
+            FindSong_AlbumName(*arrmapsong, SelectedAlbum);
 
-                printf("Masukkan ID Lagu yang dipilih : ");
-                STARTINPUT();
-                int idlagu = atoi(currentWord.TabWord);
-                if (valid_idsong(*arrmapsong, idlagu, SelectedAlbum)){
-                    FindSong_IDsong(*arrmapsong, SelectedAlbum, idlagu, putar);
-                    printf("Memutar lagu \"%s\" oleh \"%s\".\n",putar->titlesong ,SelectedArtist);
-                    CreateQueue(qLagu);
-                    clearStack(sLagu);
-                } else {
-                    printf("Tidak ada lagu dengan id %d, silahkan coba lagi\n", idlagu);
-                }
+            printf("\nMasukkan ID Lagu yang dipilih : ");
+            STARTINPUT();
+            int idlagu = atoi(currentWord.TabWord);
+            if (valid_idsong(*arrmapsong, idlagu, SelectedAlbum)){
+                FindSong_IDsong(*arrmapsong, SelectedAlbum, idlagu, putar);
+                printf("\n");
+                printf("Memutar lagu \"%s\" oleh \"%s\".\n",putar->titlesong ,SelectedArtist);
+                CreateQueue(qLagu);
+                clearStack(sLagu);
             } else {
-                printf("Album %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedAlbum);
-            }         
+                printf("Tidak ada lagu dengan id %d, silahkan coba lagi\n", idlagu);
+            }
+        } else {
+            printf("Album %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedAlbum);
+        }         
     }else {
         printf("Penyanyi %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedArtist);
     } 
@@ -339,36 +351,37 @@ void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *
 
 void QueueSong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, QueueLagu *qSong){
     Lagu Putar;
-    displaySinger(listpenyanyi);
     printf("\n");
+    displaySinger(listpenyanyi);
 
     char SelectedArtist[100];
     char SelectedAlbum[100];
     
-    printf("Masukkan Nama Penyanyi: ");
+    printf("\nMasukkan Nama Penyanyi: ");
     STARTINPUT2();
     SalinString(SelectedArtist, currentWord.TabWord);
     SalinString(Putar.artist, SelectedArtist);
 
     if(FindSinger(*listpenyanyi, SelectedArtist)){
+        printf("\n");
         FindAlbum_SingerName(*arrmapalbum, SelectedArtist); 
         
-        printf("Masukkan Nama Album yang dipilih : ");
+        printf("\nMasukkan Nama Album yang dipilih : ");
         STARTINPUT2();
         SalinString(SelectedAlbum, currentWord.TabWord);
         SalinString(Putar.album, SelectedAlbum);
 
         if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
-            printf("Daftar Lagu Album %s oleh %s\n", SelectedArtist, SelectedArtist);
+            printf("\nDaftar Lagu Album %s oleh %s\n", SelectedArtist, SelectedArtist);
             FindSong_AlbumName(*arrmapsong, SelectedAlbum);
 
-            printf("Masukkan ID Lagu yang dipilih : ");
+            printf("\nMasukkan ID Lagu yang dipilih : ");
             STARTINPUT();
             int idlagu = atoi(currentWord.TabWord);
             if (valid_idsong(*arrmapsong, idlagu, SelectedAlbum)){
                 FindSong_IDsong(*arrmapsong, SelectedAlbum, idlagu, &Putar);        
                 enqueue(qSong ,Putar);
-                printf("Berhasil menambahkan lagu \"%s\" oleh \"%s\" ke queue.\n",Putar.titlesong,SelectedArtist);
+                printf("\nBerhasil menambahkan lagu \"%s\" oleh \"%s\" ke queue.\n",Putar.titlesong,SelectedArtist);
             } else {
                 printf("Tidak ada lagu dengan id %d, silahkan coba lagi\n", idlagu);
             }

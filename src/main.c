@@ -6,6 +6,7 @@ int main(){
     // Deklarasi
     boolean mulai = true;
     boolean sesi = false;
+    boolean foundfile = false;
 
     //Bikin ADT
     //List Nama Penyanyi
@@ -73,11 +74,14 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (!sesi){
-                        sesi = true;
                         char tempcurrentchar = currentChar;
-                        Load(namefile, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist);
+                        Load(namefile, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist, &foundfile);
                         free(namefile);
                         currentChar = tempcurrentchar;
+                        if(foundfile){
+                            sesi = true;
+                            printf("Save file berhasil dibaca. WayangWave berhasil dijalankan.\n");
+                        }
                     } else {
                         printf("Sesi telah dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -121,7 +125,6 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi){
-                        printf("Play Lagu\n");
                         PlaySong(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &Playnow, &ToPlay, &HistoryLagu);
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
@@ -135,11 +138,11 @@ int main(){
                     if (sesi){
                             // DisplayPlaylist(&DaftarPlaylist);
                             if(DaftarPlaylist.Neff != 0){
-                                printf("Masukkan ID Playlist : ");
+                                printf("\nMasukkan ID Playlist : ");
                                 STARTINPUT2();
                                 int idxarr = atoi(currentWord.TabWord);
                                 PlayPlaylist(&DaftarPlaylist, &HistoryLagu, &ToPlay, idxarr);
-                                printf("Memutar playlist \"%s\".\n", DaftarPlaylist.playlists[idxarr-1].name);
+                                printf("\nMemutar playlist \"%s\".\n", DaftarPlaylist.playlists[idxarr-1].name);
                             } else {
                                 printf("Kamu tidak memiliki playlist.\n");
                             }
@@ -171,13 +174,13 @@ int main(){
                     if (sesi){
                         // DisplayPlaylist(&DaftarPlaylist);
                         if(DaftarPlaylist.Neff != 0){
-                            printf("Masukkan ID Playlist : ");
+                            printf("\nMasukkan ID Playlist : ");
                             STARTINPUT2();
                             int idxarr = atoi(currentWord.TabWord);
                             if (isValidPlaylist(&DaftarPlaylist, idxarr) && (DaftarPlaylist.Neff != 0)){
                                 QueuePlaylist(&DaftarPlaylist, &ToPlay, idxarr);
                             }
-                            printf("Berhasil menambahkan playlist \"%s\" ke queue.\n");
+                            printf("\nBerhasil menambahkan playlist \"%s\" ke queue.\n");
                         } else{
                             printf("Kamu tidak memiliki playlist.\n");
                         }

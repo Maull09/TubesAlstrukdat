@@ -128,19 +128,19 @@ void removeSong(QueueLagu *q, int id){
 
 void clearQueue(QueueLagu *q){
     CreateQueue(q);
-    printf("Queue berhasil dikosongkan\n");
+    printf("Queue berhasil dikosongkan.\n");
 }
 
 void QueueSwap (QueueLagu *q, int x, int y){
     if (isEmptyQueue(*q)){
-        printf("Queue kosong \n");
+        printf("Queue kosong.\n");
         return;
     }
 
     int length = lengthQueue(*q);
 
     if (x<1 || x>length || y<1 || y>length){
-        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue! \n", x);
+        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
         return;
     }
 
