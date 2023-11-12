@@ -135,13 +135,16 @@ void DelAfter (List *L, address *Pdel, address Prec) {
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo (List L) {
     address P = First(L);
-    printf("[");
-    while (P != Nil) {
-        printf("{%s, %s, %s}", artist(P), album(P), titlesong(P));
-        P = Next(P);
-        if (P != Nil) printf(", ");
+    int number = 0;
+    if(IsEmpty(L)){
+        printf("Playlist tidak terdapat lagu\n");
+    } else {
+        while (P != Nil) {
+            number += 1;
+            printf("%d. %s - %s - %s\n", number, artist(P), album(P), titlesong(P));
+            P = Next(P);
+        }
     }
-    printf("]\n");
 }
 
 int NbElmt (List L) {

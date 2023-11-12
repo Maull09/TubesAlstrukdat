@@ -260,8 +260,10 @@ int main(){
                             }
                             dequeue(&ToPlay, &Playnow);
                             printf("Memutar lagu selanjutnya \"%s\" oleh \"%s\"\n", Playnow.titlesong, Playnow.artist);
-                        } else {
+                        } else if (isEmptyQueue(ToPlay) && !StringSama(Playnow.titlesong, "\0")) {
                             printf("Queue kosong, memutar kembali lagu \"%s\" oleh \"%s\"\n", Playnow.titlesong, Playnow.artist);
+                        } else if (isEmptyQueue(ToPlay) && StringSama(Playnow.titlesong, "\0")){
+                            printf("Queue Lagu Kosong dan Tidak ada lagu yang sedang diputar, Song Next gagal dijalankan\n");
                         }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
@@ -279,8 +281,10 @@ int main(){
                             }
                             PopStackSong(&HistoryLagu, &Playnow);
                             printf("Memutar lagu sebelumnya \"%s\" oleh \"%s\"\n", Playnow.titlesong, Playnow.artist);
-                        } else {
+                        } else if (IsEmptyStackSong(HistoryLagu) && !StringSama(Playnow.titlesong, "\0")){
                             printf("Riwayat lagu kosong, memutar kembali lagu \"%s\" oleh \"%s\"\n", Playnow.titlesong, Playnow.artist);
+                        } else if (IsEmptyStackSong(HistoryLagu) && StringSama(Playnow.titlesong, "\0")) {
+                            printf("Riwayat Lagu kosong dan Tidak ada lagu yang sedang diputar, Song Previous gagal dijalankan\n");
                         }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
@@ -552,16 +556,21 @@ int main(){
             ADVINPUT();
             if (EndWord){
                 if (sesi){
-                    DisplayPlaylist(&DaftarPlaylist);
                     if(DaftarPlaylist.Neff != 0){
-                        printf("\n");
-                        printf("Silahkan pilih playlist untuk di enhance : ");
-                        STARTINPUT2();
-                        if (playlist_valid(&DaftarPlaylist, currentWord.TabWord)){
-                            enhance(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPlaylist, currentWord.TabWord);
-                        } else {
-                            printf("Tidak ada playlist %s\n", currentWord.TabWord);
+                        printf("Daftar playlist yang kamu miliki:\n");
+                        DisplayPlaylist(&DaftarPlaylist);
+                        if(DaftarPlaylist.Neff != 0){
+                            printf("\n");
+                            printf("Silahkan pilih playlist untuk di enhance : ");
+                            STARTINPUT2();
+                            if (playlist_valid(&DaftarPlaylist, currentWord.TabWord)){
+                                enhance(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPlaylist, currentWord.TabWord);
+                            } else {
+                                printf("Tidak ada playlist %s\n", currentWord.TabWord);
+                            }
                         }
+                    } else {
+                        printf("Kamu tidak memiliki playlist.\n");
                     }
                 } else {
                     printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");

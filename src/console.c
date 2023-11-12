@@ -411,37 +411,94 @@ void STATUS(Lagu *playing, QueueLagu *antrian){
     }
 }
 
-void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, ArrayPlaylists *arrplaylist, char namaplaylist[]){
-    int x = (rand() % DaftarPenyanyi->Neff);
-    infotype dummylagu;
+// void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, ArrayPlaylists *arrplaylist, char namaplaylist[]){
+//     int x = (rand() % DaftarPenyanyi->Neff);
+//     infotype dummylagu;
 
-    SalinString(dummylagu.artist, DaftarPenyanyi->singers[x].singerName);    
+//     SalinString(dummylagu.artist, DaftarPenyanyi->singers[x].singerName);    
     
-    for (int i = 0; i < LMA->Neff; i++) {
-        if (StringSama(LMA->MapAlbums[i].SingerName, dummylagu.artist)) {
-            x = (rand() % LMA->MapAlbums[i].Neff);
-            SalinString(dummylagu.album, LMA->MapAlbums[i].albums[x].albumName);           
-        }
-    }
+//     for (int i = 0; i < LMA->Neff; i++) {
+//         if (StringSama(LMA->MapAlbums[i].SingerName, dummylagu.artist)) {
+//             x = (rand() % LMA->MapAlbums[i].Neff);
+//             SalinString(dummylagu.album, LMA->MapAlbums[i].albums[x].albumName);           
+//         }
+//     }
 
-    for (int i = 0; i < LMS->Neff; i++) {
-        if (StringSama(LMS->MapSongs[i].albumName, dummylagu.album)) {
-            x = (rand() % LMS->MapSongs->songs.Neff);
-            SalinString(dummylagu.titlesong, LMS->MapSongs[i].songs.songs[x].songName);
-        }
-    }
+//     for (int i = 0; i < LMS->Neff; i++) {
+//         if (StringSama(LMS->MapSongs[i].albumName, dummylagu.album)) {
+//             x = (rand() % LMS->MapSongs->songs.Neff);
+//             SalinString(dummylagu.titlesong, LMS->MapSongs[i].songs.songs[x].songName);
+//         }
+//     }
 
-    for (int i = 0 ; i < arrplaylist->Neff; i++){
-        if(StringSama(arrplaylist->playlists[i].name, namaplaylist)){
-            printf("Sebelum dienhance : \n");
-            PrintInfo(arrplaylist->playlists[i].laguplaylist);
-            InsVLast(&arrplaylist->playlists[i].laguplaylist, dummylagu);
-            printf("Menambahkan lagu %s album %s oleh %s ke playlist %s\n", dummylagu.titlesong, dummylagu.album, dummylagu.artist, namaplaylist);
-            printf("Setelah dienhance : \n");
-            PrintInfo(arrplaylist->playlists[i].laguplaylist);
-        }
-    }
+//     if(!Search(arrplaylist->playlists[i].laguplaylist, dummylagu)){
+//         for (int i = 0 ; i < arrplaylist->Neff; i++){
+//             if(StringSama(arrplaylist->playlists[i].name, namaplaylist)){
+//                 printf("Sebelum dienhance : \n");
+//                 PrintInfo(arrplaylist->playlists[i].laguplaylist);
+//                 InsVLast(&arrplaylist->playlists[i].laguplaylist, dummylagu);
+//                 printf("Menambahkan lagu %s album %s oleh %s ke playlist %s\n", dummylagu.titlesong, dummylagu.album, dummylagu.artist, namaplaylist);
+//                 printf("Setelah dienhance : \n");
+//                 PrintInfo(arrplaylist->playlists[i].laguplaylist);
+//             }
+//         }
+//     } 
+// }
 
+void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, ArrayPlaylists *arrplaylist, char namaplaylist[]){
+    boolean isAdded = false;
+    infotype dummylagu;
+    printf("\nProses enhance playlist dimulai\n");
+    do {
+        printf("\nMencari penyanyi...\n");
+        delay(3);
+        int singerIdx = rand() % DaftarPenyanyi->Neff;
+        SalinString(dummylagu.artist, DaftarPenyanyi->singers[singerIdx].singerName);
+        printf("\nArtis %s telah dipilih\n", dummylagu.artist);
+        printf("\nMencari album...\n");
+        delay(3);
+
+        int albumIdx;
+        for (int i = 0; i < LMA->Neff; i++) {
+            if (StringSama(LMA->MapAlbums[i].SingerName, dummylagu.artist)) {
+                albumIdx = rand() % LMA->MapAlbums[i].Neff;
+                SalinString(dummylagu.album, LMA->MapAlbums[i].albums[albumIdx].albumName);           
+            }
+        }
+        printf("\nAlbum %s telah dipilih\n", dummylagu.album);
+        printf("\nMencari lagu...\n");
+        delay(3);
+
+        int songIdx;
+        for (int i = 0; i < LMS->Neff; i++) {
+            if (StringSama(LMS->MapSongs[i].albumName, dummylagu.album)) {
+                songIdx = rand() % LMS->MapSongs[i].songs.Neff;
+                SalinString(dummylagu.titlesong, LMS->MapSongs[i].songs.songs[songIdx].songName);
+            }
+        }
+
+        printf("\nLagu %s telah dipilih\n", dummylagu.titlesong);
+        printf("\nMenambahkan lagu %s album %s oleh %s ke playlist %s\n", dummylagu.titlesong, dummylagu.album, dummylagu.artist, namaplaylist);
+        delay(3);
+
+        int i = 0;
+        while(i < arrplaylist->Neff && !isAdded){
+            if(StringSama(arrplaylist->playlists[i].name, namaplaylist)){
+                if(!Search(arrplaylist->playlists[i].laguplaylist, dummylagu)){
+                    printf("\nPlaylist \"%s\" sebelum dienhance : \n", arrplaylist->playlists[i].name);
+                    PrintInfo(arrplaylist->playlists[i].laguplaylist);
+                    InsVLast(&arrplaylist->playlists[i].laguplaylist, dummylagu);
+                    printf("\nPlaylist \"%s\" setelah dienhance : \n", arrplaylist->playlists[i].name);
+                    PrintInfo(arrplaylist->playlists[i].laguplaylist);
+                    isAdded = true;
+                } else {
+                    printf("\nLagu %s Album %s Oleh %s telah ada dalam playlist %s\n", dummylagu.titlesong, dummylagu.album, dummylagu.artist, namaplaylist);
+                    printf("\nMengulang proses pemilihan...\n");
+                }
+            }
+            i++;
+        }
+    } while (!isAdded); 
 }
 
 boolean playlist_valid(ArrayPlaylists *arrPlaylist, char nameplaylist[]){
