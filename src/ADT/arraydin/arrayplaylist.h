@@ -22,5 +22,6 @@ boolean FindPlaylist(ArrayPlaylists arr, int idx);
 void DeletePlaylist(ArrayPlaylists *arr, int idx);
 void DisplayPlaylist(ArrayPlaylists *arr);
 boolean isValidPlaylist(ArrayPlaylists *arr, int idPlaylist);
+int IdPlaylist(ArrayPlaylists *arrplaylist, char namaplaylist[]);
 
 #endif

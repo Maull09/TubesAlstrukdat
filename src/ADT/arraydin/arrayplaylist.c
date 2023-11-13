@@ -58,3 +58,13 @@ void DisplayPlaylist(ArrayPlaylists *arr) {
 boolean isValidPlaylist(ArrayPlaylists *arr, int idPlaylist){
     return (idPlaylist >= 1 && idPlaylist <= (*arr).Neff);
 }
+
+int IdPlaylist(ArrayPlaylists *arrplaylist, char namaplaylist[]){
+    int i = 0;
+    while(i < arrplaylist->Neff){
+        if(StringSama(arrplaylist->playlists[i].name, namaplaylist)){
+            return i;
+        }
+        i++;
+    }
+}
