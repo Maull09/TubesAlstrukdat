@@ -180,11 +180,13 @@ void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapS
         }
 
         ADVKALIMATFILE3();
-        SalinString(cSong->artist ,CKalimat.TabKalimat);
-        ADVKALIMATFILE3();
-        SalinString(cSong->album ,CKalimat.TabKalimat);
-        ADVKALIMATFILE3();
-        SalinString(cSong->titlesong ,CKalimat.TabKalimat);
+        if(!StringSama(CKalimat.TabKalimat, "-")){
+            SalinString(cSong->artist ,CKalimat.TabKalimat);
+            ADVKALIMATFILE3();
+            SalinString(cSong->album ,CKalimat.TabKalimat);
+            ADVKALIMATFILE3();
+            SalinString(cSong->titlesong ,CKalimat.TabKalimat);
+        }
         
         ADVKALIMATFILE();
         int jumlahqueue = atoi(CKalimat.TabKalimat);

@@ -585,7 +585,9 @@ int main(){
 
                     if(!(StringSama(Playnow.artist, "\0") && StringSama(Playnow.album, "\0") && StringSama(Playnow.titlesong, "\0"))){
                         fprintf(savefile, "%s;%s;%s\n", Playnow.artist, Playnow.album, Playnow.titlesong);
-                    } 
+                    }else{
+                        fprintf(savefile,"-\n");
+                    }
 
                     //bagian queue
                     if(!isEmptyQueue(ToPlay)){
