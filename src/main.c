@@ -7,6 +7,8 @@ int main(){
     boolean mulai = true;
     boolean sesi = false;
     boolean foundfile = false;
+    char *nameplaylist = (char *)malloc(256 * sizeof(char));
+    // char *namefile = (char *)malloc(256 * sizeof(char));
 
     //Bikin ADT
     //List Nama Penyanyi
@@ -75,7 +77,7 @@ int main(){
                 if (EndWord){
                     if (!sesi){
                         char tempcurrentchar = currentChar;
-                        Load(namefile, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist, &foundfile);
+                        Load(namefile, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist, &foundfile, &Playnow);
                         free(namefile);
                         currentChar = tempcurrentchar;
                         if(foundfile){
@@ -141,8 +143,11 @@ int main(){
                                 printf("\nMasukkan ID Playlist : ");
                                 STARTINPUT2();
                                 int idxarr = atoi(currentWord.TabWord);
-                                PlayPlaylist(&DaftarPlaylist, &HistoryLagu, &ToPlay, idxarr);
-                                printf("\nMemutar playlist \"%s\".\n", DaftarPlaylist.playlists[idxarr-1].name);
+                                if(FindPlaylist(DaftarPlaylist, idxarr)){
+                                    PlayPlaylist(&DaftarPlaylist, &HistoryLagu, &ToPlay, idxarr);
+                                    dequeue(&ToPlay, &Playnow);
+                                    printf("\nMemutar playlist \"%s\".\n", DaftarPlaylist.playlists[idxarr-1].name);
+                                }
                             } else {
                                 printf("Kamu tidak memiliki playlist.\n");
                             }
@@ -449,7 +454,7 @@ int main(){
             ADVINPUT();
             if (EndWord){
                 if (sesi){
-                    STATUS(&Playnow, &ToPlay);
+                    STATUS(&Playnow, &ToPlay, &DaftarPlaylist);
                 } else {
                     printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                 }
@@ -481,6 +486,11 @@ int main(){
                             }
                             albumindex += KumpulanAlbumSinger.MapAlbums[u].Neff;
                         }
+
+                        if(!(StringSama(Playnow.artist, "\0") && StringSama(Playnow.album, "\0") && StringSama(Playnow.titlesong, "\0"))){
+                            fprintf(savefile, "%s;%s;%s\n", Playnow.artist, Playnow.album, Playnow.titlesong);
+                        } 
+
                         //bagian queue
                         if(!isEmptyQueue(ToPlay)){
                             fprintf(savefile,"%d\n",lengthQueue(ToPlay));
@@ -547,7 +557,84 @@ int main(){
         } else if (IsStringEqual(currentWord, "QUIT")){
             ADVINPUT();
             if (EndWord){
-                printf("Adios\n");
+                printf("Apakah kamu ingin menyimpan data sesi sekarang? ");
+                STARTINPUT();
+                if(!StringSama(currentWord.TabWord, "Y")){
+                    printf("\nKamu keluar dari WayangWave.\n");
+                    printf("Dadah ^_^\n");
+                } else {
+                    printf("\nSilahkan masukkan nama file untuk menyimpan sesi <filename.txt> : ");
+                    STARTINPUT2();
+                    char *savesname= "./data/";
+                    savesname = concat(savesname, currentWord.TabWord);
+                    FILE *savefile = fopen(savesname,"w");
+                    int albumindex = 0, songindex = 0;
+                    fprintf(savefile,"%d\n",DaftarPenyanyi.Neff);
+                    for(int u=0;u<DaftarPenyanyi.Neff;u++){
+                        fprintf(savefile,"%d %s\n",KumpulanAlbumSinger.MapAlbums[u].Neff,DaftarPenyanyi.singers[u].singerName);
+
+                        for(int e=0; e<KumpulanAlbumSinger.MapAlbums[u].Neff;e++){
+                            fprintf(savefile,"%d %s\n",KumpulanLaguAlbum.MapSongs[albumindex + e].songs.Neff,KumpulanLaguAlbum.MapSongs[albumindex + e].albumName);
+
+                            for (int o=0; o<KumpulanLaguAlbum.MapSongs[albumindex + e].songs.Neff;o++){
+                                fprintf(savefile,"%s\n",KumpulanLaguAlbum.MapSongs[albumindex + e].songs.songs[o].songName);
+                            }
+                        }
+                        albumindex += KumpulanAlbumSinger.MapAlbums[u].Neff;
+                    }
+
+                    if(!(StringSama(Playnow.artist, "\0") && StringSama(Playnow.album, "\0") && StringSama(Playnow.titlesong, "\0"))){
+                        fprintf(savefile, "%s;%s;%s\n", Playnow.artist, Playnow.album, Playnow.titlesong);
+                    } 
+
+                    //bagian queue
+                    if(!isEmptyQueue(ToPlay)){
+                        fprintf(savefile,"%d\n",lengthQueue(ToPlay));
+                        for(int i=0;i<lengthQueue(ToPlay);i++){
+                            fprintf(savefile,"%s;%s;%s\n",ToPlay.buffer[i].artist,ToPlay.buffer[i].album,ToPlay.buffer[i].titlesong);
+                        }
+                    } else {
+                        fprintf(savefile,"0\n");
+                    }
+                    //bagian riwayat
+                    if(!IsEmptyStackSong(HistoryLagu)){
+                        fprintf(savefile,"%d\n",HistoryLagu.TOP);
+                        for(int i = 0 ;i <= HistoryLagu.TOP-1;i++){
+                            fprintf(savefile,"%s;%s;%s\n",HistoryLagu.Songs[i].artist,HistoryLagu.Songs[i].album,HistoryLagu.Songs[i].titlesong);
+                        }
+                    } else {
+                        fprintf(savefile,"0\n");
+                    }
+                    // //bagian playlist
+                    if (DaftarPlaylist.Neff != 0 ){
+                        fprintf(savefile,"%d\n",DaftarPlaylist.Neff);
+                        for (int i = 0; i < DaftarPlaylist.Neff; i++) {
+                            fprintf(savefile, "%d %s", NbElmt(DaftarPlaylist.playlists[i].laguplaylist), DaftarPlaylist.playlists[i].name);
+                            int jumlahLagu = NbElmt(DaftarPlaylist.playlists[i].laguplaylist);
+                            address P = First(DaftarPlaylist.playlists[i].laguplaylist);
+                            
+                            if (jumlahLagu > 0) {
+                                fprintf(savefile, "\n"); // Baris baru hanya jika ada lagu dalam playlist
+                            }
+                            
+                            while (P != Nil) {
+                                fprintf(savefile, "%s;%s;%s", artist(P), album(P), titlesong(P));
+                                P = Next(P);
+                                if (P != Nil) {
+                                    fprintf(savefile, "\n"); // Baris baru setelah setiap lagu kecuali lagu terakhir
+                                }
+                            }
+                            
+                            if (i < DaftarPlaylist.Neff - 1) {
+                                fprintf(savefile, "\n"); // Baris baru setelah setiap playlist kecuali playlist terakhir
+                            }
+                        } 
+                    } else {
+                        fprintf(savefile,"0");
+                    }
+                    fclose(savefile);
+                    printf("Save file berhasil disimpan.\n");
+                }
                 mulai = false;
             } else {
                 invcommand();

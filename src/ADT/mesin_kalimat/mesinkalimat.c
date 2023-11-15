@@ -66,7 +66,7 @@ void SalinKalimatFile3() {
     ResetKalimat();  // Reset array
     IgnoreMark();
     int i = 0;
-    while ((currentChar != MARK) && (currentChar != NEWLINE))
+    while ((currentChar != MARK) && (currentChar != NEWLINE) && (currentChar != EOF) && !feof(config))
     {
         CKalimat.TabKalimat[i] = currentChar;
         i += 1;
