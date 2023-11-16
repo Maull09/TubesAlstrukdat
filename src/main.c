@@ -641,6 +641,43 @@ int main(){
             } else {
                 invcommand();
             }
+        } else if (IsStringEqual(currentWord, "REMOVE")){ //List
+            ADVINPUT();
+            if (IsStringEqual(currentWord, "PLAYLIST")){ // List Default
+                ADVINPUT();
+                                
+                if(isNumber(currentWord.TabWord)){
+                    int id = atoi(currentWord.TabWord);
+                    ADVINPUT();
+
+                    if(isNumber(currentWord.TabWord)){
+                        int n = atoi(currentWord.TabWord);
+                        ADVINPUT();
+                        
+                        if (EndWord){
+                            if (sesi){
+                                if(isValidPlaylist(&DaftarPlaylist, id)){
+                                    if(isValidSong(DaftarPlaylist.playlists[id-1].laguplaylist, n)){
+                                        PlaylistRemove(&DaftarPlaylist, id, n);
+                                    } else {
+                                        printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n   ", n, DaftarPlaylist.playlists[id-1].name);
+                                    }
+                                } else{
+                                    printf("Tidak ada playlist dengan ID %d.\n", id);
+                                }
+                            } else {
+                                printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                            }
+                        } else {
+                            invcommand();
+                        }
+                    } else {
+                        invcommand();
+                    }
+                } else {
+                    invcommand();
+                }
+            } 
         } else if (IsStringEqual(currentWord, "ENHANCE")){
             ADVINPUT();
             if (EndWord){
