@@ -1,0 +1,90 @@
+4
+2 Taylor Swift
+2 Fearless
+Fearless
+Fifteen
+3 1989
+Welcome to New York
+Blank Space
+Style
+2 Ed Sheeran
+2 +
+The A Team
+I See Fire
+3 X
+Sing
+Photograph
+Thinking Out Loud
+2 BLACKPINK
+4 BORN PINK
+Pink Venom
+Shut Down
+Typa Girl
+Ready For Love
+3 THE ALBUM
+How You Like That
+Ice Cream (with Selena Gomez)
+Bet You Wanna (Feat. Cardi B)
+3 Arctic Monkeys
+5 Favourite Worst Nightmare
+Brianstorm
+Teddy Picker
+Fluorescent Adolescent
+Old Yellow Bricks
+505
+5 Humbug
+My Propeller
+My Propeller
+Crying Lightning
+Secret Door
+Pretty Visitors
+3 AM
+Do I Wanna Know?
+R U Mine?
+Arabella
+2
+Maul
+Karina
+Ed Sheeran;X;Photograph
+3
+Taylor Swift;Fearless;Fifteen
+Ed Sheeran;+;The A Team
+Taylor Swift;1989;Style
+3
+Taylor Swift;1989;Blank Space
+Ed Sheeran;+;I See Fire
+Taylor Swift;Fearless;Love Story
+2
+3 My Favorites
+Taylor Swift;Fearless;Fearless
+Ed Sheeran;X;Photograph
+Taylor Swift;1989;Style
+2 Workout Mix
+Taylor Swift;1989;Welcome to New York
+Ed Sheeran;X;Sing
+Arctic Monkeys;AM;R U Mine?
+5
+BLACKPINK;BORN PINK;Typa Girl
+BLACKPINK;THE ALBUM;How You Like That
+Arctic Monkeys;AM;Do I Wanna Know?
+BLACKPINK;BORN PINK;Shut Down
+Arctic Monkeys;AM;Arabella
+0
+3
+3 BLACKPINK My Top Three
+BLACKPINK;THE ALBUM;How You Like That
+BLACKPINK;BORN PINK;Typa Girl
+BLACKPINK;BORN PINK;Pink Venom
+5 Arctic Monkeys My Top 5
+Arctic Monkeys;AM;R U Mine?
+Arctic Monkeys;AM;Do I Wanna Know?
+Arctic Monkeys;AM;Arabella
+Arctic Monkeys;Favourite Worst Nightmare;505
+Arctic Monkeys;Humbug;Pretty Visitors
+6 Mixed Playlist
+Arctic Monkeys;Humbug;My Propeller
+Arctic Monkeys;Humbug;Secret Door
+BLACKPINK;BORN PINK;Pink Venom
+Arctic Monkeys;AM;R U Mine?
+Arctic Monkeys;Humbug;Pretty Visitors
+Arctic Monkeys;AM;Do I Wanna Know?

@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include "map_album.h"
+
+// gcc map_album.c driver_album.c ../../function.c -o driver_album
+
+int main() {
+    MapAlbum M;
+    Album A1 = {"Album One"};
+    Album A2 = {"Album Two"};
+    ListMapAlbum LM;
+
+    CreateEmptyMapAlbum(&M);
+    CreateEmptyListMapAlbum(&LM);
+
+    SalinString(M.SingerName, "Singer A");
+
+    InsertAlbum(&M, A1);
+    InsertAlbum(&M, A2);
+    
+    InsertListMapAlbum(&LM, M);
+
+    // Test display functions
+    FindAlbum_SingerName(LM, "Singer A");
+    // printf("Displaying MapAlbumSinger:\n");
+    // DisplayMapAlbum(M);
+    // printf("\n");
+
+    // printf("Displaying ListMapAlbum:\n");
+    // DisplayListMapAlbum(&LM);
+
+    return 0;
+}
+
