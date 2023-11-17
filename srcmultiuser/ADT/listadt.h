@@ -172,23 +172,24 @@ typedef struct {
     int neff;
 } arrofuser;
 
-typedef struct tSuccNode *adrSuccNode;
 typedef struct tNode *adrNode;
-
-typedef struct tSuccNode {
-    adrNode succ;
-    adrSuccNode next;
-} SuccNode;
+typedef struct tSuccNode *adrSuccNode;
 
 typedef struct tNode {
-    infouser userInfo;
-    int nPred;
-    adrSuccNode trail;
+    char username[100]; 
+    int nPred; // Jumlah pengikut (followers)
+    adrSuccNode trail; // List pengguna yang diikuti (following)
     adrNode next;
 } Node;
+
+typedef struct tSuccNode {
+    adrNode succ; // Node yang diikuti
+    adrSuccNode next;
+} SuccNode;
 
 typedef struct {
     adrNode first;
 } Graph;
+
 
 #endif

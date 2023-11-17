@@ -370,7 +370,6 @@ void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *
     printf("Masukkan Nama Penyanyi yang dipilih : ");
     STARTINPUT2();
     SalinString(SelectedArtist, currentWord.TabWord);
-    SalinString(putar->artist, SelectedArtist);
 
     if(FindSinger(*listpenyanyi, SelectedArtist)){
         printf("\n");
@@ -379,7 +378,6 @@ void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *
         printf("Masukkan Nama Album yang dipilih : ");
         STARTINPUT2();
         SalinString(SelectedAlbum, currentWord.TabWord);
-        SalinString(putar->album, SelectedAlbum);
 
         if (FindSongAlbumName(*arrmapsong, SelectedAlbum)){
             printf("\n");
@@ -393,6 +391,8 @@ void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *
                 FindSong_IDsong(*arrmapsong, SelectedAlbum, idlagu, putar);
                 printf("\n");
                 printf("Memutar lagu \"%s\" oleh \"%s\".\n",putar->titlesong ,SelectedArtist);
+                SalinString(putar->artist, SelectedArtist);
+                SalinString(putar->album, SelectedAlbum);
                 CreateQueue(qLagu);
                 clearStack(sLagu);
             } else {
@@ -485,13 +485,13 @@ int playlistContainingQueue(QueueLagu *q, ArrayPlaylists *arrPlaylists) {
     return -1;  // Return -1 if no matching playlist is found
 }
 
-void STATUS(Lagu *playing, QueueLagu *antrian, ArrayPlaylists *arrPlaylists, StackSong *history, char user[]){
+void STATUS(Lagu *playing, QueueLagu *antrian, ArrayPlaylists *arrPlaylists, StackSong *history, char user[], boolean playplaylist){
 
     printf("Username : %s\n", user);
 
     int index = playlistContainingQueue(antrian, arrPlaylists);
-    if (index != -1) {
-        printf("Current Playlist: %s\n", arrPlaylists->playlists[index].name);
+    if (index != -1 && playplaylist) {
+        printf("\nCurrent Playlist: %s\n", arrPlaylists->playlists[index].name);
     } 
 
     printf("\nNow Playing: \n");

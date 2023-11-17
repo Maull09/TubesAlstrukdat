@@ -38,7 +38,7 @@ void Load(char * filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, Map
 void ListDefault(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong);
 void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, Lagu *putar, QueueLagu *qLagu, StackSong *sLagu);
 void QueueSong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, QueueLagu *qSong);
-void STATUS(Lagu *playing, QueueLagu *antrian, ArrayPlaylists *arrPlaylists, StackSong *history, char user[]);
+void STATUS(Lagu *playing, QueueLagu *antrian, ArrayPlaylists *arrPlaylists, StackSong *history, char user[], boolean playplaylist);
 void enhance(ListSinger *DaftarPenyanyi, ListMapAlbum *LMA, ListMapSong *LMS, ArrayPlaylists *arrplaylist, char namaplaylist[]);
 boolean playlist_valid(ArrayPlaylists *arrPlaylist, char nameplaylist[]);
 void PlayPlaylist(ArrayPlaylists *arrPlaylist, StackSong *sLagu, QueueLagu *qLagu, int idxarr);

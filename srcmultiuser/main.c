@@ -8,8 +8,7 @@ int main(){
     boolean sesi = false;
     boolean foundfile = false;
     boolean login = false;
-    char *nameplaylist = (char *)malloc(256 * sizeof(char));
-    // char *namefile = (char *)malloc(256 * sizeof(char));
+    boolean playplaylist = false;
 
     //Bikin ADT
     //List Nama Penyanyi
@@ -132,6 +131,7 @@ int main(){
                 if (EndWord){
                     if (sesi && login){
                         PlaySong(&DaftarPenyanyi, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &users.user[idxuser].currentsong, &users.user[idxuser].queue, &users.user[idxuser].history);
+                        playplaylist = false;
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -143,7 +143,7 @@ int main(){
                 if (EndWord){
                     if (sesi && login){
                             // DisplayPlaylist(&DaftarPlaylist);
-                            if(DaftarPlaylist.Neff != 0){
+                            if(users.user[idxuser].arrp.Neff != 0){
                                 printf("\nMasukkan ID Playlist : ");
                                 STARTINPUT2();
                                 int idxarr = atoi(currentWord.TabWord);
@@ -151,6 +151,7 @@ int main(){
                                     PlayPlaylist(&users.user[idxuser].arrp, &users.user[idxuser].history, &users.user[idxuser].queue, idxarr);
                                     dequeue(&users.user[idxuser].queue, &users.user[idxuser].currentsong);
                                     printf("\nMemutar playlist \"%s\".\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
+                                    playplaylist = true;
                                 }
                             } else {
                                 printf("Kamu tidak memiliki playlist.\n");
@@ -189,7 +190,7 @@ int main(){
                             if (isValidPlaylist(&users.user[idxuser].arrp, idxarr) && (users.user[idxuser].arrp.Neff != 0)){
                                 QueuePlaylist(&users.user[idxuser].arrp, &users.user[idxuser].queue, idxarr);
                             }
-                            printf("\nBerhasil menambahkan playlist \"%s\" ke queue.\n");
+                            printf("\nBerhasil menambahkan playlist \"%s\" ke queue.\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
                         } else{
                             printf("Kamu tidak memiliki playlist.\n");
                         }
@@ -435,11 +436,11 @@ int main(){
                     if (sesi && login){
                         printf("Daftar Playlist Pengguna : \n");
                         DisplayPlaylist(&users.user[idxuser].arrp);
-                        printf("Masukkan ID Playlist yang dipilih : ");
+                        printf("\nMasukkan ID Playlist yang dipilih : ");
                         STARTINPUT2();
                         int idxp = atoi(currentWord.TabWord); 
                         if(isValidPlaylist(&users.user[idxuser].arrp, idxp)){
-                            printf("Playlist ID %d dengan judul %s berhasil dihapus.\n", idxp, users.user[idxuser].arrp.playlists[idxp-1].name);
+                            printf("\nPlaylist ID %d dengan judul \"%s\" berhasil dihapus.\n", idxp, users.user[idxuser].arrp.playlists[idxp-1].name);
                             PlaylistDelete(&users.user[idxuser].arrp, idxp);
                         }
                         else{
@@ -458,7 +459,7 @@ int main(){
             ADVINPUT();
             if (EndWord){
                 if (sesi && login){
-                    STATUS(&users.user[idxuser].currentsong, &users.user[idxuser].queue, &users.user[idxuser].arrp, &users.user[idxuser].history, users.user[idxuser].username);
+                    STATUS(&users.user[idxuser].currentsong, &users.user[idxuser].queue, &users.user[idxuser].arrp, &users.user[idxuser].history, users.user[idxuser].username, playplaylist);
                 } else {
                     printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                 }

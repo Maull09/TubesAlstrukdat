@@ -33,7 +33,7 @@ void AddPlaylist(ArrayPlaylists *arr, Playlist p) {
 }
 
 boolean FindPlaylist(ArrayPlaylists arr, int idx) {
-    return (idx >= 0 && idx < arr.Neff);
+    return (idx > 0 && idx <= arr.Neff);
 }
 
 void DeletePlaylist(ArrayPlaylists *arr, int idx) {
