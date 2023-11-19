@@ -18,6 +18,7 @@
 #include "ADT/map/map_album.h"
 #include "ADT/map/map_song.h"
 #include "ADT/arraydin/arrayplaylist.h"
+#include "ADT/graph/graph.h"
 
 // Fungsi
 void menu();
@@ -34,7 +35,7 @@ void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongA
 
 void EndInput();
 
-void Load(char * filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, QueueLagu *qLagu, StackSong *sLagu, ArrayPlaylists *arrPlaylist, boolean *adafile, Lagu *cSong, arrofuser *users);
+void Load(char * filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, QueueLagu *qLagu, StackSong *sLagu, ArrayPlaylists *arrPlaylist, boolean *adafile, Lagu *cSong, arrofuser *users, Graph *g);
 void ListDefault(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong);
 void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, Lagu *putar, QueueLagu *qLagu, StackSong *sLagu);
 void QueueSong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, QueueLagu *qSong);
@@ -59,4 +60,19 @@ infouser CreateUser(char username[]);
 void DisplayUsers(const arrofuser *arr);
 int FindUserIndex(arrofuser *users, char username[]);
 boolean FindIndexUser(arrofuser *users, char username[]);
+
+// Follow User
+void followUser(Graph *g, char followerUsername[], char followingUsername[]);
+
+// Unfollow User
+void unfollowUser(Graph *g, char followerUsername[], char followingUsername[]);
+
+// List Follower
+void listFollower(Graph *g, char username[]);
+
+// List Following
+void listFollowing(Graph *g, char username[]);
+
+boolean isFollower(Graph g, char followerUsername[], char followingUsername[]);
+
 #endif

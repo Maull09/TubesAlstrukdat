@@ -42,9 +42,21 @@ Pretty Visitors
 Do I Wanna Know?
 R U Mine?
 Arabella
-2
-Maul
+5
+Maul;1;1
 Karina
+Gisel
+Karina;1;1
+Gisel
+Maul
+Gisel;1;1
+Ningning
+Karina
+Ningning;1;1
+Winter
+Gisel
+Winter;0;1
+Ningning
 Ed Sheeran;X;Photograph
 3
 Taylor Swift;Fearless;Fifteen
@@ -88,3 +100,15 @@ BLACKPINK;BORN PINK;Pink Venom
 Arctic Monkeys;AM;R U Mine?
 Arctic Monkeys;Humbug;Pretty Visitors
 Arctic Monkeys;AM;Do I Wanna Know?
+-
+0
+0
+0
+-
+0
+0
+0
+-
+0
+0
+0

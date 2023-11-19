@@ -147,7 +147,7 @@ void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongA
 }
 
 
-void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, QueueLagu *qLagu, StackSong *sLagu, ArrayPlaylists *arrPlaylist, boolean *adafile, Lagu *cSong, arrofuser *users){
+void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, QueueLagu *qLagu, StackSong *sLagu, ArrayPlaylists *arrPlaylist, boolean *adafile, Lagu *cSong, arrofuser *users, Graph *g){
     char* pathdata = "./data/";
     char* combinepath = concat(pathdata, filename);
     STARTKALIMATFILE2(combinepath);
@@ -199,9 +199,32 @@ void Load(char *filename,ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapS
         int jumlahuser = atoi(CKalimat.TabKalimat);
 
         for(int z = 0; z < jumlahuser; z++){
-            ADVKALIMATFILE();
-            infouser dummyuser = CreateUser(CKalimat.TabKalimat);
+            ADVKALIMATFILE3();
+            char dummynamauser[100];
+            SalinString(dummynamauser, CKalimat.TabKalimat);
+            infouser dummyuser = CreateUser(dummynamauser);
             InsertUser(users, dummyuser);
+            insertNode(g, dummynamauser);
+            ADVKALIMATFILE3();
+            int jumlahfollowers = atoi(CKalimat.TabKalimat);
+            ADVKALIMATFILE3();
+            int jumlahfollowing = atoi(CKalimat.TabKalimat);
+            if (jumlahfollowers > 0) {
+                for (int i = 0; i < jumlahfollowers; i++) {
+                    ADVKALIMATFILE();
+                    char follower[100];
+                    SalinString(follower, CKalimat.TabKalimat);
+                    insertEdge(g, follower, dummynamauser);
+                }
+            }
+            if (jumlahfollowing > 0) {
+                for (int i = 0; i < jumlahfollowing; i++) {
+                    ADVKALIMATFILE();
+                    char following[100];
+                    SalinString(following, CKalimat.TabKalimat);
+                    insertEdge(g, dummynamauser, following);
+                }
+            }
         }
 
         for(int x = 0; x < jumlahuser; x++){
@@ -668,34 +691,38 @@ void PlaylistRemove(ArrayPlaylists *arrPlaylist, int idxP, int idxL){
     }
 }
 
-void playlistSwap(ArrayPlaylists *arrP, int idx, int idy, int idPlaylist){
-    int max, ctr = 0;
-    Lagu dummy, tempx, tempy;
-    address x, y;
-    if(idx > idy ){
-        max = idx;
+void playlistSwap(ArrayPlaylists *arrP, int idx, int idy, int idPlaylist) {
+    if (idx <= 0 || idy <= 0) {
+        printf("Indeks tidak valid.\n");
+        return;
     }
-    else{
-        max = idy;
-    }
+
+    int ctr = 0;
+    Lagu tempx, tempy;
+    address x = NULL, y = NULL;
     address p = First(arrP->playlists[idPlaylist-1].laguplaylist);
     
-    while(ctr <= max){
-        if(ctr == idx-1){
+    while(p != NULL && (ctr < idx || ctr < idy)) {
+        if(ctr == idx-1) {
             x = p;
             tempx = Info(x);
-        }
-        else if(ctr == idy-1){
+        } else if(ctr == idy-1) {
             y = p;
             tempy = Info(y);
         }
         ctr++;
         p = Next(p);
     }
-    Info(x) = tempy;
-    Info(y) = tempx;
-    printf("Berhasil menukar lagu dengan nama \"%s\" dengan \"%s\" di playlist \"%s\".", tempx.titlesong, tempy.titlesong, arrP->playlists[idPlaylist-1].name);
+
+    if (x != NULL && y != NULL) {
+        Info(x) = tempy;
+        Info(y) = tempx;
+        printf("Berhasil menukar lagu dengan nama \"%s\" dengan \"%s\" di playlist \"%s\".\n", tempx.titlesong, tempy.titlesong, arrP->playlists[idPlaylist-1].name);
+    } else {
+        printf("Gagal menukar lagu: Indeks di luar batas.\n");
+    }
 }
+
 
 void playlistAddSong(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, ListSinger *listpenyanyi){
     Lagu Putar;
@@ -867,6 +894,79 @@ boolean FindIndexUser(arrofuser *users, char username[]) {
     for (int i = 0; i < users->neff; ++i) {
         if (StringSama(users->user[i].username, username)) {
             return true; // Username ditemukan pada index i
+        }
+    }
+    return false;
+}
+
+// Follow User
+void followUser(Graph *g, char followerUsername[], char followingUsername[]) {
+    insertEdge(g, followerUsername, followingUsername);
+}
+
+// Unfollow User
+void unfollowUser(Graph *g, char followerUsername[], char followingUsername[]) {
+    adrNode P = searchNode(*g, followerUsername);
+    if (P != NULL) {
+        adrSuccNode Q = P->trail, prev = NULL;
+        while (Q != NULL) {
+            if (StringSama(Q->succ->username, followingUsername)) {
+                if (prev == NULL) {
+                    P->trail = Q->next;
+                } else {
+                    prev->next = Q->next;
+                }
+                deallocSuccNode(Q);
+                break;
+            }
+            prev = Q;
+            Q = Q->next;
+        }
+    }
+}
+
+// List Follower
+void listFollower(Graph *g, char *username) {
+    boolean hasFollowers = false;
+    int count = 1;
+    printf("Daftar follower %s:\n", username);
+    for (adrNode P = g->first; P != NULL; P = P->next) {
+        for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+            if (StringSama(Q->succ->username, username)) {
+                printf("%d. %s\n",count, P->username);
+                count++;
+                hasFollowers = true;
+            }
+        }
+    }
+    if (!hasFollowers) {
+        printf("Tidak memiliki follower.\n");
+    }
+}
+
+
+// List Following
+void listFollowing(Graph *g, char *username) {
+    adrNode P = searchNode(*g, username);
+    printf("Daftar following %s:\n", username);
+    int count = 1;
+    if (P != NULL && P->trail != NULL) {
+        for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+            printf("%d. %s\n",count, Q->succ->username);
+            count++;
+        }
+    } else {
+        printf("%s tidak mengikuti siapapun.\n", username);
+    }
+}
+
+boolean isFollower(Graph g, char followerUsername[], char followingUsername[]) {
+    adrNode P = searchNode(g, followerUsername);
+    if (P != NULL) {
+        for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+            if (StringSama(Q->succ->username, followingUsername)) {
+                return true;
+            }
         }
     }
     return false;

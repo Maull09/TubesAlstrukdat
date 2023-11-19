@@ -44,7 +44,8 @@ int main(){
     int idxuser;
     arrofuser users;
     CreateEmptyUsers(&users);
-
+    Graph g;
+    CreateGraph(&g);
 
     // display welcome
     welcome();
@@ -80,7 +81,7 @@ int main(){
                 if (EndWord){
                     if (!sesi && !login){
                         char tempcurrentchar = currentChar;
-                        Load(namefile, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist, &foundfile, &Playnow, &users);
+                        Load(namefile, &DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &ToPlay, &HistoryLagu, &DaftarPlaylist, &foundfile, &Playnow, &users, &g);
                         free(namefile);
                         currentChar = tempcurrentchar;
                         if(foundfile){
@@ -739,44 +740,80 @@ int main(){
             } else {
                 invcommand();
             }
-        }  else if (IsStringEqual(currentWord, "REMOVE")){ //List
+        } else if (IsStringEqual(currentWord, "FOLLOW")){
             ADVINPUT();
-            if (IsStringEqual(currentWord, "PLAYLIST")){ // List Default
-                ADVINPUT();
-                                
-                if(isNumber(currentWord.TabWord)){
-                    int id = atoi(currentWord.TabWord);
-                    ADVINPUT();
-
-                    if(isNumber(currentWord.TabWord)){
-                        int n = atoi(currentWord.TabWord);
-                        ADVINPUT();
-                        
-                        if (EndWord){
-                            if (sesi && login){
-                                if(isValidPlaylist(&DaftarPlaylist, id)){
-                                    if(isValidSong(DaftarPlaylist.playlists[id-1].laguplaylist, n)){
-                                        PlaylistRemove(&DaftarPlaylist, id, n);
-                                    } else {
-                                        printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n   ", n, DaftarPlaylist.playlists[id-1].name);
-                                    }
-                                } else{
-                                    printf("Tidak ada playlist dengan ID %d.\n", id);
-                                }
+            if (EndWord){
+                if (sesi && login){
+                    printf("Masukkan user yang ingin di follow : ");
+                    STARTINPUT();
+                    if(FindIndexUser(&users, currentWord.TabWord)){
+                        if(!StringSama(users.user[idxuser].username, currentWord.TabWord)){
+                            if(!isFollower(g, users.user[idxuser].username, currentWord.TabWord)){
+                                int idxfollow = FindUserIndex(&users, currentWord.TabWord);
+                                followUser(&g, users.user[idxuser].username, currentWord.TabWord);
+                                printf("Berhasil follow user %s\n", currentWord.TabWord);
                             } else {
-                                printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                                printf("Kamu sudah menjadi follower dari user %s\n", currentWord.TabWord);
                             }
                         } else {
-                            invcommand();
+                            printf("Kamu tidak bisa follow diri sendiri\n");
                         }
                     } else {
-                        invcommand();
+                        printf("Tidak ada user dengan username %s\n", currentWord.TabWord);
+                    }
+
+                } else {
+                    printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                }
+            } else {
+                invcommand();
+            }
+        }else if (IsStringEqual(currentWord, "UNFOLLOW")){
+            ADVINPUT();
+            if (EndWord){
+                if (sesi && login){
+                    printf("Masukkan user yang ingin di unfollow : ");
+                    STARTINPUT();
+                    if(FindIndexUser(&users, currentWord.TabWord)){
+                        if(isFollower(g, users.user[idxuser].username, currentWord.TabWord)){
+                            int idxfollow = FindUserIndex(&users, currentWord.TabWord);
+                            unfollowUser(&g, users.user[idxuser].username, currentWord.TabWord);
+                            printf("Berhasil unfollow user %s\n", currentWord.TabWord);
+                        } else {
+                            printf("Kamu tidak menjadi follower dari user %s\n", currentWord.TabWord);
+                        }
+                    } else {
+                        printf("Tidak ada user dengan username %s\n", currentWord.TabWord);
                     }
                 } else {
-                    invcommand();
+                    printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                 }
-            } 
-        } else {
+            } else {
+                invcommand();
+            }
+        }else if (IsStringEqual(currentWord, "FOLLOWERS")){
+            ADVINPUT();
+            if (EndWord){
+                if (sesi && login){
+                    listFollower(&g, users.user[idxuser].username);
+                } else {
+                    printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                }
+            } else {
+                invcommand();
+            }
+        }else if (IsStringEqual(currentWord, "FOLLOWING")){
+            ADVINPUT();
+            if (EndWord){
+                if (sesi && login){
+                    listFollowing(&g, users.user[idxuser].username);
+                } else {
+                    printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
+                }
+            } else {
+                invcommand();
+            }
+        }else {
             invcommand();
         }
         EndInput();
