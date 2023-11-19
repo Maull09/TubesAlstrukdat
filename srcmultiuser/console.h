@@ -75,4 +75,7 @@ void listFollowing(Graph *g, char username[]);
 
 boolean isFollower(Graph g, char followerUsername[], char followingUsername[]);
 
+int jumlahFollowers(Graph g, char username[]);
+
+int jumlahFollowing(Graph g, char username[]);
 #endif

@@ -977,3 +977,26 @@ boolean isFollower(Graph g, char followerUsername[], char followingUsername[]) {
     }
     return false;
 }
+
+int jumlahFollowers(Graph g, char username[]) {
+    int count = 0;
+    for (adrNode P = g.first; P != NULL; P = P->next) {
+        for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+            if (StringSama(Q->succ->username, username)) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+int jumlahFollowing(Graph g, char username[]) {
+    adrNode P = searchNode(g, username);
+    int count = 0;
+    if (P != NULL) {
+        for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+            count++;
+        }
+    }
+    return count;
+}

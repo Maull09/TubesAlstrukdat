@@ -507,9 +507,29 @@ int main(){
                         }
 
                         fprintf(savefile, "%d\n", users.neff);
-                        for(int i = 0; i < users.neff; i++){
-                            fprintf(savefile, "%s\n", users.user[i].username);
-                        } 
+                    
+                        for (int i = 0; i < users.neff; i++) {
+                            char* username = users.user[i].username;
+                            int jmlFollower = jumlahFollowers(g, username);
+                            int jmlFollowing = jumlahFollowing(g, username);
+
+                            fprintf(savefile, "%s;%d;%d\n", username, jmlFollower, jmlFollowing);
+
+                            for (adrNode P = g.first; P != NULL; P = P->next) {
+                                for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+                                    if (StringSama(Q->succ->username, username)) {
+                                        fprintf(savefile, "%s\n", P->username);
+                                    }
+                                }
+                            }
+
+                            adrNode P = searchNode(g, username);
+                            if (P != NULL) {
+                                for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+                                    fprintf(savefile, "%s\n", Q->succ->username);
+                                }
+                            }
+                        }
 
                         for(int i = 0; i < users.neff; i++){
                             if(!(StringSama(users.user[idxuser].currentsong.artist, "\0") && StringSama(users.user[idxuser].currentsong.album, "\0") && StringSama(users.user[idxuser].currentsong.titlesong, "\0"))){
@@ -583,7 +603,7 @@ int main(){
         } else if (IsStringEqual(currentWord, "QUIT")){
             ADVINPUT();
             if (EndWord){
-                printf("Apakah kamu ingin menyimpan data sesi sekarang? (Y/N)");
+                printf("Apakah kamu ingin menyimpan data sesi sekarang? (Y/N) : ");
                 STARTINPUT();
                 if(!StringSama(currentWord.TabWord, "Y")){
                     printf("\nKamu keluar dari WayangWave.\n");
@@ -610,9 +630,29 @@ int main(){
                     }
 
                     fprintf(savefile, "%d\n", users.neff);
-                    for(int i = 0; i < users.neff; i++){
-                        fprintf(savefile, "%s\n", users.user[i].username);
-                    } 
+                    
+                    for (int i = 0; i < users.neff; i++) {
+                        char* username = users.user[i].username;
+                        int jmlFollower = jumlahFollowers(g, username);
+                        int jmlFollowing = jumlahFollowing(g, username);
+
+                        fprintf(savefile, "%s;%d;%d\n", username, jmlFollower, jmlFollowing);
+
+                        for (adrNode P = g.first; P != NULL; P = P->next) {
+                            for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+                                if (StringSama(Q->succ->username, username)) {
+                                    fprintf(savefile, "%s\n", P->username);
+                                }
+                            }
+                        }
+
+                        adrNode P = searchNode(g, username);
+                        if (P != NULL) {
+                            for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+                                fprintf(savefile, "%s\n", Q->succ->username);
+                            }
+                        }
+                    }
 
                     for(int i = 0; i < users.neff; i++){
                         if(!(StringSama(users.user[idxuser].currentsong.artist, "\0") && StringSama(users.user[idxuser].currentsong.album, "\0") && StringSama(users.user[idxuser].currentsong.titlesong, "\0"))){
@@ -794,7 +834,7 @@ int main(){
                             unfollowUser(&g, users.user[idxuser].username, currentWord.TabWord);
                             printf("Berhasil unfollow user %s\n", currentWord.TabWord);
                         } else {
-                            printf("Kamu tidak menjadi follower dari user %s\n", currentWord.TabWord);
+                            printf("Kamu tidak follow user %s\n", currentWord.TabWord);
                         }
                     } else {
                         printf("Tidak ada user dengan username %s\n", currentWord.TabWord);
