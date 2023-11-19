@@ -2,12 +2,6 @@
 #include <stdlib.h>
 #include "mesinkata.h"
 
-char currentChar;
-boolean EOP;
-
-boolean EndWord;
-Word currentWord;
-
 void IgnoreBlanks()
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
