@@ -1,4 +1,20 @@
-2
+4
+2 Taylor Swift
+2 Fearless
+Fearless
+Fifteen
+3 1989
+Welcome to New York
+Blank Space
+Style
+2 Ed Sheeran
+2 +
+The A Team
+I See Fire
+3 X
+Sing
+Photograph
+Thinking Out Loud
 2 BLACKPINK
 4 BORN PINK
 Pink Venom
@@ -16,7 +32,8 @@ Teddy Picker
 Fluorescent Adolescent
 Old Yellow Bricks
 505
-4 Humbug
+5 Humbug
+My Propeller
 My Propeller
 Crying Lightning
 Secret Door
@@ -26,5 +43,5 @@ Do I Wanna Know?
 R U Mine?
 Arabella
 2
-Maul
-Karina
+Maul;0;0
+Karina;0;0
