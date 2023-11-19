@@ -139,9 +139,13 @@ void QueueSwap (QueueLagu *q, int x, int y){
 
     int length = lengthQueue(*q);
 
-    if (x<1 || x>length || y<1 || y>length){
+    if (x<1 || x>length){
         printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
         return;
+    }
+    else if(y<1 || y>length){
+        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
+        return;     
     }
 
     ElTypeQueue lagu_x, lagu_y, temp;

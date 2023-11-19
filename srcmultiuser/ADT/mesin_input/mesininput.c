@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "mesininput.h"
 
-char currentChar;
-boolean EOP;
 
 boolean EndWord;
 Word currentWord;

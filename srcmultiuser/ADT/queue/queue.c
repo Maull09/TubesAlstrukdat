@@ -158,9 +158,13 @@ void QueueSwap (QueueLagu *q, int x, int y){
     int idx_x = (IDX_HEAD(*q) + x - 1) % CAPACITY;
     int idx_y = (IDX_HEAD(*q) + y - 1) % CAPACITY;
 
-    if (x<1 || x>length || y<1 || y>length){
+    if ((x<1 || x>length)){
         printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
         return;
+    }
+    else if (y<1 || y>length){
+        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
+        return; 
     }
 
     ElTypeQueue temp = q->buffer[idx_x];
