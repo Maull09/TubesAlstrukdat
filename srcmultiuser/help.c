@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "boolean.h"
-//#include "help.h"
+#include "help.h"
 
 void help() {
     boolean sesi;
