@@ -63,12 +63,17 @@ adrSuccNode searchEdge(Graph g, char precUsername[], char succUsername[]) {
 
 // Menambahkan node baru ke graph
 void insertNode(Graph *g, char username[]) {
+    if (searchNode(*g, username) != NULL) {
+        return;
+    }
+
     adrNode P = newGraphNode(username);
     if (P != NULL) {
         P->next = g->first;
         g->first = P;
     }
 }
+
 
 // Menambahkan edge baru ke graph
 void insertEdge(Graph *g, char precUsername[], char succUsername[]) {

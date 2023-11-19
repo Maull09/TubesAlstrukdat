@@ -926,7 +926,7 @@ void unfollowUser(Graph *g, char followerUsername[], char followingUsername[]) {
 }
 
 // List Follower
-void listFollower(Graph *g, char *username) {
+void listFollower(Graph *g, char username[]) {
     boolean hasFollowers = false;
     int count = 1;
     printf("Daftar follower %s:\n", username);
@@ -946,7 +946,7 @@ void listFollower(Graph *g, char *username) {
 
 
 // List Following
-void listFollowing(Graph *g, char *username) {
+void listFollowing(Graph *g, char username[]) {
     adrNode P = searchNode(*g, username);
     printf("Daftar following %s:\n", username);
     int count = 1;
