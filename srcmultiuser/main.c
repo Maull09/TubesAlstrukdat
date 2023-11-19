@@ -116,6 +116,19 @@ int main(){
                     if (sesi && login){
                         printf("Daftar playlist yang kamu miliki:\n");
                         DisplayPlaylist(&users.user[idxuser].arrp);
+                        printf("\nIngin melihat lagu dalam album ? (Y/N) ");
+                        STARTINPUT();
+                        if (currentWord.TabWord, "Y") {
+                            printf("\nMasukkan ID Playlist : ");
+                            STARTINPUT();
+                            int idxplaylist = atoi(currentWord.TabWord);
+                            if(FindPlaylist(users.user[idxuser].arrp, idxplaylist)){
+                                printf("\nDaftar lagu dalam playlist %s : \n", users.user[idxuser].arrp.playlists[idxplaylist-1].name);
+                                PrintInfo(users.user[idxuser].arrp.playlists[idxplaylist-1].laguplaylist);
+                            } else {
+                                printf("Tidak ada playlist dengan id %d \n", idxplaylist);
+                            }
+                        }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                     }
@@ -570,7 +583,7 @@ int main(){
         } else if (IsStringEqual(currentWord, "QUIT")){
             ADVINPUT();
             if (EndWord){
-                printf("Apakah kamu ingin menyimpan data sesi sekarang? ");
+                printf("Apakah kamu ingin menyimpan data sesi sekarang? (Y/N)");
                 STARTINPUT();
                 if(!StringSama(currentWord.TabWord, "Y")){
                     printf("\nKamu keluar dari WayangWave.\n");
@@ -732,6 +745,7 @@ int main(){
                     if(!FindIndexUser(&users, currentWord.TabWord)){
                         infouser dummyuser = CreateUser(currentWord.TabWord);
                         InsertUser(&users, dummyuser);
+                        insertNode(&g, currentWord.TabWord);
                         printf("\nAkun %s berhasil ditambahkan\n", currentWord.TabWord);
                     } else {
                         printf("\nUser dengan username\"%s\" telah ada\n", currentWord.TabWord);

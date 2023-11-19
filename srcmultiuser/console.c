@@ -623,6 +623,7 @@ void PlayPlaylist(ArrayPlaylists *arrPlaylist, StackSong *sLagu, QueueLagu *qLag
     Lagu dummyL;
 
     if(FindPlaylist(*arrPlaylist, idxarr)){
+        clearStack(sLagu);
         while (!isEmptyQueue(*qLagu)){
             dequeue(qLagu, &dummyq);
             PushStackSong(sLagu, dummyq);
@@ -678,6 +679,7 @@ void PlaylistRemove(ArrayPlaylists *arrPlaylist, int idxP, int idxL){
         if(ctr == idxL-1){
             if (prev == NULL) {
                 DelFirst(&arrPlaylist->playlists[idxP-1].laguplaylist, &p);
+                printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari playlist \"%s\"!\n", titlesong(p), artist(p), arrPlaylist->playlists[idxP-1].name);
             } else {
                 DelAfter(&arrPlaylist->playlists[idxP-1].laguplaylist, &p, prev);
                 printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari playlist \"%s\"!\n", titlesong(p), artist(p), arrPlaylist->playlists[idxP-1].name);
@@ -774,7 +776,7 @@ void playlistAddSong(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong
                 int idplaylist = atoi(currentWord.TabWord);
                 if(isValidPlaylist(arr, idplaylist)){
                     InsVLast(&arr->playlists[idplaylist-1].laguplaylist, Putar);
-                    printf("Lagu dengan judul \"%s\" pada album %s oleh penyanyi %s berhasil ditambahkan ke dalam playlist \"%s\".", Putar.titlesong ,SelectedAlbum, SelectedArtist, arr->playlists[idplaylist-1].name );
+                    printf("Lagu dengan judul \"%s\" pada album %s oleh penyanyi %s berhasil ditambahkan ke dalam playlist \"%s\" \n.", Putar.titlesong ,SelectedAlbum, SelectedArtist, arr->playlists[idplaylist-1].name );
                 }
                 else{
                     printf("Playlist dengan id:%d tidak ada dalam daftar. Silakan coba lagi.\n", idplaylist);
