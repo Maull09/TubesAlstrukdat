@@ -25,18 +25,70 @@ WayangWave merupakan sebuah aplikasi yang bisa mensimulasikan service pemutaran 
 │
 ├─── src
 │       ├─── ADT
+│       │       ├─── arraydin
+│       │       │            │ arrayplaylist.c
+│       │       │            │ arrayplaylist.h
+│       │       │            │ driver_arrayplaylist.c
+│       │       ├─── arraystatis
+│       │       │               │ arraySinger.c
+│       │       │               │ arraySinger.h
+│       │       │               │ driver_singer.c
+│       │       ├─── graph
+│       │       │         │ driver_graph.c
+│       │       │         │ graph.c
+│       │       │         │ graph.h
 │       │       ├─── linkedlist
-│       │       ├─── list
-│       │       ├─── machine
-│       │       ├─── queuestack
-│       │       ├─── setmap
-│       │       └─── stack
+│       │       │              │ driver_linkedlist.c
+│       │       │              │ linkedlist.c
+│       │       │              │ linkedlist.h
+│       │       ├─── map
+│       │       │       │ driver_album.c
+│       │       │       │ driver_song.c
+│       │       │       │ map_album.c
+│       │       │       │ map_album.h
+│       │       │       │ map_song.c
+│       │       │       │ map_song.h
+│       │       ├─── mesin_input
+│       │       │               │ driver_mesininput.c
+│       │       │               │ mesininput.c
+│       │       │               │ mesininput.h
+│       │       ├─── mesin_kalimat
+│       │       │                 │ driver_mesinkalimat.c
+│       │       │                 │ mesinkalimat.c
+│       │       │                 │ mesinkalimat.h
+│       │       ├─── mesin_karakter
+│       │       │                  │ driver_mesinkarakter.c
+│       │       │                  │ mesinkarakter.c
+│       │       │                  │ mesinkarakter.h
+│       │       ├─── mesin_kata
+│       │       │              │ driver_mesinkata.c
+│       │       │              │ mesinkata.c
+│       │       │              │ mesinkata.h
+│       │       ├─── queue
+│       │       │         │ driver_queue.c
+│       │       │         │ queue.c
+│       │       │         │ queue.h
+│       │       ├─── set
+│       │       │       │ driver_set.c
+│       │       │       │ set.c
+│       │       │       │ set.h
+│       │       ├─── stack
+│       │       │         │ driver_stack.c
+│       │       │         │ stack.c
+│       │       │         │ stack.h
+│       │       │ boolean.h
+│       │       │ listadt.h
 │       ├─── data
-│       │       │ default.txt
-│       │       │ test.txt
-│       │ boolean.h
-│       │ console.c
+│       │       │ config.txt
+│       │       │ configmultiuser.txt
+│       │       │ test_mesinkarakter.txt
+│       │       │ welcoming_text.txt
 │       │ console.h
+│       │ console.c
+│       │ driver_function.c
+│       │ function.c
+│       │ function.h
+│       │ Makefile
 │       │ main.c
 ```
 
@@ -78,7 +130,15 @@ note : program akan otomatis membuild, clean dan menjalankan main
 3. selesai
 
 ## Command
-- `START` : Command ini digunakan untuk menjalankan program BNMO
+- `START` : Command ini digunakan untuk menjalankan program WayangWave
+- `ENHANCE` : Enhance dilakukan dengan command “ENHANCE” lalu memasukan nama playlist yang ingin di enhance. Setelah dijalankan, command ini akan mengisi playlist dengan rekomendasi lagu secara acak dengan penyanyi dan album yang acak juga.
+- `LOGIN` : untuk masuk ke akun user yang digunakan untuk fitur-fitur yang ada pada WayangWave
+- `LOGOUT` : digunakan untuk mengganti akun atau hanya ingin keluar dari akun.
+- `REGISTER` : Ini dapat dilakukan setelah melakukan start atau load dengan memasukkan command “REGISTER” untuk membuat akun baru.
+- `FOLLOW` : Untuk mengikuti pengguna lain dengan memasukkan nama akun pengguna yang ingin diikuti.
+- `UNFOLLOW` : Untuk berhenti mengikuti pengguna lain dengan memasukkan nama akun pengguna yang ingin berhenti diikuti
+- `FOLLOWERS` : Untuk melihat daftar pengikut yang ia miliki
+- `FOLLOWING` : Untuk melihat daftar pengguna yang ia ikuti
 - `LOAD <filename>` : Command ini digunakan untuk membaca file yang telah disimpan dan menjalankan program WayangWave
 - `LIST` : command ini digunakan untuk menampilkan list playlist yang ada, list penyanyi, list album dari penyanyi, dan list lagu yang ada di album. Terdapat dua jenis list, `DEFAULT` dan `PLAYLIST`.
 - `LIST DEFAULT` : Command ini digunakan untuk melihat list penyanyi yang ada. Selanjutnya dapat memilih untuk melihat album dari penyanyi yang dipilih. Kemudian melihat lagu yang ada dari album yang dipilih. Terdapat konfirmasi apakah ingin melihat album/lagu
