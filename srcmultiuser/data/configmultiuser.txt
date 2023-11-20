@@ -1,5 +1,5 @@
 4
-2 Taylor Swift
+4 Taylor Swift
 2 Fearless
 Fearless
 Fifteen
@@ -7,6 +7,24 @@ Fifteen
 Welcome to New York
 Blank Space
 Style
+10 Lover
+I Forgot That You Existed
+Cruel Summer
+Lover
+The Man
+The Archer
+I Think He Knows
+Paper Rings
+Cornelia Street
+London Boy
+False God
+6 Midnights
+Lavender Haze
+Anti-Hero
+Question...?
+Bejeweled
+You're On Your Own, Kid
+Maroon
 2 Ed Sheeran
 2 +
 The A Team
@@ -103,7 +121,24 @@ Arctic Monkeys;AM;Do I Wanna Know?
 -
 0
 0
-0
+3
+3 BLACKPINK My Top Three
+BLACKPINK;THE ALBUM;How You Like That
+BLACKPINK;BORN PINK;Typa Girl
+BLACKPINK;BORN PINK;Pink Venom
+5 Arctic Monkeys My Top 5
+Arctic Monkeys;AM;R U Mine?
+Arctic Monkeys;AM;Do I Wanna Know?
+Arctic Monkeys;AM;Arabella
+Arctic Monkeys;Favourite Worst Nightmare;505
+Arctic Monkeys;Humbug;Pretty Visitors
+6 Mixed Playlist
+Arctic Monkeys;Humbug;My Propeller
+Arctic Monkeys;Humbug;Secret Door
+BLACKPINK;BORN PINK;Pink Venom
+Arctic Monkeys;AM;R U Mine?
+Arctic Monkeys;Humbug;Pretty Visitors
+Arctic Monkeys;AM;Do I Wanna Know?
 -
 0
 0

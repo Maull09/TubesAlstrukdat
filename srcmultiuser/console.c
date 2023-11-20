@@ -476,16 +476,14 @@ void QueueSong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong 
     }
 }
 
-int playlistContainingQueue(QueueLagu *q, ArrayPlaylists *arrPlaylists) {
+int playlistContainingQueue(QueueLagu *q, ArrayPlaylists *arrPlaylists, Lagu *playing) {
     for (int i = 0; i < arrPlaylists->Neff; i++) {
         Playlist pl = arrPlaylists->playlists[i];
-        int foundCount = 0;  // Counter for found songs in the queue
+        int foundCount = 0;  
 
-        // Iterate over the queue only
         for (int j = q->idxHead; j != q->idxTail+1; j = (j + 1) % CAPACITY) {
             boolean foundInPlaylist = false;
             
-            // Check if the current song in the queue is in the playlist
             address current = pl.laguplaylist.First;
             while (current != NULL) {
                 if (StringSama(q->buffer[j].titlesong, current->info.titlesong) &&
@@ -498,23 +496,36 @@ int playlistContainingQueue(QueueLagu *q, ArrayPlaylists *arrPlaylists) {
             }
             
             if (foundInPlaylist) {
-                foundCount++;  // Increment if the song is found in the playlist
+                foundCount++;  
             }
         }
 
-        // Check if the number of found songs matches the queue length
         if (foundCount == lengthQueue(*q)) {
-            return i;  // Return the index of the playlist
+            boolean isPlayingInPlaylist = false;
+            address current = pl.laguplaylist.First;
+            while (current != NULL) {
+                if (StringSama(playing->titlesong, current->info.titlesong) &&
+                    StringSama(playing->album, current->info.album) &&
+                    StringSama(playing->artist, current->info.artist)) {
+                    isPlayingInPlaylist = true;
+                    break;
+                }
+                current = Next(current);
+            }
+
+            if (isPlayingInPlaylist) {
+                return i; 
+            }
         }
     }
-    return -1;  // Return -1 if no matching playlist is found
+    return -1;  
 }
 
 void STATUS(Lagu *playing, QueueLagu *antrian, ArrayPlaylists *arrPlaylists, StackSong *history, char user[], boolean playplaylist){
 
     printf("Username : %s\n", user);
 
-    int index = playlistContainingQueue(antrian, arrPlaylists);
+    int index = playlistContainingQueue(antrian, arrPlaylists, playing);
     if (index != -1 && playplaylist) {
         printf("\nCurrent Playlist: %s\n", arrPlaylists->playlists[index].name);
     } 

@@ -50,7 +50,7 @@ void PlaylistRemove(ArrayPlaylists *arrPlaylist, int idxP, int idxL);
 void playlistSwap(ArrayPlaylists *arrP, int idx, int idy, int idPlaylist);
 void playlistAddAlbum(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, ListSinger *listpenyanyi);
 void playlistAddSong(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, ListSinger *listpenyanyi);
-int playlistContainingQueue(QueueLagu *q, ArrayPlaylists *arrPlaylists);
+int playlistContainingQueue(QueueLagu *q, ArrayPlaylists *arrPlaylists, Lagu *playing);
 
 
 // Prototipe fungsi

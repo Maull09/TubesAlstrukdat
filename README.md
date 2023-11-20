@@ -11,6 +11,35 @@ WayangWave merupakan sebuah aplikasi yang bisa mensimulasikan service pemutaran 
 4. Mengatur urutan dimainkannya lagu
 5. Menampilkan status dari aplikasi
 
+## Struktur Program
+```
+│ README.md
+│ .gitignore
+│
+├─── bin
+│       │ Makefile
+│
+├─── doc
+│       │ Pedoman Tugas Besar.pdf
+│       │ Spesifikasi Tugas Besar IF2111 2023_2024.pdf
+│
+├─── src
+│       ├─── ADT
+│       │       ├─── linkedlist
+│       │       ├─── list
+│       │       ├─── machine
+│       │       ├─── queuestack
+│       │       ├─── setmap
+│       │       └─── stack
+│       ├─── data
+│       │       │ default.txt
+│       │       │ test.txt
+│       │ boolean.h
+│       │ console.c
+│       │ console.h
+│       │ main.c
+```
+
 ## Cara Menjalankan
 1. Pastikan Terminal Berada di src ini
 2. Cara Menjalankan ada 2 cara yaitu dengan menggunakan Makefile atau compile biasa
@@ -21,7 +50,10 @@ WayangWave merupakan sebuah aplikasi yang bisa mensimulasikan service pemutaran 
    ```
    `Makefile`
    ```
-2. ketik `make` pada terminal
+
+2. buka terminal di folder src
+
+3. ketik `make` pada terminal
    
    ```
    `make`
@@ -32,13 +64,16 @@ note : program akan otomatis membuild, clean dan menjalankan main
 
 
 ### b. Tanpa Makefile
-1. ketik ini diterminal :
+
+1. Buka terminal di folder src
+
+2. ketik ini diterminal :
    
 ```
-  `gcc main.c function.c console.c ADT/arraystatis/arraySinger.c ADT/map/map_album.c ADT/map/map_song.c ADT/mesin_karakater/mesinkarakter.c ADT/mesin_kata/mesinkata.c ADT/mesin_input/mesininput.c ADT/mesin_kalimat/mesinkalimat.c -o main`
+  `gcc main.c function.c console.c ADT/arraystatis/arraySinger.c ADT/map/map_album.c ADT/map/map_song.c ADT/mesin_karakter/mesinkarakter.c ADT/mesin_kata/mesinkata.c ADT/mesin_input/mesininput.c ADT/mesin_kalimat/mesinkalimat.c ADT/queue/queue.c ADT/arraydin/arrayplaylist.c ADT/linkedlist/linkedlist.c ADT/set/set.c ADT/stack/stack.c ADT/graph/graph.c -o main`
 ```
 
-2. Jalankan Program WayangWave diterminal
+3. Jalankan Program WayangWave diterminal
    
    ```
    ./main
@@ -77,7 +112,8 @@ note : program akan otomatis membuild, clean dan menjalankan main
 - `<INVALID COMMAND>` : Command-command selain yang disebutkan di atas dinyatakan akan tidak valid dan hanya akan mengeluarkan teks error.
 
 ## Cara Menjalankan Driver Abstract Data Type
-1. Ketik ini diterminal :
+1. Buka folder bin
+2. Ketik ini diterminal :
 ```
 
 ```

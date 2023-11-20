@@ -116,9 +116,9 @@ int main(){
                     if (sesi && login){
                         printf("Daftar playlist yang kamu miliki:\n");
                         DisplayPlaylist(&users.user[idxuser].arrp);
-                        printf("\nIngin melihat lagu dalam album ? (Y/N) ");
+                        printf("\nIngin melihat lagu dalam playlist ? (Y/N) : ");
                         STARTINPUT();
-                        if (currentWord.TabWord, "Y") {
+                        if (StringSama(currentWord.TabWord, "Y")) {
                             printf("\nMasukkan ID Playlist : ");
                             STARTINPUT();
                             int idxplaylist = atoi(currentWord.TabWord);
@@ -156,8 +156,9 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi && login){
-                            // DisplayPlaylist(&DaftarPlaylist);
+                            printf("Daftar playlist pengguna : \n");
                             if(users.user[idxuser].arrp.Neff != 0){
+                                DisplayPlaylist(&users.user[idxuser].arrp);
                                 printf("\nMasukkan ID Playlist : ");
                                 STARTINPUT2();
                                 int idxarr = atoi(currentWord.TabWord);
@@ -196,13 +197,15 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi && login){
-                        // DisplayPlaylist(&DaftarPlaylist);
+                        printf("Daftar playlist pengguna : \n");
+                        DisplayPlaylist(&users.user[idxuser].arrp);
                         if(users.user[idxuser].arrp.Neff != 0){
                             printf("\nMasukkan ID Playlist : ");
                             STARTINPUT2();
                             int idxarr = atoi(currentWord.TabWord);
                             if (isValidPlaylist(&users.user[idxuser].arrp, idxarr) && (users.user[idxuser].arrp.Neff != 0)){
                                 QueuePlaylist(&users.user[idxuser].arrp, &users.user[idxuser].queue, idxarr);
+                                playplaylist = true;
                             }
                             printf("\nBerhasil menambahkan playlist \"%s\" ke queue.\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
                         } else{

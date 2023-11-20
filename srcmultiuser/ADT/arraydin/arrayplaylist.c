@@ -46,14 +46,12 @@ void DeletePlaylist(ArrayPlaylists *arr, int idx) {
 }
 
 void DisplayPlaylist(ArrayPlaylists *arr) {
-    if(arr->Neff == 0){
-        printf("Kamu tidak memiliki playlist.\n");
-    } else {
-        for (int i = 0; i < arr->Neff; i++) {
-            printf("\t%d. %s\n", i+1, arr->playlists[i].name);
-        }
+    for (int i = 0; i < arr->Neff; i++) {
+        printf("\t%d. %s\n", i+1, arr->playlists[i].name);
     }
 }
+
+
 
 boolean isValidPlaylist(ArrayPlaylists *arr, int idPlaylist){
     return (idPlaylist >= 1 && idPlaylist <= (*arr).Neff);
