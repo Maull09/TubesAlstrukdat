@@ -1,39 +1,38 @@
 arraydin:
-	gcc -o ../arrayDriver ../src/Driver/arrayDriver.c ../src/ADT/array.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
+	gcc -o ../driver_arrayplaylist ../src/ADT/arraydin/driver_arrayplaylist.c ../src/ADT/arraydin/arrayplaylist.c ../src/function.c
 
 arraystatis:
-	gcc -o ../bintreeDriver ../src/Driver/bintreeDriver.c ../src/ADT/bintree.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/ADT/listrek.c ../src/boolean.c 
+	gcc -o ../driver_arraystatis ../src/ADT/arraydin/driver_singer.c ../src/ADT/arraydin/arraySinger.c ../src/function.c
 
 graph:
-	gcc -o ../listrekDriver ../src/Driver/listrekDriver.c ../src/ADT/listrek.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
+	gcc -o ../driver_graph ../src/ADT/graph/driver_graph.c ../src/ADT/graph/graph.c ../src/function.c
 
 linkedlist:
-	gcc -o ../listlinierDriver ../src/Driver/listlinierDriver.c ../src/ADT/listlinier.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
+	gcc -o ../driver_linkedlist ../src/ADT/linkedlist/driver_linkedlist.c ../src/ADT/linkedlist/linkedlist.c ../src/function.c
 
 map_album:
-	gcc -o ../listsomDriver ../src/Driver/listsomDriver.c ../src/ADT/listsom.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
+	gcc -o ../driver_map_album ../src/ADT/map/driver_album.c ../src/ADT/map/map_album.c ../src/function.c
 
 map_song:
-	gcc -o ../mapDriver ../src/Driver/mapDriver.c ../src/ADT/map.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
+	gcc -o ../driver_map_song ../src/ADT/map/driver_song.c ../src/ADT/map/map_song.c ../src/function.c
 
 mesinkarakter:
-	gcc -o ../mesinkarakterDriver ../src/Driver/mesinkarakterDriver.c ../src/ADT/mesinkarakter.c ../src/boolean.c
+	gcc -o ../driver_mesinkarakter ../src/ADT/mesin_karakter/driver_mesinkarakter.c ../src/ADT/mesinkarakter/mesinkarakter.c ../src/function.c
 
 mesinkata:
-	gcc -o ../mesinkataDriver ../src/Driver/mesinkataDriver.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/boolean.c
+	gcc -o ../driver_mesinkata ../src/ADT/mesin_kata/driver_mesinkata.c ../src/ADT/mesinkata/mesinkata.c ../src/function.c
 
 mesininput:
-	gcc -o ../queueDriver ../src/Driver/queueDriver.c ../src/ADT/queue.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
+	gcc -o ../driver_mesininput ../src/ADT/mesin_input/driver_mesininput.c ../src/ADT/mesininput/mesininput.c ../src/function.c
 
 mesinkalimat:
-	gcc -o ../queuedashDriver ../src/Driver/queuedashDriver.c ../src/ADT/queuedash.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
+	gcc -o ../driver_mesinkalimat ../src/ADT/mesin_kalimat/driver_mesinkalimat.c ../src/ADT/mesinkalimat/mesinkalimat.c ../src/function.c
 
 set:
-	gcc -o ../setDriver ../src/Driver/setDriver.c ../src/ADT/set.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
+	gcc -o ../driver_set ../src/ADT/set/driver_set.c ../src/ADT/set/set.c ../src/function.c
 
 stack:
-	gcc -o ../stackDriver ../src/Driver/stackDriver.c ../src/ADT/stack.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
+	gcc -o ../driver_stack ../src/ADT/stack/driver_stack.c ../src/ADT/stack/stack.c ../src/function.c
 
 queue:
-	gcc -o ../stacktDriver ../src/Driver/stacktDriver.c ../src/ADT/stackt.c ../src/ADT/mesinkarakter.c ../src/ADT/mesinkata.c ../src/boolean.c
-
+	gcc -o ../driver_queue ../src/ADT/queue/driver_queue.c ../src/ADT/queue/queue.c ../src/function.c
