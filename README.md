@@ -2,7 +2,7 @@
 
 Suatu hari, Bondowoso jatuh cinta kepada Roro, si teteh geulis yang hanya suka dengan lagu hip-hop terbaru dari walkman-nya. Bondowoso yang memiliki sense musik yang sangat berkelas pada masanya, merasakan bahwa Roro belum melihat seluruh dunia musik yang luas.
 
-Saya akan buatkan kamu aplikasi WayangWave yang dapat meluluhkan hati Roro”.
+Saya akan buatkan kamu aplikasi WayangWave yang dapat meluluhkan hati Roro.
 ## Tentang Sistem Wayangwave
 WayangWave merupakan sebuah aplikasi yang bisa mensimulasikan service pemutaran musik. WayangWave ini memiliki memiliki beberapa fitur utama, yaitu:
 1. Memutar lagu
@@ -168,12 +168,44 @@ note : program akan otomatis membuild, clean dan menjalankan main
 - `<INVALID COMMAND>` : Command-command selain yang disebutkan di atas dinyatakan akan tidak valid dan hanya akan mengeluarkan teks error.
 
 ## Cara Menjalankan Driver Abstract Data Type
-1. Buka folder bin
-
-2. Ketik ini diterminal :
+1. Masuk ke folder bin melalui terminal
+```
+cd bin
 ```
 
+2. Ketik `make <ADT>`  pada terminal
+
 ```
+make set
+```
+
+3. Keluar dari folder terminal
+
+```
+cd ..
+```
+
+4. Jalankan driver di terminal dengan format `<ADT>Driver`
+
+```
+./setDriver atau setDriver
+```
+## List ADT
+| No. | ADT | Command |
+|-----|-----|------|
+| 1 | Arraydin | make arraydin |
+| 2 | Arraystatis | make arraystatis |
+| 3 | Graph | make graph |
+| 4 | Linkedlist | make linkedlist |
+| 5 | Map_album | make map_album |
+| 6 | Map_song | make map_song |
+| 7 | Mesinkarakter | make mesinkarakter |
+| 8 | Mesinkata | make mesinkata |
+| 9 | Mesininput | make mesininput |
+| 10 | Mesinkalimat | make mesinkalimat |
+| 11 | Set | make set |
+| 12 | Stack | make stack |
+| 13 | Queue | make queue |
 
 
 ## Anggota Kelompok 7
