@@ -114,20 +114,24 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi && login){
-                        printf("Daftar playlist yang kamu miliki:\n");
-                        DisplayPlaylist(&users.user[idxuser].arrp);
-                        printf("\nIngin melihat lagu dalam playlist ? (Y/N) : ");
-                        STARTINPUT();
-                        if (StringSama(currentWord.TabWord, "Y")) {
-                            printf("\nMasukkan ID Playlist : ");
+                        if (users.user[idxuser].arrp.Neff != 0){
+                            printf("Daftar playlist yang kamu miliki:\n");
+                            DisplayPlaylist(&users.user[idxuser].arrp);
+                            printf("\nIngin melihat lagu dalam playlist ? (Y/N) : ");
                             STARTINPUT();
-                            int idxplaylist = atoi(currentWord.TabWord);
-                            if(FindPlaylist(users.user[idxuser].arrp, idxplaylist)){
-                                printf("\nDaftar lagu dalam playlist %s : \n", users.user[idxuser].arrp.playlists[idxplaylist-1].name);
-                                PrintInfo(users.user[idxuser].arrp.playlists[idxplaylist-1].laguplaylist);
-                            } else {
-                                printf("Tidak ada playlist dengan id %d \n", idxplaylist);
+                            if (StringSama(currentWord.TabWord, "Y")) {
+                                printf("\nMasukkan ID Playlist : ");
+                                STARTINPUT();
+                                int idxplaylist = atoi(currentWord.TabWord);
+                                if(FindPlaylist(users.user[idxuser].arrp, idxplaylist)){
+                                    printf("\nDaftar lagu dalam playlist %s : \n", users.user[idxuser].arrp.playlists[idxplaylist-1].name);
+                                    PrintInfo(users.user[idxuser].arrp.playlists[idxplaylist-1].laguplaylist);
+                                } else {
+                                    printf("Tidak ada playlist dengan id %d \n", idxplaylist);
+                                }
                             }
+                        } else {
+                            printf("Kamu tidak memiliki playlist.\n");
                         }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
