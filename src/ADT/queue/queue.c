@@ -149,6 +149,10 @@ void clearQueue(QueueLagu *q){
 }
 
 void QueueSwap (QueueLagu *q, int x, int y){
+    if(x == y){
+        printf("Lagu yang swap adalah lagu dengan indeks yang sama\n");
+        return;
+    }
     if (isEmptyQueue(*q)){
         printf("Queue kosong.\n");
         return;

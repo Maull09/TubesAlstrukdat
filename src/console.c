@@ -712,6 +712,11 @@ void PlaylistRemove(ArrayPlaylists *arrPlaylist, int idxP, int idxL){
 }
 
 void playlistSwap(ArrayPlaylists *arrP, int idx, int idy, int idPlaylist) {
+    if(idx == idy){
+        printf("Lagu yang ditukar adalah lagu dengan indeks yang sama\n");
+        return;
+    }
+
     if (idx <= 0 || idy <= 0) {
         printf("Indeks tidak valid.\n");
         return;
