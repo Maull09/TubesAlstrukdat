@@ -716,6 +716,7 @@ int main(){
                         } else {
                             fprintf(savefile,"0");
                         }
+                        free(saves);
                         fclose(savefile);
                     } 
                     printf("Save file berhasil disimpan.\n");
