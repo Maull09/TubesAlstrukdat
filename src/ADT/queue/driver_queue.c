@@ -34,23 +34,23 @@ int main() {
     enqueue(&q, lagu5);
 
     printf("Setelah menambahkan 5 lagu:\n");
-    displayQueue(q);
+    displayQueue(&q);
     dequeue(&q, &laguHapus);
     printf("\nSetelah menghapus lagu %s - %s: %s dari queue:\n", laguHapus.artist, laguHapus.album, laguHapus.titlesong);
-    displayQueue(q);
+    displayQueue(&q);
     printf("\n");
     removeSong(&q, 2);
-    displayQueue(q);
+    displayQueue(&q);
 
     printf("\n");
     int x = 1, y = 2;
     printf("Tukar Queue ke %d dengan %d \n", x, y);
     QueueSwap(&q, x, y);
-    displayQueue(q);
+    displayQueue(&q);
 
     printf("\nKosongkan Queue\n");
     clearQueue(&q);
-    displayQueue(q);
+    displayQueue(&q);
 
     return 0;
 }

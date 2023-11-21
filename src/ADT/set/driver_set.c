@@ -7,8 +7,6 @@ int main() {
     // Inisialisasi
     SetSong mySet;
     CreateEmptySet(&mySet);
-    ListofSetSong ListofMyset;
-    CreateEmptyListSet(&ListofMyset);
 
     // Buat beberapa data dummy
     Song song1;
@@ -20,7 +18,6 @@ int main() {
     Song song3;
     SalinString(song3.songName, "Lagu C");
 
-    SalinString(mySet.albumName, "Album A");
 
     // Tambahkan lagu ke dalam set
     AddSongToSet(&mySet, song1);
@@ -39,10 +36,6 @@ int main() {
     printf("Displaying SetSong:\n");
     DisplaySetSong(mySet);
     printf("\n");
-
-    AddSetSongToListSetSong(&ListofMyset, mySet);
-    printf("Displaying ListofSetSong:\n");
-    DisplayListOfSetSong(ListofMyset);
-
+    
     return 0;
 }

@@ -1,37 +1,47 @@
 #include "arrayplaylist.h"
 #include <stdio.h>
 
-// gcc arrayplaylist.c driver_arrayplaylist.c ../../function.c -o driver_arrayplaylist
-
 int main() {
-    ArrayPlaylists arrPlaylist;
+    ArrayPlaylists arr;
+    CreateEmptyArrayPlaylists(&arr);
+
+    // Demonstrasi penambahan playlist
     Playlist p1, p2;
+    SalinString(p1.name, "Playlist 1");
+    SalinString(p2.name, "Playlist 2");
 
-    SalinString(p1.name, "Pop Hits");
-    SalinString(p2.name, "Chill Vibes");
+    AddPlaylist(&arr, p1);
+    AddPlaylist(&arr, p2);
 
-    CreateEmptyArrayPlaylists(&arrPlaylist);
+    // Menampilkan isi array playlist
+    printf("Isi ArrayPlaylists:\n");
+    DisplayPlaylist(&arr);
 
-    AddPlaylist(&arrPlaylist, p1);
-    AddPlaylist(&arrPlaylist, p2);
+    // Menghapus playlist
+    printf("\nMenghapus Playlist 2...\n");
+    DeletePlaylist(&arr, 1);  // Menghapus playlist di indeks 1
 
-    // Test Display function
-    printf("Displaying Playlists:\n");
-    DisplayPlaylist(&arrPlaylist);
-    printf("\n");
+    // Menampilkan isi array playlist setelah penghapusan
+    printf("Isi ArrayPlaylists setelah penghapusan:\n");
+    DisplayPlaylist(&arr);
 
-    char searchName[255];
-    SalinString(searchName, "Pop Hits");
-
-    if (FindPlaylist(arrPlaylist, searchName)) {
-        printf("%s is in the list of playlists.\n", searchName);
+    // Memeriksa validitas indeks playlist
+    if (isValidPlaylist(&arr, 1)) {
+        printf("\nPlaylist 1 adalah playlist yang valid.\n");
     } else {
-        printf("%s is not in the list of playlists.\n", searchName);
+        printf("\nPlaylist 1 bukan playlist yang valid.\n");
     }
 
-    // Cleanup
-    DeallocateArrayPlaylists(&arrPlaylist);
+    // Menemukan ID playlist berdasarkan nama
+    int id = IdPlaylist(&arr, "Playlist 2");
+    if (id != -1) {
+        printf("\nID dari Playlist 2 adalah: %d\n", id + 1);
+    } else {
+        printf("\nPlaylist 2 tidak ditemukan.\n");
+    }
+
+    // Membersihkan array playlist
+    DeallocateArrayPlaylists(&arr);
 
     return 0;
 }
-

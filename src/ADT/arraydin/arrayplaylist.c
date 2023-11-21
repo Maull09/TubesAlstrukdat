@@ -65,4 +65,5 @@ int IdPlaylist(ArrayPlaylists *arrplaylist, char namaplaylist[]){
         }
         i++;
     }
+    return -1;
 }
