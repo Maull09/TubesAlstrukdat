@@ -623,6 +623,7 @@ int main(){
                         perror("Alokasi memori gagal");
                         exit(1);
                     }
+                    char *old_saves = saves;
                     SalinString(saves, "./data/");
                     saves = concat(saves, currentWord.TabWord);
                     FILE *savefile = fopen(saves,"w");
@@ -716,7 +717,7 @@ int main(){
                         } else {
                             fprintf(savefile,"0");
                         }
-                        free(saves);
+                        free(old_saves);
                         fclose(savefile);
                     } 
                     printf("Save file berhasil disimpan.\n");
