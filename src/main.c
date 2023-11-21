@@ -619,11 +619,6 @@ int main(){
                 } else {
                     printf("\nSilahkan masukkan nama file untuk menyimpan sesi <filename.txt> : ");
                     STARTINPUT2();
-                    char *saves = (char *)malloc(256 * sizeof(char));
-                    if (saves == NULL) {
-                        perror("Alokasi memori gagal");
-                        exit(1);
-                    }
                     char* pathdata = "./data/";
     		        char* saves = concat(pathdata, currentWord.TabWord);
                     FILE *savefile = fopen(saves,"w");
