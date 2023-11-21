@@ -14,7 +14,6 @@ WayangWave merupakan sebuah aplikasi yang bisa mensimulasikan service pemutaran 
 ## Struktur Program
 ```
 │ README.md
-│ .gitignore
 │
 ├─── bin
 │       │ Makefile
@@ -22,6 +21,8 @@ WayangWave merupakan sebuah aplikasi yang bisa mensimulasikan service pemutaran 
 ├─── doc
 │       │ Pedoman Tugas Besar.pdf
 │       │ Spesifikasi Tugas Besar IF2111 2023_2024.pdf
+│       │ //docs final
+│
 │
 ├─── src
 │       ├─── ADT
@@ -185,27 +186,27 @@ make set
 cd ..
 ```
 
-4. Jalankan driver di terminal dengan format `<ADT>Driver`
+4. Jalankan driver di terminal dengan format `driver_<ADT>`
 
 ```
-./setDriver atau setDriver
+./driver_map_album
 ```
-## List ADT
-| No. | ADT | Command |
-|-----|-----|------|
-| 1 | Arraydin | make arraydin |
-| 2 | Arraystatis | make arraystatis |
-| 3 | Graph | make graph |
-| 4 | Linkedlist | make linkedlist |
-| 5 | Map_album | make map_album |
-| 6 | Map_song | make map_song |
-| 7 | Mesinkarakter | make mesinkarakter |
-| 8 | Mesinkata | make mesinkata |
-| 9 | Mesininput | make mesininput |
-| 10 | Mesinkalimat | make mesinkalimat |
-| 11 | Set | make set |
-| 12 | Stack | make stack |
-| 13 | Queue | make queue |
+### List ADT 
+| No. | ADT | Command Driver| Run Driver|
+|-----|-----|------|------|
+| 1 | Arraydin | make arraydin | ./driver_arraydin |
+| 2 | Arraystatis | make arraystatis | ./driver_arraystatis | 
+| 3 | Graph | make graph | ./driver_graph |
+| 4 | Linkedlist | make linkedlist | ./driver_linkedlist |
+| 5 | Map_album | make map_album | ./driver_map_album |
+| 6 | Map_song | make map_song | ./driver_map_song |
+| 7 | Mesinkarakter | make mesinkarakter | ./driver_mesinkarakter |
+| 8 | Mesinkata | make mesinkata | ./driver_mesinkata |
+| 9 | Mesininput | make mesininput | ./driver_mesininput |
+| 10 | Mesinkalimat | make mesinkalimat | ./driver_mesinkalimat |
+| 11 | Set | make set | ./driver_set |
+| 12 | Stack | make stack | ./driver_stack |
+| 13 | Queue | make queue | ./driver_queue |
 
 
 ## Anggota Kelompok 7
