@@ -21,7 +21,7 @@ WayangWave merupakan sebuah aplikasi yang bisa mensimulasikan service pemutaran 
 ├─── doc
 │       │ Pedoman Tugas Besar.pdf
 │       │ Spesifikasi Tugas Besar IF2111 2023_2024.pdf
-│       │ //docs final
+│       │ IF2111_TB_03_07.docx
 │
 │
 ├─── src
@@ -101,13 +101,13 @@ WayangWave merupakan sebuah aplikasi yang bisa mensimulasikan service pemutaran 
 
 1. Pastikan `Makefile` sudah terinstall
    ```
-   `Makefile`
+   Makefile
    ```
 
 2. ketik `make` pada terminal
    
    ```
-   `make`
+   make
    ```
 3. selesai
 
@@ -177,7 +177,7 @@ cd bin
 2. Ketik `make <ADT>`  pada terminal
 
 ```
-make set
+make map_album
 ```
 
 3. Keluar dari folder terminal
