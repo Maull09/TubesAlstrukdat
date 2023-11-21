@@ -51,7 +51,12 @@ void ADV()
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 {
-    if ((currentChar = fgetc(config)) == EOF) {
+    currentChar = fgetc(config);
+    while (currentChar == '\r') { // Lewati karakter '\r'
+        currentChar = fgetc(config);
+    }
+
+    if (currentChar == EOF) {
         EOP = true;
         fclose(config);
     } else {
@@ -67,9 +72,10 @@ void ADV2()
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 {
     retval = fscanf(pita, "%c", &currentChar);
-
+    while (currentChar == '\r') { // Lewati karakter '\r'
+        retval = fscanf(pita, "%c", &currentChar);
+    }
 }
-
 char GetCC()
 /* Mengirimkan currentChar */
 {
