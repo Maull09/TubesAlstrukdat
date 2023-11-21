@@ -496,7 +496,7 @@ int main(){
                 if (EndWord){
                     if (sesi && login){
                         char* pathdata = "./data/";
-    		            char* saves = concat(pathdata, currentWord.TabWord);
+    		            char* saves = concat(pathdata, filename.TabWord);
                         FILE *savefile = fopen(saves,"w");
                         int albumindex = 0, songindex = 0;
                         fprintf(savefile,"%d\n",DaftarPenyanyi.Neff);
