@@ -17,19 +17,5 @@ int main() {
     }
 
     printf("\nPembacaan selesai!\n");
-    
-    char namefile[] = "../../data/config.txt"; // Anda perlu membuat file bernama test.txt dengan beberapa kalimat di dalamnya
-    printf("Memulai pembacaan dari file %s...\n\n", namefile);
-
-    STARTKALIMATFILE(namefile);
-    int CountKalimat = 1;
-    printf("\nPembacaan Kedua!\n");
-    while (!EndKalimat) {
-        printf("Kalimat %d: %s\n", CountKalimat, CKalimat.TabKalimat);
-        CountKalimat++;
-        ADVKALIMATFILE2();
-    }
-
-    printf("\nPembacaan selesai!\n");
     return 0;
 }

@@ -381,12 +381,19 @@ void ListDefault(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSon
                 } else {
                     printf("Album %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedAlbum);
                 }
-            } 
+            } else if (StringSama(choice, "N") || StringSama(choice, "n")){
+                return;
+            } else {
+                printf("Input tidak valid, silahkan coba lagi.\n");
+            }
         }else {
             printf("Penyanyi %s tidak ada dalam daftar. Silakan coba lagi.\n", SelectedArtist);
-        }
-        
-    } 
+        }  
+    } else if (StringSama(choice, "N") || StringSama(choice, "n")){
+        return;
+    } else {
+        printf("Input tidak valid, silahkan coba lagi.\n");
+    }
 }
 
 void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *arrmapsong, Lagu *putar, QueueLagu *qLagu, StackSong *sLagu){
@@ -416,6 +423,12 @@ void PlaySong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong *
 
             printf("\nMasukkan ID Lagu yang dipilih : ");
             STARTINPUT();
+
+            if(!isNumber(currentWord.TabWord)){
+                printf("Input tidak valid, silahkan coba lagi.\n");
+                return;
+            }
+
             int idlagu = atoi(currentWord.TabWord);
             if (valid_idsong(*arrmapsong, idlagu, SelectedAlbum)){
                 FindSong_IDsong(*arrmapsong, SelectedAlbum, idlagu, putar);
@@ -712,15 +725,16 @@ void PlaylistRemove(ArrayPlaylists *arrPlaylist, int idxP, int idxL){
 }
 
 void playlistSwap(ArrayPlaylists *arrP, int idx, int idy, int idPlaylist) {
+    if (idx <= 0 || idy <= 0) {
+        printf("Indeks tidak valid.\n");
+        return;
+    }
+    
     if(idx == idy){
         printf("Lagu yang ditukar adalah lagu dengan indeks yang sama\n");
         return;
     }
 
-    if (idx <= 0 || idy <= 0) {
-        printf("Indeks tidak valid.\n");
-        return;
-    }
 
     int ctr = 0;
     Lagu tempx, tempy;
@@ -782,6 +796,12 @@ void playlistAddSong(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong
 
             printf("Masukkan ID Lagu yang dipilih : ");
             STARTINPUT();
+
+            if(!isNumber(currentWord.TabWord)){
+                printf("Input tidak valid, silahkan coba lagi.\n");
+                return;
+            }
+
             int idlagu = atoi(currentWord.TabWord);
             printf("\n");
 
@@ -795,6 +815,11 @@ void playlistAddSong(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong
                 printf("Masukkan ID Playlist yang dipilih : ");
                 STARTINPUT();
                 printf("\n");
+
+                if(!isNumber(currentWord.TabWord)){
+                    printf("Input tidak valid, silahkan coba lagi.\n");
+                    return;
+                }
 
                 int idplaylist = atoi(currentWord.TabWord);
                 if(isValidPlaylist(arr, idplaylist)){
@@ -854,6 +879,11 @@ void playlistAddAlbum(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSon
             STARTINPUT();
             printf("\n");
             
+            if(!isNumber(currentWord.TabWord)){
+                printf("Input tidak valid, silahkan coba lagi.\n");
+                return;
+            }
+
             int idplaylist = atoi(currentWord.TabWord);
             if(isValidPlaylist(arr, idplaylist)){
                 for (int i = 0; i < arrmapsong->MapSongs[idalbum].songs.Neff; i++){

@@ -149,10 +149,6 @@ void clearQueue(QueueLagu *q){
 }
 
 void QueueSwap (QueueLagu *q, int x, int y){
-    if(x == y){
-        printf("Lagu yang swap adalah lagu dengan indeks yang sama\n");
-        return;
-    }
     if (isEmptyQueue(*q)){
         printf("Queue kosong.\n");
         return;
@@ -171,6 +167,11 @@ void QueueSwap (QueueLagu *q, int x, int y){
         return; 
     }
 
+    if(x == y){
+        printf("Lagu yang swap adalah lagu dengan indeks yang sama\n");
+        return;
+    }
+    
     ElTypeQueue temp = q->buffer[idx_x];
     q->buffer[idx_x] = q->buffer[idx_y];
     q->buffer[idx_y] = temp;

@@ -165,12 +165,17 @@ int main(){
                                 DisplayPlaylist(&users.user[idxuser].arrp);
                                 printf("\nMasukkan ID Playlist : ");
                                 STARTINPUT2();
-                                int idxarr = atoi(currentWord.TabWord);
-                                if(FindPlaylist(users.user[idxuser].arrp, idxarr)){
-                                    PlayPlaylist(&users.user[idxuser].arrp, &users.user[idxuser].history, &users.user[idxuser].queue, idxarr);
-                                    dequeue(&users.user[idxuser].queue, &users.user[idxuser].currentsong);
-                                    printf("\nMemutar playlist \"%s\".\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
-                                    playplaylist = true;
+
+                                if(isNumber(currentWord.TabWord)){
+                                    int idxarr = atoi(currentWord.TabWord);
+                                    if(FindPlaylist(users.user[idxuser].arrp, idxarr)){
+                                        PlayPlaylist(&users.user[idxuser].arrp, &users.user[idxuser].history, &users.user[idxuser].queue, idxarr);
+                                        dequeue(&users.user[idxuser].queue, &users.user[idxuser].currentsong);
+                                        printf("\nMemutar playlist \"%s\".\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
+                                        playplaylist = true;
+                                    }
+                                } else {
+                                    printf("Input tidak valid, silahkan coba lagi.\n");
                                 }
                             } else {
                                 printf("Kamu tidak memiliki playlist.\n");
@@ -210,8 +215,8 @@ int main(){
                             if (isValidPlaylist(&users.user[idxuser].arrp, idxarr) && (users.user[idxuser].arrp.Neff != 0)){
                                 QueuePlaylist(&users.user[idxuser].arrp, &users.user[idxuser].queue, idxarr);
                                 playplaylist = true;
+                                printf("\nBerhasil menambahkan playlist \"%s\" ke queue.\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
                             }
-                            printf("\nBerhasil menambahkan playlist \"%s\" ke queue.\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
                         } else{
                             printf("Kamu tidak memiliki playlist.\n");
                         }
@@ -334,7 +339,7 @@ int main(){
                     if (sesi && login){
                         printf("Masukkan nama playlist yang ingin dibuat : ");
                         STARTINPUT2();
-                        if(currentWord.TabWord[0] == BLANK && currentWord.TabWord[1] == BLANK && currentWord.TabWord[2] == BLANK && currentWord.Length == 3){
+                        if(currentWord.TabWord[0] == BLANK && currentWord.TabWord[1] == BLANK && currentWord.TabWord[2] == BLANK && currentWord.Length < 6){
                             printf("Minimal terdapat 3 karakter selain whitespace dalam nama playlist. Silakan coba lagi.\n");
                         } else {
                             PlaylistCreate(&users.user[idxuser].arrp, currentWord.TabWord);
@@ -460,12 +465,16 @@ int main(){
                         printf("\nMasukkan ID Playlist yang dipilih : ");
                         STARTINPUT2();
                         int idxp = atoi(currentWord.TabWord); 
-                        if(isValidPlaylist(&users.user[idxuser].arrp, idxp)){
-                            printf("\nPlaylist ID %d dengan judul \"%s\" berhasil dihapus.\n", idxp, users.user[idxuser].arrp.playlists[idxp-1].name);
-                            PlaylistDelete(&users.user[idxuser].arrp, idxp);
-                        }
-                        else{
-                            printf("Tidak ada playlist dengan ID %d dalam daftar playlist pengguna. Silakan coba lagi.\n", idxp);
+                        if(isNumber(currentWord.TabWord)){
+                            if(isValidPlaylist(&users.user[idxuser].arrp, idxp)){
+                                printf("\nPlaylist ID %d dengan judul \"%s\" berhasil dihapus.\n", idxp, users.user[idxuser].arrp.playlists[idxp-1].name);
+                                PlaylistDelete(&users.user[idxuser].arrp, idxp);
+                            }
+                            else{
+                                printf("Tidak ada playlist dengan ID %d dalam daftar playlist pengguna. Silakan coba lagi.\n", idxp);
+                            }
+                        } else {
+                            printf("Input tidak valid, silahkan coba lagi.\n");
                         }
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
@@ -775,10 +784,12 @@ int main(){
             if (EndWord){
                 if(!sesi && !login){
                     printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
-                } else {
+                } else if (sesi && login){
                     idxuser = -1;
                     login = false;
                     printf("Berhasil keluar. Sampai jumpa lagi!\n");
+                } else if(sesi && !login){
+                    printf("Kamu belum login, Command tidak bisa dieksekusi!\n");
                 }
             } else {
                 invcommand();
@@ -816,7 +827,7 @@ int main(){
                                 followUser(&g, users.user[idxuser].username, currentWord.TabWord);
                                 printf("Berhasil follow user %s\n", currentWord.TabWord);
                             } else {
-                                printf("Kamu sudah menjadi follower dari user %s\n", currentWord.TabWord);
+                                printf("Kamu sudah follow user %s\n", currentWord.TabWord);
                             }
                         } else {
                             printf("Kamu tidak bisa follow diri sendiri\n");
