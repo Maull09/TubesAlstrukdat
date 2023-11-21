@@ -68,8 +68,13 @@ void help(boolean sesi, boolean login) {
         printf("16. PLAYLIST DELETE\t\t -> Untuk melakukan penghapusan suatu existing playlist dalam daftar playlist pengguna.\n");
         printf("17. STATUS\t\t\t -> Untuk menampilkan lagu yang sedang dimainkan beserta Queue song yang ada dan dari playlist mana lagu itu diputar.\n");
         printf("18. SAVE <filename>\t\t -> Untuk menyimpan state WayangWave terbaru ke dalam file yang kamu inginkan.\n");
-        printf("19. HELP\t\t\t -> Menunjukkanmu list command command yang tersedia di WayangWave dan kegunaannya.\n");
-        printf("20. QUIT\t\t\t -> Untuk keluar dari aplikasi WayangWave.\n\n");
+        printf("19. FOLLOW\t\t\t-> Untuk mengikuti akun orang lain yang kamu inginkan.\n");
+        printf("20. UNFOLLOW\t\t\t-> Untuk berhenti mengikuti akun orang lain yang kamu inginkan.\n");
+        printf("21. FOLLOWERS\t\t\t-> Untuk melihat daftar akun orang lain yang mengikuti akunmu.\n");
+        printf("22. FOLLOWING\t\t\t-> Untuk melihat daftar akun orang lain yang kamu ikuti.\n");
+        printf("23. LOGOUT\t\t\t-> Untuk keluar dari akun WayangWave milikmu.\n");
+        printf("24. HELP\t\t\t -> Menunjukkanmu list command command yang tersedia di WayangWave dan kegunaannya.\n");
+        printf("25. QUIT\t\t\t -> Untuk keluar dari aplikasi WayangWave.\n\n");
     }
 }
 
