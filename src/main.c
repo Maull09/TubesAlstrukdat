@@ -495,8 +495,8 @@ int main(){
                 
                 if (EndWord){
                     if (sesi && login){
-                        char *saves= "./data/";
-                        saves = concat(saves, filename.TabWord);
+                        char* pathdata = "./data/";
+    		            char* saves = concat(pathdata, currentWord.TabWord);
                         FILE *savefile = fopen(saves,"w");
                         int albumindex = 0, songindex = 0;
                         fprintf(savefile,"%d\n",DaftarPenyanyi.Neff);
@@ -588,8 +588,9 @@ int main(){
                             } else {
                                 fprintf(savefile,"0");
                             }
-                            fclose(savefile);
                         } 
+                        fclose(savefile);
+                        free(saves);
                         printf("Save file berhasil disimpan.\n");
                     } else {
                         printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
@@ -623,9 +624,8 @@ int main(){
                         perror("Alokasi memori gagal");
                         exit(1);
                     }
-                    char *old_saves = saves;
-                    SalinString(saves, "./data/");
-                    saves = concat(saves, currentWord.TabWord);
+                    char* pathdata = "./data/";
+    		        char* saves = concat(pathdata, currentWord.TabWord);
                     FILE *savefile = fopen(saves,"w");
                     int albumindex = 0, songindex = 0;
                     fprintf(savefile,"%d\n",DaftarPenyanyi.Neff);
@@ -717,9 +717,9 @@ int main(){
                         } else {
                             fprintf(savefile,"0");
                         }
-                        free(old_saves);
-                        fclose(savefile);
                     } 
+                    fclose(savefile);
+                    free(saves);
                     printf("Save file berhasil disimpan.\n");
                 }
                 mulai = false;
