@@ -614,9 +614,14 @@ int main(){
                 } else {
                     printf("\nSilahkan masukkan nama file untuk menyimpan sesi <filename.txt> : ");
                     STARTINPUT2();
-                    char *savesname= "./data/";
-                    savesname = concat(savesname, currentWord.TabWord);
-                    FILE *savefile = fopen(savesname,"w");
+                    char *saves = (char *)malloc(256 * sizeof(char));
+                    if (saves == NULL) {
+                        perror("Alokasi memori gagal");
+                        exit(1);
+                    }
+                    SalinString(saves, "./data/");
+                    saves = concat(saves, currentWord.TabWord);
+                    FILE *savefile = fopen(saves,"w");
                     int albumindex = 0, songindex = 0;
                     fprintf(savefile,"%d\n",DaftarPenyanyi.Neff);
                     for(int u=0;u<DaftarPenyanyi.Neff;u++){
