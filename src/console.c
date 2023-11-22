@@ -28,7 +28,6 @@ void menu(){
     printf("1. START\n");
     printf("2. LOAD [filename.txt]\n");
     printf("3. HELP\n");
-    printf("0. QUIT\n");
     printf("=========================================================================================================================================\n");
 }
 
@@ -38,7 +37,6 @@ void help(boolean sesi, boolean login) {
         printf("1. START\t\t-> Untuk memulai aplikasi WayangWave.\n");
         printf("2. LOAD <filename>\t-> Untuk memulai aplikasi WayangWave berdasarkan file yang kamu simpan.\n");
         printf("3. HELP\t\t\t-> Menunjukkanmu list command command yang tersedia di WayangWave dan kegunaannya.\n");
-        printf("4. QUIT\t\t\t-> Untuk keluar dari aplikasi WayangWave\n\n");
     }
     else if ((sesi) && (!login)) {
         printf("========================================================[ Menu Help WayangWave =========================================================\n\n");

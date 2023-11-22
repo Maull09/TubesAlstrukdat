@@ -5,6 +5,7 @@
 #include "../mesin_karakter/mesinkarakter.h"
 #include "../mesin_kata/mesinkata.h"
 #include "../listadt.h"
+#include "../mesin_kalimat/mesinkalimat.h"
 
 void STARTINPUT();
 /* I.S. : currentChar sembarang

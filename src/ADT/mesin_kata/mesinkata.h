@@ -4,7 +4,8 @@
 #include "../boolean.h"
 #include "../mesin_karakter/mesinkarakter.h"
 #include "../listadt.h"
-
+#include "../mesin_kata/mesinkata.h"
+#include "../mesin_kalimat/mesinkalimat.h"
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK

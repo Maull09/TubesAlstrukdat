@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include "mesinkalimat.h"
+#include "../mesin_kata/mesinkata.h"
+#include "../mesin_kalimat/mesinkalimat.h"
+#include "../mesin_input/mesininput.h"
 
 // gcc mesinkalimat.c driver_mesinkalimat.c ../mesin_kata/mesinkata.c ../mesin_karkater/mesinkarakter.c -o driver_mesinkalimat
 
 int main() {
-    char filename[] = "../../data/config.txt"; // Anda perlu membuat file bernama test.txt dengan beberapa kalimat di dalamnya
+    char filename[] = "../src/data/config.txt"; 
     printf("Memulai pembacaan dari file %s...\n\n", filename);
 
     STARTKALIMATFILE(filename);

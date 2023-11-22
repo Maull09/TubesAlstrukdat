@@ -4,7 +4,7 @@
 // gcc mesinkarakter.c driver_mesinkarakter.c -o driver_mesinkarakter
 
 int main() {
-    // char filename[] = "../../data/test_mesinkarakter.txt";
+    // char filename[] = "../src/data/test_mesinkarakter.txt";
     // printf("Memulai pembacaan dari file %s...\n\n", filename);
 
     // STARTFILE(filename);
@@ -13,7 +13,7 @@ int main() {
     //     ADV();
     // }
 
-    // printf("\n\nPembacaan karakter dari file selesai!\n");
+    printf("\n\nPembacaan karakter dari file selesai!\n");
 
     printf("\nMemulai pembacaan dari input standar (stdin). Ketik beberapa karakter dan akhiri dengan tanda ;\n\n");
 

@@ -20,13 +20,13 @@ mesinkarakter:
 	gcc -o ../driver_mesinkarakter ../src/ADT/mesin_karakter/driver_mesinkarakter.c ../src/ADT/mesin_karakter/mesinkarakter.c ../src/function.c
 
 mesinkata:
-	gcc -o ../driver_mesinkata ../src/ADT/mesin_kata/driver_mesinkata.c ../src/ADT/mesin_kata/mesinkata.c ../src/function.c
+	gcc -o ../driver_mesinkata ../src/ADT/mesin_kata/driver_mesinkata.c ../src/ADT/mesin_kata/mesinkata.c ../src/function.c ../src/ADT/mesin_karakter/mesinkarakter.c ../src/ADT/mesin_input/mesininput.c ../src/ADT/mesin_kalimat/mesinkalimat.c
 
 mesininput:
-	gcc -o ../driver_mesininput ../src/ADT/mesin_input/driver_mesininput.c ../src/ADT/mesin_input/mesininput.c ../src/function.c
+	gcc -o ../driver_mesininput ../src/ADT/mesin_input/driver_mesininput.c ../src/ADT/mesin_input/mesininput.c ../src/function.c ../src/ADT/mesin_karakter/mesinkarakter.c ../src/ADT/mesin_kata/mesinkata.c ../src/ADT/mesin_kalimat/mesinkalimat.c
 
 mesinkalimat:
-	gcc -o ../driver_mesinkalimat ../src/ADT/mesin_kalimat/driver_mesinkalimat.c ../src/ADT/mesin_kalimat/mesinkalimat.c ../src/function.c
+	gcc -o ../driver_mesinkalimat ../src/ADT/mesin_kalimat/driver_mesinkalimat.c ../src/ADT/mesin_kalimat/mesinkalimat.c ../src/function.c ../src/ADT/mesin_karakter/mesinkarakter.c ../src/ADT/mesin_kata/mesinkata.c ../src/ADT/mesin_input/mesininput.c
 
 set:
 	gcc -o ../driver_set ../src/ADT/set/driver_set.c ../src/ADT/set/set.c ../src/function.c
