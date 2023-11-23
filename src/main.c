@@ -63,7 +63,7 @@ int main(){
                 if (!sesi && !login){
                     printf("WayangWave Dimulai\n");
                     char tempcurrentchar = currentChar;
-                    FUNCSTART(&DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &users);
+                    FUNCSTART(&DaftarPenyanyi, &SingerAlbum, &SongAlbum, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &KumpulanLagu, &users, &g);
                     sesi = true;
                     currentChar = tempcurrentchar;
                 } else {

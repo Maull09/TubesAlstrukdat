@@ -100,7 +100,7 @@ void delay(int number_of_seconds)
     while (clock() < start_time + milli_seconds);
 }
 
-void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, arrofuser *users) {
+void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongAlbum, ListMapAlbum *KumpulanAlbumSinger, ListMapSong *KumpulanLaguAlbum, SetSong *KumpulanLagu, arrofuser *users, Graph *g) {
     STARTKALIMATFILE("./data/config.txt");
     int jumlahPenyanyi = atoi(CKalimat.TabKalimat);  // Convert ke integer
     DaftarPenyanyi->Neff = jumlahPenyanyi;
@@ -140,10 +140,33 @@ void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongA
     int jumlahuser = atoi(CKalimat.TabKalimat);
 
     for(int z = 0; z < jumlahuser; z++){
-        ADVKALIMATFILE3();
-        infouser dummyuser = CreateUser(CKalimat.TabKalimat);
-        InsertUser(users, dummyuser);
-    }
+            ADVKALIMATFILE3();
+            char dummynamauser[100];
+            SalinString(dummynamauser, CKalimat.TabKalimat);
+            infouser dummyuser = CreateUser(dummynamauser);
+            InsertUser(users, dummyuser);
+            insertNode(g, dummynamauser);
+            ADVKALIMATFILE3();
+            int jumlahfollowers = atoi(CKalimat.TabKalimat);
+            ADVKALIMATFILE3();
+            int jumlahfollowing = atoi(CKalimat.TabKalimat);
+            if (jumlahfollowers > 0) {
+                for (int i = 0; i < jumlahfollowers; i++) {
+                    ADVKALIMATFILE();
+                    char follower[100];
+                    SalinString(follower, CKalimat.TabKalimat);
+                    insertEdge(g, follower, dummynamauser);
+                }
+            }
+            if (jumlahfollowing > 0) {
+                for (int i = 0; i < jumlahfollowing; i++) {
+                    ADVKALIMATFILE();
+                    char following[100];
+                    SalinString(following, CKalimat.TabKalimat);
+                    insertEdge(g, dummynamauser, following);
+                }
+            }
+        }
 
     printf("File konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
     // displaySinger(DaftarPenyanyi);
