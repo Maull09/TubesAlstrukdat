@@ -2,7 +2,7 @@
 #include <time.h>
 #include "console.h"
 
-void welcome(){
+void welcome() {
     printf("Memuat WayangWave...\n");
     delay(2);
     char *welcomingtext = "./data/welcoming_text.txt";
@@ -14,14 +14,15 @@ void welcome(){
         return;
     }
 
-    char baca_str[255];
-    while(fgets(baca_str, sizeof(baca_str), ff) != NULL) {
-        printf("%s",baca_str);
+    char c;
+    while ((c = fgetc(ff)) != EOF) {
+        printf("%c", c);
     }
-    printf("\n");
 
+    printf("\n");
     fclose(ff);
 }
+
 
 void menu(){
     printf("========================================================[ Main Menu WayangWave ]=========================================================\n\n");
@@ -651,7 +652,7 @@ void PlayPlaylist(ArrayPlaylists *arrPlaylist, StackSong *sLagu, QueueLagu *qLag
     ElTypeQueue dummyq;
     Lagu dummyL;
 
-    if(FindPlaylist(*arrPlaylist, idxarr)){
+    if(arrPlaylist->playlists[idxarr-1].laguplaylist.First != NULL){
         clearStack(sLagu);
         while (!isEmptyQueue(*qLagu)){
             dequeue(qLagu, &dummyq);
@@ -664,6 +665,8 @@ void PlayPlaylist(ArrayPlaylists *arrPlaylist, StackSong *sLagu, QueueLagu *qLag
             enqueue(qLagu, dummyL);
             P = Next(P);
         }
+    } else {
+        printf("Playlist kosong, silahkan tambahkan lagu terlebih dahulu.\n");
     }
 }
 

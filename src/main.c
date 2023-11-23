@@ -367,7 +367,6 @@ int main(){
                             } else {
                                 printf("Kamu tidak memiliki playlist.\n");
                             }
-                            playlistAddSong(&users.user[idxuser].arrp, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPenyanyi);
                         } else {
                             printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                         }
@@ -454,7 +453,7 @@ int main(){
                                     if(isValidSong(users.user[idxuser].arrp.playlists[id-1].laguplaylist, n)){
                                         PlaylistRemove(&users.user[idxuser].arrp, id, n);
                                     } else {
-                                        printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n   ", n, users.user[idxuser].arrp.playlists[id-1].name);
+                                        printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n", n, users.user[idxuser].arrp.playlists[id-1].name);
                                     }
                                 } else{
                                     printf("Tidak ada playlist dengan ID %d.\n", id);
