@@ -33,7 +33,7 @@ void menu(){
 
 void help(boolean sesi, boolean login) {
     if ((!sesi) && (!login)) {
-        printf("========================================================[ Menu Help WayangWave =========================================================\n\n");
+        printf("========================================================[ Menu Help WayangWave ]=========================================================\n\n");
         printf("1. START\t\t-> Untuk memulai aplikasi WayangWave.\n");
         printf("2. LOAD <filename>\t-> Untuk memulai aplikasi WayangWave berdasarkan file yang kamu simpan.\n");
         printf("3. HELP\t\t\t-> Menunjukkanmu list command command yang tersedia di WayangWave dan kegunaannya.\n");
