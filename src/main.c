@@ -173,10 +173,14 @@ int main(){
                                 if(isNumber(currentWord.TabWord)){
                                     int idxarr = atoi(currentWord.TabWord);
                                     if(FindPlaylist(users.user[idxuser].arrp, idxarr)){
-                                        PlayPlaylist(&users.user[idxuser].arrp, &users.user[idxuser].history, &users.user[idxuser].queue, idxarr);
-                                        dequeue(&users.user[idxuser].queue, &users.user[idxuser].currentsong);
-                                        printf("\nMemutar playlist \"%s\".\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
-                                        playplaylist = true;
+                                        if(users.user[idxuser].arrp.playlists[idxarr-1].laguplaylist.First != Nil){
+                                            PlayPlaylist(&users.user[idxuser].arrp, &users.user[idxuser].history, &users.user[idxuser].queue, idxarr);
+                                            dequeue(&users.user[idxuser].queue, &users.user[idxuser].currentsong);
+                                            printf("\nMemutar playlist \"%s\".\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
+                                            playplaylist = true;
+                                        } else {
+                                            printf("Playlist \"%s\" kosong, silahkan isi lagu terlebih dahulu.\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
+                                        }
                                     } else {
                                         printf("Tidak ada playlist dengan id %d \n", idxarr);
                                     }

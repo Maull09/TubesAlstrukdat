@@ -825,7 +825,7 @@ void playlistAddSong(ArrayPlaylists *arr, ListMapAlbum *arrmapalbum, ListMapSong
                 int idplaylist = atoi(currentWord.TabWord);
                 if(isValidPlaylist(arr, idplaylist)){
                     InsVLast(&arr->playlists[idplaylist-1].laguplaylist, Putar);
-                    printf("Lagu dengan judul \"%s\" pada album %s oleh penyanyi %s berhasil ditambahkan ke dalam playlist \"%s\" \n.", Putar.titlesong ,SelectedAlbum, SelectedArtist, arr->playlists[idplaylist-1].name );
+                    printf("Lagu dengan judul \"%s\" pada album %s oleh penyanyi %s berhasil ditambahkan ke dalam playlist \"%s\".\n", Putar.titlesong ,SelectedAlbum, SelectedArtist, arr->playlists[idplaylist-1].name );
                 }
                 else{
                     printf("Playlist dengan id:%d tidak ada dalam daftar. Silakan coba lagi.\n", idplaylist);
