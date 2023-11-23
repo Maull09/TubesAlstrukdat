@@ -150,7 +150,7 @@ void clearQueue(QueueLagu *q){
 
 void QueueSwap (QueueLagu *q, int x, int y){
     if (isEmptyQueue(*q)){
-        printf("Queue kosong.\n");
+        printf("Queue kosong. Tidak ada lagu yang dapat ditukar.\n");
         return;
     }
 

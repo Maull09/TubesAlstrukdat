@@ -216,16 +216,20 @@ int main(){
                 ADVINPUT();
                 if (EndWord){
                     if (sesi && login){
-                        printf("Daftar playlist pengguna : \n");
-                        DisplayPlaylist(&users.user[idxuser].arrp);
                         if(users.user[idxuser].arrp.Neff != 0){
+                            printf("Daftar playlist pengguna : \n");
+                            DisplayPlaylist(&users.user[idxuser].arrp);
                             printf("\nMasukkan ID Playlist : ");
                             STARTINPUT2();
                             int idxarr = atoi(currentWord.TabWord);
-                            if (isValidPlaylist(&users.user[idxuser].arrp, idxarr) && (users.user[idxuser].arrp.Neff != 0)){
-                                QueuePlaylist(&users.user[idxuser].arrp, &users.user[idxuser].queue, idxarr);
-                                playplaylist = true;
-                                printf("\nBerhasil menambahkan playlist \"%s\" ke queue.\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
+                            if(users.user[idxuser].arrp.playlists[idxarr-1].laguplaylist.First != Nil){
+                                if (isValidPlaylist(&users.user[idxuser].arrp, idxarr) && (users.user[idxuser].arrp.Neff != 0)){
+                                    QueuePlaylist(&users.user[idxuser].arrp, &users.user[idxuser].queue, idxarr);
+                                    playplaylist = true;
+                                    printf("\nBerhasil menambahkan playlist \"%s\" ke queue.\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
+                                }
+                            } else {
+                                printf("Playlist \"%s\" kosong, silahkan isi lagu terlebih dahulu.\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
                             }
                         } else{
                             printf("Kamu tidak memiliki playlist.\n");

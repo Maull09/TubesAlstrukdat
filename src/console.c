@@ -140,7 +140,7 @@ void FUNCSTART(ListSinger *DaftarPenyanyi, MapAlbum *SingerAlbum, MapSong *SongA
     int jumlahuser = atoi(CKalimat.TabKalimat);
 
     for(int z = 0; z < jumlahuser; z++){
-        ADVKALIMATFILE();
+        ADVKALIMATFILE3();
         infouser dummyuser = CreateUser(CKalimat.TabKalimat);
         InsertUser(users, dummyuser);
     }
@@ -476,6 +476,10 @@ void QueueSong(ListSinger *listpenyanyi, ListMapAlbum *arrmapalbum, ListMapSong 
 
             printf("\nMasukkan ID Lagu yang dipilih : ");
             STARTINPUT();
+            if(!isNumber(currentWord.TabWord)){
+                printf("Input tidak valid, silahkan coba lagi.\n");
+                return;
+            }
             int idlagu = atoi(currentWord.TabWord);
             if (valid_idsong(*arrmapsong, idlagu, SelectedAlbum)){
                 FindSong_IDsong(*arrmapsong, SelectedAlbum, idlagu, &Putar);        
