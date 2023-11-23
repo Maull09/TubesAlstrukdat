@@ -1047,3 +1047,13 @@ int jumlahFollowing(Graph g, char username[]) {
     }
     return count;
 }
+
+int countNonWhitespace(Word w) {
+    int count = 0;
+    for (int i = 0; i < w.Length; i++) {
+        if (w.TabWord[i] != BLANK && w.TabWord[i] != '\n' && w.TabWord[i] != '\t' && w.TabWord[i] != '\r') {
+            count++;
+        }
+    }
+    return count;
+}

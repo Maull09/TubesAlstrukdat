@@ -129,6 +129,10 @@ int main(){
                                 } else {
                                     printf("Tidak ada playlist dengan id %d \n", idxplaylist);
                                 }
+                            } else if (StringSama(currentWord.TabWord, "N")) {
+                                printf("\n");
+                            } else {
+                                printf("Input tidak valid, silahkan coba lagi.\n");
                             }
                         } else {
                             printf("Kamu tidak memiliki playlist.\n");
@@ -173,6 +177,8 @@ int main(){
                                         dequeue(&users.user[idxuser].queue, &users.user[idxuser].currentsong);
                                         printf("\nMemutar playlist \"%s\".\n", users.user[idxuser].arrp.playlists[idxarr-1].name);
                                         playplaylist = true;
+                                    } else {
+                                        printf("Tidak ada playlist dengan id %d \n", idxarr);
                                     }
                                 } else {
                                     printf("Input tidak valid, silahkan coba lagi.\n");
@@ -339,7 +345,7 @@ int main(){
                     if (sesi && login){
                         printf("Masukkan nama playlist yang ingin dibuat : ");
                         STARTINPUT2();
-                        if(currentWord.TabWord[0] == BLANK && currentWord.TabWord[1] == BLANK && currentWord.TabWord[2] == BLANK && currentWord.Length < 6){
+                        if(countNonWhitespace(currentWord) < 3){
                             printf("Minimal terdapat 3 karakter selain whitespace dalam nama playlist. Silakan coba lagi.\n");
                         } else {
                             PlaylistCreate(&users.user[idxuser].arrp, currentWord.TabWord);
@@ -356,6 +362,11 @@ int main(){
                     ADVINPUT();
                     if (EndWord){
                         if (sesi && login){
+                            if(users.user[idxuser].arrp.Neff != 0){
+                                playlistAddSong(&users.user[idxuser].arrp, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPenyanyi);
+                            } else {
+                                printf("Kamu tidak memiliki playlist.\n");
+                            }
                             playlistAddSong(&users.user[idxuser].arrp, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPenyanyi);
                         } else {
                             printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
@@ -367,7 +378,11 @@ int main(){
                     ADVINPUT();
                     if (EndWord){
                         if (sesi && login){
-                            playlistAddAlbum(&users.user[idxuser].arrp, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPenyanyi);
+                            if(users.user[idxuser].arrp.Neff != 0){
+                                playlistAddAlbum(&users.user[idxuser].arrp, &KumpulanAlbumSinger, &KumpulanLaguAlbum, &DaftarPenyanyi);
+                            } else {
+                                printf("Kamu tidak memiliki playlist.\n");
+                            }
                         } else {
                             printf("Sesi belum dimulai, Command tidak bisa dieksekusi!\n");
                         }

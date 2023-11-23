@@ -78,4 +78,6 @@ boolean isFollower(Graph g, char followerUsername[], char followingUsername[]);
 int jumlahFollowers(Graph g, char username[]);
 
 int jumlahFollowing(Graph g, char username[]);
+
+int countNonWhitespace(Word w);
 #endif
