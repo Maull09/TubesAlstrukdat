@@ -16,12 +16,12 @@ WayangWave merupakan sebuah aplikasi yang bisa mensimulasikan service pemutaran 
 │ README.md
 │
 ├─── bin
-│       │ Makefile
+│       │ makefile
 │
 ├─── doc
+│       │ IF2111_TB_03_07.pdf
 │       │ Pedoman Tugas Besar.pdf
 │       │ Spesifikasi Tugas Besar IF2111 2023_2024.pdf
-│       │ IF2111_TB_03_07.docx
 │
 │
 ├─── src

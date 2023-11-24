@@ -73,12 +73,16 @@ void CopyWord()
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 {
     int i = 0;
+    for(int j = 0; j < NMax; j++){
+        currentWord.TabWord[j] = '\0';
+    }
+    currentWord.Length = 0;
 
     while ((currentChar != MARK) && (currentChar != BLANK) && (i < NMax))
     {
         currentWord.TabWord[i] = currentChar;
         i += 1;
-        ADV();
+        ADV2();
     }
 
     currentWord.Length = i;

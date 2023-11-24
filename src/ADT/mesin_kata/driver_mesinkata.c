@@ -8,9 +8,7 @@ int main() {
 
     while (!EndWord) {
         printf("Read word: ");
-        for (int i = 0; i < currentWord.Length; i++) {
-            printf("%c", currentWord.TabWord[i]);
-        }
+        printf("%s", currentWord.TabWord);
         printf("\n");
 
         ADVWORD(); // Advance to the next word

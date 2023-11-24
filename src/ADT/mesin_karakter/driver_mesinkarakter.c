@@ -4,14 +4,14 @@
 // gcc mesinkarakter.c driver_mesinkarakter.c -o driver_mesinkarakter
 
 int main() {
-    // char filename[] = "../src/data/test_mesinkarakter.txt";
-    // printf("Memulai pembacaan dari file %s...\n\n", filename);
+    char filename[] = "../src/data/test_mesinkarakter.txt";
+    printf("Memulai pembacaan dari file %s...\n\n", filename);
 
-    // STARTFILE(filename);
-    // while (!IsEOP()) {
-    //     printf("%c", GetCC());
-    //     ADV();
-    // }
+    STARTFILE(filename);
+    while (!IsEOP()) {
+        printf("%c", GetCC());
+        ADV();
+    }
 
     printf("\n\nPembacaan karakter dari file selesai!\n");
 
