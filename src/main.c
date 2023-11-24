@@ -553,52 +553,62 @@ int main(){
 
                             fprintf(savefile, "%s;%d;%d\n", username, jmlFollower, jmlFollowing);
 
-                            for (adrNode P = g.first; P != NULL; P = P->next) {
-                                for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
-                                    if (StringSama(Q->succ->username, username)) {
-                                        fprintf(savefile, "%s\n", P->username);
+                            if(jumlahFollowers(g, username) > 0){
+                                for (adrNode P = g.first; P != NULL; P = P->next) {
+                                    for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+                                        if (StringSama(Q->succ->username, username)) {
+                                            fprintf(savefile, "%s\n", P->username);
+                                        }
                                     }
                                 }
                             }
-
-                            adrNode P = searchNode(g, username);
-                            if (P != NULL) {
-                                for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
-                                    fprintf(savefile, "%s\n", Q->succ->username);
+                            
+                            if(jumlahFollowing(g, username) > 0){
+                                adrNode P = searchNode(g, username);
+                                if (P != NULL) {
+                                    for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+                                        fprintf(savefile, "%s\n", Q->succ->username);
+                                    }
                                 }
                             }
                         }
 
-                        for(int i = 0; i < users.neff; i++){
-                            if(!(StringSama(users.user[idxuser].currentsong.artist, "\0") && StringSama(users.user[idxuser].currentsong.album, "\0") && StringSama(users.user[idxuser].currentsong.titlesong, "\0"))){
-                                fprintf(savefile, "%s;%s;%s\n", users.user[idxuser].currentsong.artist, users.user[idxuser].currentsong.album, users.user[idxuser].currentsong.titlesong);
-                            } 
+                        for(int cuser = 0; cuser < users.neff; cuser++){
+                            if(!(StringSama(users.user[cuser].currentsong.artist, "\0") && StringSama(users.user[cuser].currentsong.album, "\0") && StringSama(users.user[cuser].currentsong.titlesong, "\0"))){
+                                fprintf(savefile, "%s;%s;%s\n", users.user[cuser].currentsong.artist, users.user[cuser].currentsong.album, users.user[cuser].currentsong.titlesong);
+                            } else {
+                                fprintf(savefile, "-\n");
+                            }
 
                             //bagian queue
-                            if(!isEmptyQueue(users.user[idxuser].queue)){
-                                fprintf(savefile,"%d\n",lengthQueue(users.user[idxuser].queue));
-                                for(int i=0;i<lengthQueue(users.user[idxuser].queue);i++){
-                                    fprintf(savefile,"%s;%s;%s\n",users.user[idxuser].queue.buffer[i].artist,users.user[idxuser].queue.buffer[i].album,users.user[idxuser].queue.buffer[i].titlesong);
+                            if (!isEmptyQueue(users.user[cuser].queue)) {
+                                int length = lengthQueue(users.user[cuser].queue);
+                                fprintf(savefile, "%d\n", length);
+                                int idx = users.user[cuser].queue.idxHead;
+                                for (int i = 0; i < length; i++) {
+                                    fprintf(savefile, "%s;%s;%s\n", users.user[cuser].queue.buffer[idx].artist, users.user[cuser].queue.buffer[idx].album, users.user[cuser].queue.buffer[idx].titlesong);
+                                    idx = (idx + 1) % CAPACITY; // Majukan indeks sesuai dengan antrian sirkuler
                                 }
                             } else {
-                                fprintf(savefile,"0\n");
+                                fprintf(savefile, "0\n");
                             }
+
                             //bagian riwayat
-                            if(!IsEmptyStackSong(users.user[idxuser].history)){
-                                fprintf(savefile,"%d\n",users.user[idxuser].history.TOP);
-                                for(int i = 0 ;i <= users.user[idxuser].history.TOP-1;i++){
-                                    fprintf(savefile,"%s;%s;%s\n",users.user[idxuser].history.Songs[i].artist,users.user[idxuser].history.Songs[i].album,users.user[idxuser].history.Songs[i].titlesong);
+                            if(!IsEmptyStackSong(users.user[cuser].history)){
+                                fprintf(savefile,"%d\n",users.user[cuser].history.TOP+1);
+                                for(int i = 0 ;i <= users.user[cuser].history.TOP;i++){
+                                    fprintf(savefile,"%s;%s;%s\n",users.user[cuser].history.Songs[i].artist,users.user[cuser].history.Songs[i].album,users.user[cuser].history.Songs[i].titlesong);
                                 }
                             } else {
                                 fprintf(savefile,"0\n");
                             }
                             // //bagian playlist
-                            if (users.user[idxuser].arrp.Neff != 0 ){
-                                fprintf(savefile,"%d\n",users.user[idxuser].arrp.Neff);
-                                for (int i = 0; i < users.user[idxuser].arrp.Neff; i++) {
-                                    fprintf(savefile, "%d %s", NbElmt(users.user[idxuser].arrp.playlists[i].laguplaylist), users.user[idxuser].arrp.playlists[i].name);
-                                    int jumlahLagu = NbElmt(users.user[idxuser].arrp.playlists[i].laguplaylist);
-                                    address P = First(users.user[idxuser].arrp.playlists[i].laguplaylist);
+                            if (users.user[cuser].arrp.Neff != 0 ){
+                                fprintf(savefile,"%d\n",users.user[cuser].arrp.Neff);
+                                for (int i = 0; i < users.user[cuser].arrp.Neff; i++) {
+                                    fprintf(savefile, "%d %s", NbElmt(users.user[cuser].arrp.playlists[i].laguplaylist), users.user[cuser].arrp.playlists[i].name);
+                                    int jumlahLagu = NbElmt(users.user[cuser].arrp.playlists[i].laguplaylist);
+                                    address P = First(users.user[cuser].arrp.playlists[i].laguplaylist);
                                     
                                     if (jumlahLagu > 0) {
                                         fprintf(savefile, "\n"); // Baris baru hanya jika ada lagu dalam playlist
@@ -612,12 +622,15 @@ int main(){
                                         }
                                     }
                                     
-                                    if (i < users.user[idxuser].arrp.Neff - 1) {
+                                    if (cuser < users.neff - 1) {
                                         fprintf(savefile, "\n"); // Baris baru setelah setiap playlist kecuali playlist terakhir
                                     }
                                 } 
                             } else {
                                 fprintf(savefile,"0");
+                                if (cuser < users.neff - 1) {
+                                    fprintf(savefile, "\n"); // Baris baru setelah setiap playlist kecuali playlist terakhir
+                                }
                             }
                         } 
                         fclose(savefile);
@@ -652,104 +665,121 @@ int main(){
                     } else if (StringSama(currentWord.TabWord, "Y")){
                         printf("\nSilahkan masukkan nama file untuk menyimpan sesi <filename.txt> : ");
                         STARTINPUT2();
-                        char* pathdata = "./data/";
-                        char* saves = concat(pathdata, currentWord.TabWord);
-                        FILE *savefile = fopen(saves,"w");
-                        int albumindex = 0, songindex = 0;
-                        fprintf(savefile,"%d\n",DaftarPenyanyi.Neff);
-                        for(int u=0;u<DaftarPenyanyi.Neff;u++){
-                            fprintf(savefile,"%d %s\n",KumpulanAlbumSinger.MapAlbums[u].Neff,DaftarPenyanyi.singers[u].singerName);
+                        if(name_valid(currentWord.TabWord)){
+                            char* pathdata = "./data/";
+                            char* saves = concat(pathdata, currentWord.TabWord);
+                            FILE *savefile = fopen(saves,"w");
+                            int albumindex = 0, songindex = 0;
+                            fprintf(savefile,"%d\n",DaftarPenyanyi.Neff);
+                            for(int u=0;u<DaftarPenyanyi.Neff;u++){
+                                fprintf(savefile,"%d %s\n",KumpulanAlbumSinger.MapAlbums[u].Neff,DaftarPenyanyi.singers[u].singerName);
 
-                            for(int e=0; e<KumpulanAlbumSinger.MapAlbums[u].Neff;e++){
-                                fprintf(savefile,"%d %s\n",KumpulanLaguAlbum.MapSongs[albumindex + e].songs.Neff,KumpulanLaguAlbum.MapSongs[albumindex + e].albumName);
+                                for(int e=0; e<KumpulanAlbumSinger.MapAlbums[u].Neff;e++){
+                                    fprintf(savefile,"%d %s\n",KumpulanLaguAlbum.MapSongs[albumindex + e].songs.Neff,KumpulanLaguAlbum.MapSongs[albumindex + e].albumName);
 
-                                for (int o=0; o<KumpulanLaguAlbum.MapSongs[albumindex + e].songs.Neff;o++){
-                                    fprintf(savefile,"%s\n",KumpulanLaguAlbum.MapSongs[albumindex + e].songs.songs[o].songName);
-                                }
-                            }
-                            albumindex += KumpulanAlbumSinger.MapAlbums[u].Neff;
-                        }
-
-                        fprintf(savefile, "%d\n", users.neff);
-                        
-                        for (int i = 0; i < users.neff; i++) {
-                            char* username = users.user[i].username;
-                            int jmlFollower = jumlahFollowers(g, username);
-                            int jmlFollowing = jumlahFollowing(g, username);
-
-                            fprintf(savefile, "%s;%d;%d\n", username, jmlFollower, jmlFollowing);
-
-                            for (adrNode P = g.first; P != NULL; P = P->next) {
-                                for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
-                                    if (StringSama(Q->succ->username, username)) {
-                                        fprintf(savefile, "%s\n", P->username);
+                                    for (int o=0; o<KumpulanLaguAlbum.MapSongs[albumindex + e].songs.Neff;o++){
+                                        fprintf(savefile,"%s\n",KumpulanLaguAlbum.MapSongs[albumindex + e].songs.songs[o].songName);
                                     }
                                 }
+                                albumindex += KumpulanAlbumSinger.MapAlbums[u].Neff;
                             }
 
-                            adrNode P = searchNode(g, username);
-                            if (P != NULL) {
-                                for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
-                                    fprintf(savefile, "%s\n", Q->succ->username);
-                                }
-                            }
-                        }
+                            fprintf(savefile, "%d\n", users.neff);
+                            
+                            for (int i = 0; i < users.neff; i++) {
+                                char* username = users.user[i].username;
+                                int jmlFollower = jumlahFollowers(g, username);
+                                int jmlFollowing = jumlahFollowing(g, username);
 
-                        for(int i = 0; i < users.neff; i++){
-                            if(!(StringSama(users.user[idxuser].currentsong.artist, "\0") && StringSama(users.user[idxuser].currentsong.album, "\0") && StringSama(users.user[idxuser].currentsong.titlesong, "\0"))){
-                                fprintf(savefile, "%s;%s;%s\n", users.user[idxuser].currentsong.artist, users.user[idxuser].currentsong.album, users.user[idxuser].currentsong.titlesong);
-                            } 
-
-                            //bagian queue
-                            if(!isEmptyQueue(users.user[idxuser].queue)){
-                                fprintf(savefile,"%d\n",lengthQueue(users.user[idxuser].queue));
-                                for(int i=0;i<lengthQueue(users.user[idxuser].queue);i++){
-                                    fprintf(savefile,"%s;%s;%s\n",users.user[idxuser].queue.buffer[i].artist,users.user[idxuser].queue.buffer[i].album,users.user[idxuser].queue.buffer[i].titlesong);
-                                }
-                            } else {
-                                fprintf(savefile,"0\n");
-                            }
-                            //bagian riwayat
-                            if(!IsEmptyStackSong(users.user[idxuser].history)){
-                                fprintf(savefile,"%d\n",users.user[idxuser].history.TOP);
-                                for(int i = 0 ;i <= users.user[idxuser].history.TOP-1;i++){
-                                    fprintf(savefile,"%s;%s;%s\n",users.user[idxuser].history.Songs[i].artist,users.user[idxuser].history.Songs[i].album,users.user[idxuser].history.Songs[i].titlesong);
-                                }
-                            } else {
-                                fprintf(savefile,"0\n");
-                            }
-                            // //bagian playlist
-                            if (users.user[idxuser].arrp.Neff != 0 ){
-                                fprintf(savefile,"%d\n",users.user[idxuser].arrp.Neff);
-                                for (int i = 0; i < users.user[idxuser].arrp.Neff; i++) {
-                                    fprintf(savefile, "%d %s", NbElmt(users.user[idxuser].arrp.playlists[i].laguplaylist), users.user[idxuser].arrp.playlists[i].name);
-                                    int jumlahLagu = NbElmt(users.user[idxuser].arrp.playlists[i].laguplaylist);
-                                    address P = First(users.user[idxuser].arrp.playlists[i].laguplaylist);
-                                    
-                                    if (jumlahLagu > 0) {
-                                        fprintf(savefile, "\n"); // Baris baru hanya jika ada lagu dalam playlist
-                                    }
-                                    
-                                    while (P != Nil) {
-                                        fprintf(savefile, "%s;%s;%s", artist(P), album(P), titlesong(P));
-                                        P = Next(P);
-                                        if (P != Nil) {
-                                            fprintf(savefile, "\n"); // Baris baru setelah setiap lagu kecuali lagu terakhir
+                                fprintf(savefile, "%s;%d;%d\n", username, jmlFollower, jmlFollowing);
+                                
+                                if(jumlahFollowers(g, username) > 0){
+                                    for (adrNode P = g.first; P != NULL; P = P->next) {
+                                        for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+                                            if (StringSama(Q->succ->username, username)) {
+                                                fprintf(savefile, "%s\n", P->username);
+                                            }
                                         }
                                     }
-                                    
-                                    if (i < users.user[idxuser].arrp.Neff - 1) {
+                                }
+                                
+                                if(jumlahFollowing(g, username) > 0){
+                                    adrNode P = searchNode(g, username);
+                                    if (P != NULL) {
+                                        for (adrSuccNode Q = P->trail; Q != NULL; Q = Q->next) {
+                                            fprintf(savefile, "%s\n", Q->succ->username);
+                                        }
+                                    }
+                                }
+                            }
+
+                            for(int cuser = 0; cuser < users.neff; cuser++){
+                                if(!(StringSama(users.user[cuser].currentsong.artist, "\0") && StringSama(users.user[cuser].currentsong.album, "\0") && StringSama(users.user[cuser].currentsong.titlesong, "\0"))){
+                                    fprintf(savefile, "%s;%s;%s\n", users.user[cuser].currentsong.artist, users.user[cuser].currentsong.album, users.user[cuser].currentsong.titlesong);
+                                } else {
+                                    fprintf(savefile, "-\n");
+                                }
+
+                                //bagian queue
+                                if (!isEmptyQueue(users.user[cuser].queue)) {
+                                    int length = lengthQueue(users.user[cuser].queue);
+                                    fprintf(savefile, "%d\n", length);
+                                    int idx = users.user[cuser].queue.idxHead;
+                                    for (int i = 0; i < length; i++) {
+                                        fprintf(savefile, "%s;%s;%s\n", users.user[cuser].queue.buffer[idx].artist, users.user[cuser].queue.buffer[idx].album, users.user[cuser].queue.buffer[idx].titlesong);
+                                        idx = (idx + 1) % CAPACITY; // Majukan indeks sesuai dengan antrian sirkuler
+                                    }
+                                } else {
+                                    fprintf(savefile, "0\n");
+                                }
+
+                                //bagian riwayat
+                                if(!IsEmptyStackSong(users.user[cuser].history)){
+                                    fprintf(savefile,"%d\n",users.user[cuser].history.TOP+1);
+                                    for(int i = 0 ;i <= users.user[cuser].history.TOP;i++){
+                                        fprintf(savefile,"%s;%s;%s\n",users.user[cuser].history.Songs[i].artist,users.user[cuser].history.Songs[i].album,users.user[cuser].history.Songs[i].titlesong);
+                                    }
+                                } else {
+                                    fprintf(savefile,"0\n");
+                                }
+                                // //bagian playlist
+                                if (users.user[cuser].arrp.Neff != 0 ){
+                                    fprintf(savefile,"%d\n",users.user[cuser].arrp.Neff);
+                                    for (int i = 0; i < users.user[cuser].arrp.Neff; i++) {
+                                        fprintf(savefile, "%d %s", NbElmt(users.user[cuser].arrp.playlists[i].laguplaylist), users.user[cuser].arrp.playlists[i].name);
+                                        int jumlahLagu = NbElmt(users.user[cuser].arrp.playlists[i].laguplaylist);
+                                        address P = First(users.user[cuser].arrp.playlists[i].laguplaylist);
+                                        
+                                        if (jumlahLagu > 0) {
+                                            fprintf(savefile, "\n"); // Baris baru hanya jika ada lagu dalam playlist
+                                        }
+                                        
+                                        while (P != Nil) {
+                                            fprintf(savefile, "%s;%s;%s", artist(P), album(P), titlesong(P));
+                                            P = Next(P);
+                                            if (P != Nil) {
+                                                fprintf(savefile, "\n"); // Baris baru setelah setiap lagu kecuali lagu terakhir
+                                            }
+                                        }
+                                        
+                                        if (cuser < users.neff - 1) {
+                                            fprintf(savefile, "\n"); // Baris baru setelah playlist pengguna terakhir
+                                        }
+                                    } 
+                                } else {
+                                    fprintf(savefile,"0");
+                                    if (cuser < users.neff - 1) {
                                         fprintf(savefile, "\n"); // Baris baru setelah setiap playlist kecuali playlist terakhir
                                     }
-                                } 
-                            } else {
-                                fprintf(savefile,"0");
-                            }
-                        } 
-                        fclose(savefile);
-                        free(saves);
-                        printf("Save file berhasil disimpan.\n");
-                        mulai = false;
+                                }
+                            } 
+                            fclose(savefile);
+                            free(saves);
+                            printf("Save file berhasil disimpan.\n");
+                            mulai = false;
+                        } else {
+                            printf("Nama file tidak valid, silahkan coba lagi.\n");
+                        }
                     } else{
                         printf("Input tidak valid, silahkan coba lagi.\n");
                     }
